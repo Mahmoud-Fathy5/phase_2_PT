@@ -11,7 +11,8 @@ private:
 	string LHS;
 	string op;
 	string RHS;
-	Connector* pOutConn;	//Right Handside (Value)
+	Connector* pOutConn1;	//Right Handside (Value)
+	Connector* pOutConn2;
 
 	//Value Assignment Stat. has one Connector to next statement
 	//Each statement type in flowchart has a predefined number of (output) connectors
