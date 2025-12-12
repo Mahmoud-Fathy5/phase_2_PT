@@ -1,0 +1,75 @@
+#include "VariableAssign.h"
+#include <sstream>
+
+using namespace std;
+
+VariableAssign::VariableAssign(Point Lcorner, string LeftHS, string RightHS)
+{
+	// Note: The LeftHS and RightHS should be validated inside (AddVariableAssign) action
+	//       before passing it to the constructor of VariableAssign
+	LHS = LeftHS;
+	RHS = RightHS;
+
+	UpdateStatementText();
+
+	LeftCorner = Lcorner;
+
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet.x = Inlet.x;
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
+}
+
+void VariableAssign::setLHS(const string& L)
+{
+	LHS = L;
+	UpdateStatementText();
+}
+
+void VariableAssign::setRHS(string R)
+{
+	RHS = R;
+	UpdateStatementText();
+}
+
+
+void VariableAssign::Draw(Output* pOut) const
+{
+	//Call Output::DrawAssign function to draw assignment statement 	
+	pOut->DrawAssign(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected);
+
+}
+
+Point VariableAssign::GetLeftCorner()
+{
+	return LeftCorner;
+}
+
+Point VariableAssign::GetInLet() const
+{
+	return Inlet;
+}
+
+Point VariableAssign::GetOutLet() const
+{
+	return Outlet;
+}
+
+void VariableAssign::SetOutConn(Connector* C)
+{
+	pOutConn = C;
+}
+
+
+
+//This function should be called when LHS or RHS changes
+void VariableAssign::UpdateStatementText()
+{
+	//Build the statement text: Left handside then equals then right handside
+	ostringstream T;
+	T << LHS << " = " << RHS;
+	Text = T.str();
+}
