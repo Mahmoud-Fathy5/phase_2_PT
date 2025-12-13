@@ -1,11 +1,16 @@
 #include "Start.h"
 #include <sstream>
 using namespace std;
+#include"../ApplicationManager.h"
+
+
+
+bool Start::exsit =false;
 
 Start::Start(Point Lcorner)
 {
 	
-
+	exsit = true;
 	UpdateStatementText();
 
 	LeftCorner = Lcorner;
@@ -63,4 +68,13 @@ void Start::UpdateStatementText()
 void Start::Save(ofstream& OutFile)
 {
 	OutFile << "START" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << "\n";
+}
+
+void Start::Edit(ApplicationManager* pManager)
+{
+}
+
+Start::~Start()
+{
+	exsit = false;
 }

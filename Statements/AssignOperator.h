@@ -37,6 +37,7 @@ public:
 	void setRHS_1(string R1);
 	void setRHS_2(string R2); //const by refrence
 	void setOp(string O);
+	void get_all(string& LeftHS, string& RightHS_1, string& oper, string& RightHS_2) const;
 
 	Point GetInLet() const;
 	Point GetOutLet() const;
@@ -44,6 +45,7 @@ public:
 
 	virtual void Draw(Output* pOut) const;
 	Point GetLeftCorner();
+	void Edit(ApplicationManager* pManager) override;
 
 };
 

@@ -20,39 +20,22 @@ Edit::Edit(ApplicationManager* pAppManager) :Action(pAppManager)
 
 void Edit::ReadActionParameters()
 {
-	Input* pIn = pManager->GetInput();
-	Output* pOut = pManager->GetOutput();
-
-
-	
-
-	pIn->GetPointClicked(Position);
-	pOut->ClearStatusBar();
-
-
-
-
-
-
+	pStat = pManager->GetSelectedStatement();
 }
 
 void Edit::Execute()
 {
-
-	pStat = pManager->GetStatement(Position);
-
+	ReadActionParameters();
+	
 	if (pStat == NULL)
 	{
 		(pManager->GetOutput())->PrintMessage("No Statement Selected to edit");
 		return;
 	}
-	else if (pStat != NULL)
+	else
 	{
-		if (dynamic_cast<ValueAssign*>(pStat))
-		{
-			
-		}
+		pStat->Edit(pManager);
 	}
-	ReadActionParameters();
+	
 
 }

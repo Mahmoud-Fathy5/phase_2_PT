@@ -21,6 +21,8 @@ private:
 	virtual void UpdateStatementText();
 
 public:
+	static bool exsit;
+
 	Start(Point Lcorner);
 
 
@@ -30,6 +32,8 @@ public:
 	Point GetOutLet() const;
 	void SetOutConn(Connector* C);
 	virtual void Save(ofstream& OutFile);
+	void Edit(ApplicationManager* pManager) override;
+	~Start();
 
 };
 

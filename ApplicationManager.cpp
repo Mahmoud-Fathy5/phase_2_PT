@@ -6,8 +6,15 @@
 #include "./Actions\AddAssignVariable.h"
 #include "./Actions\AddDeclare.h"
 #include "./Actions\AddRead.h"
-#include "./Actions\Select.h"
+#include "./Actions\AddWrite.h"
 #include "./Actions\AddIf.h"
+#include "./Actions\Select.h"
+#include"./Actions\Delete.h"
+#include"./Actions\Copy.h"
+#include"./Actions\Paste.h"
+#include"./Actions\Edit.h"
+#include"./Actions\Cut.h"
+
 #include "GUI\Input.h"
 #include "GUI\Output.h"
 #include "./Actions/AddConn.h"
@@ -65,6 +72,23 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new Select(this);
 			pOut->PrintMessage("LOL");
 			break;
+
+		case DEL:
+			pAct= new Delete(this);
+			break;
+
+		case COPY:
+			pAct = new Copy(this);
+			break;
+		case CUT:
+			pAct = new Cut(this);
+			break;
+		case PASTE:
+			pAct = new Paste(this);
+			break;
+		case EDIT_STAT:
+			pAct = new Edit(this);
+			break;
 		case SAVE:
 			pAct = new Save(this);
 			break;
@@ -94,6 +118,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case ADD_READ:
 			pAct = new AddRead(this);
+			break;
+		case ADD_WRITE:
+			pAct = new AddWrite(this);
 			break;
 		case ADD_CONNECTOR:
 			pAct = new AddConn(this);
@@ -343,6 +370,61 @@ void ApplicationManager::SetSelectedConn(Connector* pConn)
 	pSelectedConn = pConn;
 }
 
+void ApplicationManager::DeleteConn(Connector* pConn)
+{
+	if (pConn != NULL) {
+		int index;
+		for (int i = 0; i < ConnCount; i++) {
+			if (pConn == ConnList[i]) {
+				index = i;
+				break;
+			}
+		}
+
+		for (int i = index; i < ConnCount - 1; i++) {
+			ConnList[i] = ConnList[i + 1];
+		}
+		ConnList[ConnCount - 1] = NULL;
+		ConnCount--;
+		//(pConn->getSrcStat())->SetOutConn1(NULL);
+		delete pConn;
+	}
+	
+}
+
+void ApplicationManager::DeleteStat(Statement* pStat)
+{
+
+	if (pStat != NULL) {
+		if (dynamic_cast<If*>(pStat)) {
+			//DeleteConn(pStat->GetOutConn2());
+		}
+		//DeleteConn(pStat->GetOutConn1());
+
+		for (int i = 0; i < ConnCount;i++) {
+			if ((ConnList[i]->getDstStat()) == pStat ) {
+				DeleteConn(ConnList[i]);
+			}
+		}
+
+		int index;
+		for (int i = 0; i < StatCount; i++) {
+			if (pStat == StatList[i]) {
+				index = i;
+				break;
+			}
+		}
+		for (int i = index; i < StatCount - 1; i++) {
+			StatList[i] = StatList[i + 1];
+		}
+		StatList[StatCount - 1] = NULL;
+		StatCount--;
+		delete pStat;
+	}
+}
+	
+	
+
 
 void ApplicationManager::saveStatements(ofstream& OutFile)
 {
@@ -382,6 +464,15 @@ Statement *ApplicationManager::GetClipboard() const
 //Set the Clipboard
 void ApplicationManager::SetClipboard(Statement *pStat)
 {	pClipboard = pStat;	}
+
+bool ApplicationManager::get_Copy0_Cut1() const
+{
+	return	this->Copy0_or_Cut1;
+}
+void ApplicationManager::set_Copy0_Cut1(bool b)
+{
+	this->Copy0_or_Cut1 = b;
+}
 
 
 //==================================================================================//

@@ -78,6 +78,9 @@ string Input::GetVariabel(Output *pO)const
 	}
 	return variabel;
 }
+
+
+
 //TODO: Add the function Input::GetArithOperator 
 // to read an arithmetic operator (+, -, * or /) from the user. 
 // It does not return before taking a valid arithmetic operator.

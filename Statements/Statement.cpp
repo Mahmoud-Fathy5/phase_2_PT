@@ -1,4 +1,5 @@
 #include "Statement.h"
+#include "Start.h"
 int Statement::temp = 0;
 Statement::Statement()	
 { 
@@ -33,4 +34,8 @@ int Statement::GetID() const
 void Statement::Save(ofstream& OutFile)
 {
 
+}
+
+Statement::~Statement()
+{
 }

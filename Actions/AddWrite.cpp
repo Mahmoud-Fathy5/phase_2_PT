@@ -1,4 +1,4 @@
-#include "AddRead.h"
+#include "AddWrite.h"
 
 
 
@@ -11,17 +11,17 @@
 
 
 //constructor: set the ApplicationManager pointer inside this action
-AddRead::AddRead(ApplicationManager* pAppManager) :Action(pAppManager)
+AddWrite::AddWrite(ApplicationManager* pAppManager) :Action(pAppManager)
 {
 }
 
-void AddRead::ReadActionParameters()
+void AddWrite::ReadActionParameters()
 {
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 
-	//Read the (Position) parameter
-	pOut->PrintMessage("Read Statement: Click to Read a Variabel");
+	//Write the (Position) parameter
+	pOut->PrintMessage("Write Statement: Click to Write a Variabel");
 
 	pIn->GetPointClicked(Position);
 	while (!(Position.x <UI.DrawingAreaWidth && Position.y >UI.ToolBarHeight && Position.y < (UI.height - UI.StatusBarHeight))) {
@@ -35,8 +35,8 @@ void AddRead::ReadActionParameters()
 	pOut->ClearStatusBar();
 
 	//TODO: Ask the user in the status bapr to enter the LHS and set the data member
-	pOut->PrintMessage("Please Enter var");
-	var = pIn->GetVariabel(pOut);
+	pOut->PrintMessage("Please Enter Variable name or Value");
+	VarOrValu = pIn->GetVariabelOrValue(pOut);
 
 	//TODO: Ask the user in the status bar to enter the RHS and set the data member
 
@@ -44,19 +44,18 @@ void AddRead::ReadActionParameters()
 	//      Call the appropriate functions for this.
 }
 
-void AddRead::Execute()
+void AddWrite::Execute()
 {
 	ReadActionParameters();
-
 	//Calculating left corner of assignement statement block
 	Point Corner;
 	Corner.x = Position.x - UI.ASSGN_WDTH / 2;   // need to be considerdddd
 	Corner.y = Position.y;
 
-	Read* pRead = new Read(Corner, var);
+	Write* pWrite = new Write(Corner, VarOrValu);
 	//TODO: should set the LHS and RHS of pAssign statement
-	//      with the data members set and validated before in ReadActionParameters()
+	//      with the data members set and validated before in WriteActionParameters()
 
-	pManager->AddStatement(pRead); // Adds the created statement to application manger's statement list
+	pManager->AddStatement(pWrite); // Adds the created statement to application manger's statement list
 }
 

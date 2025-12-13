@@ -1,4 +1,5 @@
 #include "AssignOperator.h"
+#include"../ApplicationManager.h"
 #include <sstream>
 
 using namespace std;
@@ -37,6 +38,14 @@ void AssignOperator::setOp(string O)
 	UpdateStatementText();
 }
 
+void AssignOperator::get_all(string& LeftHS, string& RightHS_1, string& oper, string& RightHS_2) const
+{
+	LeftHS = this->LHS;
+	RightHS_1 =this->RHS_1 ;
+	oper = this->op;
+	RightHS_2 = this->RHS_2;
+}
+
 void AssignOperator::setRHS_1(string R1)
 {
 	RHS_1 = R1;
@@ -61,6 +70,31 @@ void AssignOperator::Draw(Output* pOut) const
 Point AssignOperator::GetLeftCorner()
 {
 	return LeftCorner;
+}
+
+void AssignOperator::Edit(ApplicationManager* pManager)
+{
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
+	string l, op, r1,r2;
+	pOut->PrintMessage("Please Enter Left Hand Side");
+	l = pIn->GetVariabel(pOut);
+
+
+	//ValueOrVariable()
+	pOut->PrintMessage("Please Enter First Operand Right Hand Side ");
+	r1 = pIn->GetVariabelOrValue(pOut);
+
+	pOut->PrintMessage("Please Enter Operator ");
+	op = pIn->GetArithOperator(pOut);
+
+	pOut->PrintMessage("Please Enter Second Operand Right Hand Side ");
+	r2 = pIn->GetVariabelOrValue(pOut);
+	this->setLHS(l);
+	this->setRHS_1(r1);
+	this->setOp(op);
+	this->setRHS_2(r2);
+	pOut->ClearStatusBar();
 }
 
 void AssignOperator::SetOutConn(Connector* C)

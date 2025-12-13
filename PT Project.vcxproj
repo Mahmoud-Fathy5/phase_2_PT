@@ -19,7 +19,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -133,7 +133,12 @@
     <ClCompile Include="Actions\AddRead.cpp" />
     <ClCompile Include="Actions\AddStart.cpp" />
     <ClCompile Include="Actions\AddAssignVariable.cpp" />
+    <ClCompile Include="Actions\AddWrite.cpp" />
+    <ClCompile Include="Actions\Copy.cpp" />
+    <ClCompile Include="Actions\Cut.cpp" />
+    <ClCompile Include="Actions\Delete.cpp" />
     <ClCompile Include="Actions\Edit.cpp" />
+    <ClCompile Include="Actions\Paste.cpp" />
     <ClCompile Include="Actions\Save.cpp" />
     <ClCompile Include="Actions\Select.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
@@ -299,6 +304,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Statements\VariableAssign.cpp" />
+    <ClCompile Include="Statements\Write.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddAssignOperator.h" />
@@ -309,7 +315,12 @@
     <ClInclude Include="Actions\AddStart.h" />
     <ClInclude Include="Actions\AddAssignVariable.h" />
     <ClInclude Include="Actions\AddConn.h" />
+    <ClInclude Include="Actions\AddWrite.h" />
+    <ClInclude Include="Actions\Copy.h" />
+    <ClInclude Include="Actions\Cut.h" />
+    <ClInclude Include="Actions\Delete.h" />
     <ClInclude Include="Actions\Edit.h" />
+    <ClInclude Include="Actions\Paste.h" />
     <ClInclude Include="Actions\Save.h" />
     <ClInclude Include="Actions\Select.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
@@ -350,6 +361,7 @@
     <ClInclude Include="Statements\ValueAssign.h" />
     <ClInclude Include="Statements\Statement.h" />
     <ClInclude Include="Statements\VariableAssign.h" />
+    <ClInclude Include="Statements\Write.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

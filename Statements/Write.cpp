@@ -1,0 +1,80 @@
+#include "Write.h"
+#include <sstream>
+#include"../ApplicationManager.h"
+using namespace std;
+
+Write::Write(Point Lcorner, string v)
+{
+	// Note: The LeftHS and RightHS should be validated inside (AddWrite) action
+	//       before passing it to the constructor of Write
+	this->VarorStr = v;
+
+	UpdateStatementText();
+
+	LeftCorner = Lcorner;
+
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet.x = Inlet.x;
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need tobe condiderd
+}
+
+void Write::set_ValuOrVar(const string& L)
+{
+	VarorStr = L;
+	UpdateStatementText();
+}
+
+
+void Write::Draw(Output* pOut) const
+{
+	//Call Output::DrawAssign function to draw assignment statement 	
+	pOut->DrawWrite(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected); //need to be considerd
+
+}
+
+Point Write::GetLeftCorner()
+{
+	return LeftCorner;
+}
+
+Point Write::GetInLet() const
+{
+	return Inlet;
+}
+
+Point Write::GetOutLet() const
+{
+	return Outlet;
+}
+
+string Write::get_ValuOrVar() const
+{
+	return this->VarorStr;
+}
+
+void Write::SetOutConn(Connector* C)
+{
+	pOutConn = C;
+}
+
+void Write::Edit(ApplicationManager* pManager)
+{
+	string s;
+	this->set_ValuOrVar(s);
+}
+
+
+
+
+//This function should be called when LHS or RHS changes
+void Write::UpdateStatementText()
+{
+	//Build the statement text: Left handside then equals then right handside
+	ostringstream T;
+	T << VarorStr;
+	Text = T.str();
+}

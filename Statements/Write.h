@@ -3,10 +3,10 @@
 
 //Value Assignment statement class
 //The value assignment statement assigns a value to a variable
-class	Read : public Statement
+class	Write : public Statement
 {
 private:
-	string var;	//Left Handside of the assignment (name of a variable)
+	string VarorStr;	//Left Handside of the assignment (name of a variable)
 	//Right Handside (Value)
 
 	Connector* pOutConn;	//Value Assignment Stat. has one Connector to next statement
@@ -28,17 +28,17 @@ private:
 	virtual void UpdateStatementText();
 
 public:
-	Read(Point Lcorner, string var = "");
+	Write(Point Lcorner, string var = "");
 
-	void setVar(const string& L);
+	void set_ValuOrVar(const string& L);
 
 	virtual void Draw(Output* pOut) const;
 
 	Point GetLeftCorner();
 	Point GetInLet() const;
 	Point GetOutLet() const;
-	string get_var()const;
+	string get_ValuOrVar()const;
+
 	void SetOutConn(Connector* C);
 	void Edit(ApplicationManager* pManager) override;
-
 };

@@ -39,7 +39,9 @@ public:
 	Point GetLeftCorner();
 	Point GetInLet() const;
 	Point GetOutLet() const;
+	void get_all(string &l,string &r)const;
 	void SetOutConn(Connector* C);
+	void Edit(ApplicationManager* pManager) override;
 
 };
 

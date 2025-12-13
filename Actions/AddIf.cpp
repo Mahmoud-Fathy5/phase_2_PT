@@ -24,11 +24,19 @@ void AddIf::ReadActionParameters()
 	pOut->PrintMessage("Conditional Statement: Click to add the statement");
 
 	pIn->GetPointClicked(Position);
+	while (!(Position.x <UI.DrawingAreaWidth && Position.y >UI.ToolBarHeight && Position.y < (UI.height - UI.StatusBarHeight))) {
+		(pManager->GetOutput())->PrintMessage("You Should Draw in the Drawing Area Only, Click anywhere in the Drawing Area");
+		pIn->GetPointClicked(Position);
+	}
+	while ((pManager->GetStatement(Position))) {
+		(pManager->GetOutput())->PrintMessage("You cannot Put Statement Above The other , click anywhere else");
+		pIn->GetPointClicked(Position);
+	}
 	pOut->ClearStatusBar();
 
 	//TODO: Ask the user in the status bapr to enter the LHS and set the data member
 	pOut->PrintMessage("Please Enter Left Hand Side");
-	LHS = pIn->GetVariabel(pOut);
+	LHS = pIn->GetVariabelOrValue(pOut);
 
 	pOut->PrintMessage("Please Enter Comparator ");
 	op = pIn->GetCompOperator(pOut);
@@ -50,7 +58,6 @@ void AddIf::ReadActionParameters()
 void AddIf::Execute()
 {
 	ReadActionParameters();
-
 
 	//Calculating left corner of assignement statement block
 	Point Corner;

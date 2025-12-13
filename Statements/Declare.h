@@ -36,6 +36,8 @@ public:
 	Point GetLeftCorner() const;
 	Point GetInLet() const;
 	Point GetOutLet() const;
+	string get_var()const;
 	void SetOutConn(Connector* C);
+	void Edit(ApplicationManager* pManager) override;
 
 };
