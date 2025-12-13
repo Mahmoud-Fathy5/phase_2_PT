@@ -134,8 +134,8 @@ void If::Load(ifstream& InFile)
 {
 	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> LHS >> op >> RHS;
 	UpdateStatementText();
-	pOutConn = NULL;	//No connectors yet
-
+	pOutConn1 = NULL;	//No connectors yet
+	pOutConn2 = NULL;
 	Inlet.x = LeftCorner.x + UI.COND_WDTH / 2;
 	Inlet.y = LeftCorner.y;
 
