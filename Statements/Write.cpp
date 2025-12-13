@@ -86,7 +86,7 @@ Connector* Write::GetOutConn1()
 
 void Write::Save(ofstream& OutFile)
 {
-	OutFile << "WRITE" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " << VarorStr;
+	OutFile << "WRITE" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " << VarorStr << "\n";
 }
 
 void Write::Load(ifstream& InFile)

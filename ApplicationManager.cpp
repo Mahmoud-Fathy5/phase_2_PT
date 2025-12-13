@@ -257,10 +257,6 @@ Statement *ApplicationManager::GetStatement(Point P) const
 		else if (dynamic_cast<Declare*>(StatList[i]))
 		{
 			Declare* pStat = static_cast<Declare*>(StatList[i]);
-			if (P.x >= pStat->GetLeftCorner().x 
-				&& P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-				&& P.y >= pStat->GetLeftCorner().y
-				&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
 			if (P.x < pStat->GetLeftCorner().x + UI.ASSGN_WDTH
 				&& P.x > pStat->GetLeftCorner().x
 				&& P.y > pStat->GetLeftCorner().y
@@ -311,6 +307,19 @@ Statement *ApplicationManager::GetStatement(Point P) const
 			}
 
 		}
+			else if (dynamic_cast<Write*>(StatList[i]))
+			{
+				Write* pStat = static_cast<Write*>(StatList[i]);
+				if (P.x >= pStat->GetLeftCorner().x
+					&& P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
+					&& P.y >= pStat->GetLeftCorner().y
+					&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
+				{
+
+					return pStat;
+				}
+
+			}
 
 		
 		
