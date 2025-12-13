@@ -36,19 +36,20 @@ void Paste::ReadActionParameters()
 void Paste::Execute()
 {
 	ReadActionParameters();
-
+	bool isStart = false, isEnd = false;
 	if (pStat_copy != NULL ) {
 
 		if (dynamic_cast<Start*>(pStat_copy)) {
-			if (Start::exsit && (pManager->get_Copy0_Cut1() == 0)) return;
+			if (Start::exsit && ((pManager->get_Copy0_Cut1()) == false)) return;
 			Start* ptr = new Start(Position);
 			pManager->AddStatement(ptr);
+			isStart = true;
 		}
 		else if (dynamic_cast<End*>(pStat_copy)) {
-			if (End::exist) return;
+			if (End::exist && ((pManager->get_Copy0_Cut1()) == false)) return;
 			End* ptr = new End(Position);
 			pManager->AddStatement(ptr);
-			
+			isEnd = true;
 		}
 		else if (dynamic_cast<AssignOperator*>(pStat_copy)) {
 			string l, op, r1, r2;
@@ -106,6 +107,11 @@ void Paste::Execute()
 	if ((pManager->get_Copy0_Cut1()) == 1) {
 		Delete d(pManager);
 		d.Execute();
+		if (isStart)
+			Start::exsit = true;
+		if (isEnd)
+			End::exist = true;
+
 		pManager->SetClipboard(NULL);
 	}
 
