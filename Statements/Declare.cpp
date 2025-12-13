@@ -65,3 +65,23 @@ void Declare::UpdateStatementText()
 	T << var;
 	Text = T.str();
 }
+
+
+void Declare::Save(ofstream& OutFile)
+{
+	OutFile << "DECLARE" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " << var << "\n";
+}
+
+void Declare::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> var;
+	UpdateStatementText();
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet.x = Inlet.x;
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
+
+}

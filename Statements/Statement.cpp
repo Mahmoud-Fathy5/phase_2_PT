@@ -30,7 +30,3 @@ int Statement::GetID() const
 	return ID;
 }
 
-void Statement::Save(ofstream& OutFile)
-{
-
-}

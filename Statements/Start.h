@@ -30,7 +30,11 @@ public:
 	Point GetOutLet() const;
 	void SetOutConn(Connector* C);
 	virtual void Save(ofstream& OutFile);
+	virtual void Load(ifstream& InFile);
 
+	//Start() = default;
+
+	Start() = default;
 };
 
 #endif

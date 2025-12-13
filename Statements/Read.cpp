@@ -67,3 +67,22 @@ void Read::UpdateStatementText()
 	T << var;
 	Text = T.str();
 }
+
+void Read::Save(ofstream& OutFile)
+{
+	OutFile << "READ" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " << var << "\n";
+}
+void Read::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> var;
+	UpdateStatementText();
+
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet.x = Inlet.x;
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need tobe condiderd
+
+}
