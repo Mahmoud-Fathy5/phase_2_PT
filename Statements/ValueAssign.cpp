@@ -53,14 +53,20 @@ Point ValueAssign::GetInLet() const
 	return Inlet;
 }
 
-Point ValueAssign::GetOutLet() const
+Point ValueAssign::GetOutLet1() const
 {
 	return Outlet;
 }
 
-void ValueAssign::SetOutConn(Connector* C)
+void ValueAssign::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
+}
+
+
+Connector* ValueAssign ::GetOutConn1()
+{
+	return pOutConn;
 }
 
 

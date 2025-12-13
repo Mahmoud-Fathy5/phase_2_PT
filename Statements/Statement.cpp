@@ -20,13 +20,47 @@ Point Statement::GetInLet() const
 	return Point();
 }
 
-Point Statement::GetOutLet() const
-{
-	return Point();
-}
+
 
 int Statement::GetID() const
 {
 	return ID;
 }
 
+Point Statement::GetOutLet1() const
+{
+	return Point();
+}
+
+
+Point Statement::GetOutLet2() const
+{
+	return Point();
+}
+
+
+
+
+
+void Statement:: SetOutConn2(Connector*)
+{
+	return;
+}
+
+
+
+
+
+
+Connector *Statement::GetOutConn2()
+{
+	return NULL;
+}
+
+
+
+
+void Statement::Save(ofstream& OutFile)
+{
+
+}

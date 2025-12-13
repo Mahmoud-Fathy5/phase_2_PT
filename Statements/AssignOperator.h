@@ -39,13 +39,15 @@ public:
 	void setOp(string O);
 
 	Point GetInLet() const;
-	Point GetOutLet() const;
-	void SetOutConn(Connector* C);
+	Point GetOutLet1() const;
+	void SetOutConn1(Connector* C);
 
 	virtual void Draw(Output* pOut) const;
 	Point GetLeftCorner();
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& InFile);
+
+	Connector *GetOutConn1();
 
 
 	AssignOperator() = default;

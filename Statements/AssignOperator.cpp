@@ -63,19 +63,29 @@ Point AssignOperator::GetLeftCorner()
 	return LeftCorner;
 }
 
-void AssignOperator::SetOutConn(Connector* C)
-{
-	pOutConn = C;
-}
+
 Point AssignOperator::GetInLet() const
 {
 	return Inlet;
 }
 
-Point AssignOperator::GetOutLet() const
+Point AssignOperator::GetOutLet1() const
 {
 	return Outlet;
 }
+
+
+Connector * AssignOperator:: GetOutConn1()
+{
+	return pOutConn;
+}
+
+
+void AssignOperator::SetOutConn1(Connector* C)
+{
+	pOutConn = C;
+}
+
 
 
 //This function should be called when LHS or RHS changes

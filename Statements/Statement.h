@@ -27,9 +27,16 @@ public:
 	int GetID() const;
 
 	virtual Point  GetInLet() const ;
-	virtual Point  GetOutLet() const;
+	//virtual Point  GetOutLet() const;
+	virtual Point  GetOutLet1() const=0;
+	virtual Point  GetOutLet2() const;
+
 	virtual void Draw(Output* pOut) const  = 0 ;	//Draw the statement
-	
+	virtual void SetOutConn1(Connector*) = 0;
+	virtual void SetOutConn2(Connector*);
+	virtual Connector *GetOutConn1()=0;
+	virtual Connector *GetOutConn2();
+
 	
 
 	///TODO:The following functions should be supported by the Statement class

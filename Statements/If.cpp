@@ -15,16 +15,20 @@ If::If(Point Lcorner, string LeftHS, string RightHS, string oper)
 
 	LeftCorner = Lcorner;
 
-	pOutConn = NULL;	//No connectors yet
+	pOutConn1 = NULL;	//No connectors yet
+	pOutConn2 = NULL;
 
-	Inlet.x = LeftCorner.x + UI.COND_WDTH / 2;
+	Inlet.x = LeftCorner.x + UI.COND_WDTH/2;
 	Inlet.y = LeftCorner.y;
 
-	Outlet1.x = Inlet.x;
-	Outlet1.y = LeftCorner.y + UI.COND_HI;
+	Outlet1.x = LeftCorner.x+UI.COND_WDTH;
+	Outlet1.y = LeftCorner.y + UI.COND_HI/2;
 
-	Outlet2.x= Inlet.x;
-	Outlet2.y= LeftCorner.y + UI.COND_HI;//Edit Co-ordinates
+	Outlet2.x = LeftCorner.x;
+	Outlet2.y = LeftCorner.y + UI.COND_HI / 2;
+
+	//Outlet2.x= Inlet.x;
+	//Outlet2.y= LeftCorner.y + UI.COND_HI;//Edit Co-ordinates
 }
 
 
@@ -61,25 +65,53 @@ Point If::GetLeftCorner()
 	return LeftCorner;
 }
 
-Point If::GetInlet() const
+Point If::GetInLet() const
 {
 	return Inlet;
 }
 
-Point If::GetOutlet1() const
+
+Point If::GetOutLet1() const
 {
 	return Outlet1;
 }
 
-Point If::GetOutlet2() const
+
+
+
+
+
+
+Point If::GetOutLet2() const
 {
 	return Outlet2;
 }
 
-void If::SetOutConn(Connector* C)
+void If::SetOutConn1(Connector* C)
 {
-	pOutConn = C;
+	pOutConn1 = C;
+	
 }
+
+void If::SetOutConn2(Connector* C)
+{
+	pOutConn2 = C;
+
+}
+
+Connector* If::GetOutConn1()
+{
+	return pOutConn1;
+}
+
+
+Connector* If::GetOutConn2()
+{
+	return pOutConn2;
+}
+
+
+
 
 
 
