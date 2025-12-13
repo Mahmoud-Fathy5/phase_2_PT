@@ -1,5 +1,6 @@
 #include "Connector.h"
 #include"Statements/Statement.h"
+#include"Statements/If.h"
 
 
 Connector::Connector(Statement* Src, Statement* Dst)	
@@ -9,8 +10,27 @@ Connector::Connector(Statement* Src, Statement* Dst)
 	
 	SrcStat = Src;
 	DstStat = Dst;
-	start = Src->GetOutLet();
+	if (dynamic_cast<If*>(SrcStat))
+	{
+		if (SrcStat->GetOutConn1() == NULL)
+		{
+			start = SrcStat->GetOutLet1();
+		}
+
+		else if(SrcStat->GetOutConn1()!=NULL&&SrcStat->GetOutConn2()==NULL)
+
+		{
+			start = SrcStat->GetOutLet2();
+		}
+
+	}
+	if (dynamic_cast<If*>(SrcStat)==NULL)
+	{
+		start = SrcStat->GetOutLet1();
+	}
+
 	end = Dst->GetInLet();
+
 	isSelected = false;
 }
 
@@ -27,11 +47,39 @@ Statement* Connector::getDstStat()
 {	return DstStat;	}
 
 
+//void Connector::setStart1Point(Point P)
+//{
+//	Start1 = P;
+//}
+
+
+//void Connector::setStart2Point(Point P)
+//{
+//	Start2 = P;
+//}
+
+//Point Connector::getStart1Point(Point P)
+//{
+//	return Start1;
+//}
+
+//Point Connector::getStart2Point(Point P)
+//{
+//	return Start2;
+//}
+
+
 void Connector::setStartPoint(Point P)
 {	start = P;	}
 
 Point Connector::getStartPoint()
 {	return start;	}
+
+
+
+
+
+
 
 void Connector::setEndPoint(Point P)
 {	end = P;	}
@@ -55,10 +103,13 @@ void Connector::Draw(Output* pOut) const
 	
 
 	///TODO: Call Output to draw a connector from SrcStat to DstStat on the output window
-	pOut->DrawConnector(start, end,isSelected);
+	
+		pOut->DrawConnector(start, end, isSelected);
+	
 }
 
 void Connector::Save(ofstream& OutFile)
 {
-	OutFile << SrcStat->GetID() << " " << DstStat->GetID() << " " << 0 << "\n";
+	OutFile << SrcStat->GetID() << " " << DstStat->GetID() << "\n";
 }
+

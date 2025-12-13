@@ -40,13 +40,19 @@ public:
 	void get_all(string& LeftHS, string& RightHS_1, string& oper, string& RightHS_2) const;
 
 	Point GetInLet() const;
-	Point GetOutLet() const;
-	void SetOutConn(Connector* C);
+	Point GetOutLet1() const;
+	void SetOutConn1(Connector* C);
 
 	virtual void Draw(Output* pOut) const;
 	Point GetLeftCorner();
 	void Edit(ApplicationManager* pManager) override;
+	virtual void Save(ofstream& OutFile);
+	virtual void Load(ifstream& InFile);
 
+	Connector *GetOutConn1();
+
+
+	AssignOperator() = default;
 };
 
 #endif

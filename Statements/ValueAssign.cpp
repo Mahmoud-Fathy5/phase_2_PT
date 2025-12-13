@@ -53,7 +53,7 @@ Point ValueAssign::GetInLet() const
 	return Inlet;
 }
 
-Point ValueAssign::GetOutLet() const
+Point ValueAssign::GetOutLet1() const
 {
 	return Outlet;
 }
@@ -65,6 +65,7 @@ void ValueAssign::get_all(string& l, double& r) const
 }
 
 void ValueAssign::SetOutConn(Connector* C)
+void ValueAssign::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
 }
@@ -86,6 +87,12 @@ void ValueAssign::Edit(ApplicationManager* pManager)
 }
 
 
+Connector* ValueAssign ::GetOutConn1()
+{
+	return pOutConn;
+}
+
+
 
 //This function should be called when LHS or RHS changes
 void ValueAssign::UpdateStatementText()
@@ -94,4 +101,23 @@ void ValueAssign::UpdateStatementText()
 	ostringstream T;
 	T<<LHS<<" = "<<RHS;	
 	Text = T.str();	 
+}
+
+void ValueAssign::Save(ofstream& OutFile)
+{
+	OutFile << "VAL_ASSIGN" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " << LHS << " " << RHS << "\n";
+}
+
+void ValueAssign::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> LHS >> RHS;
+	UpdateStatementText();
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet.x = Inlet.x;
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
+
 }

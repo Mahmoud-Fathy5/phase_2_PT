@@ -43,10 +43,29 @@ Point End::GetInLet() const
 }
 
 
+Point End::GetOutLet1()const
+{
+	return NULL;
+}
+
+
+void End::SetOutConn1(Connector* C)
+{
+	pOutConn = C;
+}
+
+Connector* End::GetOutConn1()
+{
+	return pOutConn;
+}
+
+
 
 void End::UpdateStatementText()
 {
-
+	ostringstream T;
+	T << "End";
+	Text = T.str();
 }
 
 void End::Save(ofstream& OutFile)
@@ -61,3 +80,11 @@ void End::Edit(ApplicationManager* pManager)
 End ::~End() {
 	exist = false;
 }
+void End::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y;
+	Inlet.x = LeftCorner.x + UI.OVAL_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+}
+

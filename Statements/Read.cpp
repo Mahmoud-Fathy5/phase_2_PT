@@ -47,7 +47,7 @@ Point Read::GetInLet() const
 	return Inlet;
 }
 
-Point Read::GetOutLet() const
+Point Read::GetOutLet1() const
 {
 	return Outlet;
 }
@@ -58,6 +58,7 @@ string Read::get_var() const
 }
 
 void Read::SetOutConn(Connector* C)
+void Read::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
 }
@@ -74,6 +75,10 @@ void Read::Edit(ApplicationManager* pManager)
 }
 
 
+Connector* Read::GetOutConn1()
+{
+	return pOutConn;
+}
 
 
 //This function should be called when LHS or RHS changes
@@ -83,4 +88,23 @@ void Read::UpdateStatementText()
 	ostringstream T;
 	T << var;
 	Text = T.str();
+}
+
+void Read::Save(ofstream& OutFile)
+{
+	OutFile << "READ" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " << var << "\n";
+}
+void Read::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> var;
+	UpdateStatementText();
+
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet.x = Inlet.x;
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need tobe condiderd
+
 }

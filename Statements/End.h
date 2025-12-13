@@ -10,7 +10,7 @@ class End : public Statement
 private:
 
 
-
+	Connector* pOutConn;
 
 	Point Inlet;	//A point a connection leaves this statement
 	//It's used as the (Start) point of the (Output) connector
@@ -30,6 +30,12 @@ public:
 	virtual void Save(ofstream& OutFile);
 	void Edit(ApplicationManager* pManager) override;
 	~End();
+	Connector* GetOutConn1();
+	Point GetOutLet1() const;
+	void SetOutConn1(Connector* C);
+	virtual void Load(ifstream& InFile);
+
+	End() = default;
 };
 
 #endif

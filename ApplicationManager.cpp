@@ -92,6 +92,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case SAVE:
 			pAct = new Save(this);
 			break;
+		case LOAD:
+			pAct = new Load(this);
+			break;
 
 		case EXIT:
 			///create Exit Action here
@@ -125,7 +128,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_CONNECTOR:
 			pAct = new AddConn(this);
 			break;
-
+		case SWITCH_SIM_MODE:
+			pOut->CreateSimulationToolBar();
+			break;
+		case SWITCH_DSN_MODE:
+			pOut->CreateDesignToolBar();
+			break;
 		
 
 	}
@@ -249,16 +257,59 @@ Statement *ApplicationManager::GetStatement(Point P) const
 		else if (dynamic_cast<Declare*>(StatList[i]))
 		{
 			Declare* pStat = static_cast<Declare*>(StatList[i]);
-			if (P.x < pStat->GetLeftCorner().x + UI.ASSGN_WDTH / 2
-				&& P.x < pStat->GetLeftCorner().x - UI.ASSGN_WDTH / 2
-				&& P.y < pStat->GetLeftCorner().y
-				&& P.y < pStat->GetLeftCorner().y - UI.ASSGN_HI)
+			if (P.x >= pStat->GetLeftCorner().x 
+				&& P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
+				&& P.y >= pStat->GetLeftCorner().y
+				&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
+			if (P.x < pStat->GetLeftCorner().x + UI.ASSGN_WDTH
+				&& P.x > pStat->GetLeftCorner().x
+				&& P.y > pStat->GetLeftCorner().y
+				&& P.y < pStat->GetLeftCorner().y + UI.ASSGN_HI)
 			{
 
 
 				return pStat;
 			}
 			
+		}
+		else if (dynamic_cast<If*>(StatList[i]))
+		{
+			If* pStat = static_cast<If*>(StatList[i]);
+
+			/*double slope1 = ((pStat->GetLeftCorner().y - (pStat->GetLeftCorner().y + UI.COND_HI/2))
+				/ ((pStat->GetLeftCorner().x + UI.COND_WDTH / 2) - pStat->GetLeftCorner().x));
+
+
+
+			double slope2 = ((pStat->GetLeftCorner().y - (pStat->GetLeftCorner().y + UI.COND_HI / 2))
+				/ ((pStat->GetLeftCorner().x + UI.COND_WDTH / 2) - (pStat->GetLeftCorner().x+ UI.COND_WDTH)));
+
+
+
+			double slope3 = (((pStat->GetLeftCorner().y+UI.COND_HI/2) - (pStat->GetLeftCorner().y + UI.COND_HI ))
+				/ ((pStat->GetLeftCorner().x + UI.COND_WDTH)  - (pStat->GetLeftCorner().x + UI.COND_WDTH/2)));
+
+
+
+			double slope4= (((pStat->GetLeftCorner().y + UI.COND_HI / 2) - (pStat->GetLeftCorner().y + UI.COND_HI))
+				/ (pStat->GetLeftCorner().x  - (pStat->GetLeftCorner().x + UI.COND_WDTH / 2)));
+
+
+			
+
+			
+			if ((P.y- pStat->GetLeftCorner().y)/(P.x- pStat->GetLeftCorner().x + UI.COND_WDTH / 2)>=slope1&&
+				(P.y - pStat->GetLeftCorner().y) / (P.x - pStat->GetLeftCorner().x + UI.COND_WDTH ) >= slope2&&
+				(P.y - pStat->GetLeftCorner().y + UI.COND_HI / 2) / (P.x - pStat->GetLeftCorner().x + UI.COND_WDTH / 2) <= slope3&&
+				(P.y - pStat->GetLeftCorner().y + UI.COND_HI ) / (P.x - pStat->GetLeftCorner().x) <= slope4)*/
+			if (P.x >= pStat->GetLeftCorner().x
+				&& P.x <= pStat->GetLeftCorner().x + UI.COND_WDTH
+				&& P.y >= pStat->GetLeftCorner().y
+				&& P.y <= pStat->GetLeftCorner().y + UI.COND_HI)
+			{
+				return pStat;
+			}
+
 		}
 
 		
@@ -438,6 +489,16 @@ void ApplicationManager::saveConn(ofstream& OutFile)
 	OutFile << ConnCount << "\n";
 	for (int i = 0; i < ConnCount; i++)
 		ConnList[i]->Save(OutFile);
+}
+
+Statement* ApplicationManager::FindStatement(int id)
+{
+	for (int i = 0; i < StatCount; i++)
+	{
+		if (StatList[i]->GetID() == id)
+			return StatList[i];
+	}
+	return nullptr;
 }
 
 

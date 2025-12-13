@@ -101,15 +101,29 @@ void AssignOperator::SetOutConn(Connector* C)
 {
 	pOutConn = C;
 }
+
 Point AssignOperator::GetInLet() const
 {
 	return Inlet;
 }
 
-Point AssignOperator::GetOutLet() const
+Point AssignOperator::GetOutLet1() const
 {
 	return Outlet;
 }
+
+
+Connector * AssignOperator:: GetOutConn1()
+{
+	return pOutConn;
+}
+
+
+void AssignOperator::SetOutConn1(Connector* C)
+{
+	pOutConn = C;
+}
+
 
 
 //This function should be called when LHS or RHS changes
@@ -119,4 +133,24 @@ void AssignOperator::UpdateStatementText()
 	ostringstream T;
 	T << LHS << " = "<<RHS_1<<" " << op << " " << RHS_2;
 	Text = T.str();
+}
+
+void AssignOperator::Save(ofstream& OutFile)
+{
+	OutFile << "OP_ASSIGN" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " 
+		<< LHS << " " << RHS_1 << " " << op << " " << RHS_2 << "\n";
+}
+
+void AssignOperator::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> LHS >> RHS_1 >> op >> RHS_2;
+	UpdateStatementText();
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet.x = Inlet.x;
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
+
 }

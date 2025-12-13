@@ -53,7 +53,7 @@ Point VariableAssign::GetInLet() const
 	return Inlet;
 }
 
-Point VariableAssign::GetOutLet() const
+Point VariableAssign::GetOutLet1() const
 {
 	return Outlet;
 }
@@ -65,6 +65,7 @@ void VariableAssign::get_all(string& l, string& r) const
 }
 
 void VariableAssign::SetOutConn(Connector* C)
+void VariableAssign::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
 }
@@ -85,6 +86,12 @@ void VariableAssign::Edit(ApplicationManager* pManager)
 }
 
 
+Connector* VariableAssign::GetOutConn1()
+{
+	return pOutConn;
+}
+
+
 
 //This function should be called when LHS or RHS changes
 void VariableAssign::UpdateStatementText()
@@ -93,4 +100,23 @@ void VariableAssign::UpdateStatementText()
 	ostringstream T;
 	T << LHS << " = " << RHS;
 	Text = T.str();
+}
+
+void VariableAssign::Save(ofstream& OutFile)
+{
+	OutFile << "VAR_ASSIGN" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " << LHS << " " << RHS << "\n";
+}
+
+void VariableAssign::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> LHS >> RHS;
+	UpdateStatementText();
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet.x = Inlet.x;
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
+
 }

@@ -21,6 +21,19 @@ Edit::Edit(ApplicationManager* pAppManager) :Action(pAppManager)
 void Edit::ReadActionParameters()
 {
 	pStat = pManager->GetSelectedStatement();
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
+
+	
+
+	pIn->GetPointClicked(Position);
+	pOut->ClearStatusBar();
+
+
+
+
+
+
 }
 
 void Edit::Execute()

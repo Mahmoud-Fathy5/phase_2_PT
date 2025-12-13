@@ -17,15 +17,20 @@ If::If(Point Lcorner, string LeftHS, string RightHS, string oper)
 
 	pOutConn2 = NULL;
 	pOutConn1 = NULL;	//No connectors yet
+	pOutConn1 = NULL;	//No connectors yet
+	pOutConn2 = NULL;
 
-	Inlet.x = LeftCorner.x + UI.COND_WDTH / 2;
+	Inlet.x = LeftCorner.x + UI.COND_WDTH/2;
 	Inlet.y = LeftCorner.y;
 
-	Outlet1.x = Inlet.x;
-	Outlet1.y = LeftCorner.y + UI.COND_HI;
+	Outlet1.x = LeftCorner.x+UI.COND_WDTH;
+	Outlet1.y = LeftCorner.y + UI.COND_HI/2;
 
-	Outlet2.x= Inlet.x;
-	Outlet2.y= LeftCorner.y + UI.COND_HI;//Edit Co-ordinates
+	Outlet2.x = LeftCorner.x;
+	Outlet2.y = LeftCorner.y + UI.COND_HI / 2;
+
+	//Outlet2.x= Inlet.x;
+	//Outlet2.y= LeftCorner.y + UI.COND_HI;//Edit Co-ordinates
 }
 
 
@@ -84,16 +89,24 @@ void If::Edit(ApplicationManager* pManager)
 }
 
 Point If::GetInlet() const
+Point If::GetInLet() const
 {
 	return Inlet;
 }
 
-Point If::GetOutlet1() const
+
+Point If::GetOutLet1() const
 {
 	return Outlet1;
 }
 
-Point If::GetOutlet2() const
+
+
+
+
+
+
+Point If::GetOutLet2() const
 {
 	return Outlet2;
 }
@@ -112,7 +125,28 @@ void If::get_all(string& l, string& h, string& o) const
 	l = this->LHS;
 	h = this->RHS;
 	o = this->op;
+	
 }
+
+void If::SetOutConn2(Connector* C)
+{
+	pOutConn2 = C;
+
+}
+
+Connector* If::GetOutConn1()
+{
+	return pOutConn1;
+}
+
+
+Connector* If::GetOutConn2()
+{
+	return pOutConn2;
+}
+
+
+
 
 
 
@@ -121,6 +155,29 @@ void If::UpdateStatementText()
 {
 	//Build the statement text: Left handside then equals then right handside
 	ostringstream T;
-	T <<"IF " << LHS << " " << op << " " << RHS;
+	T <<"If " << LHS << " " << op << " " << RHS;
 	Text = T.str();
+}
+
+void If::Save(ofstream& OutFile)
+{
+	OutFile << "COND" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " 
+		<< LHS << " " << op << " " << RHS << "\n";
+}
+
+void If::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> LHS >> op >> RHS;
+	UpdateStatementText();
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.COND_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet1.x = Inlet.x;
+	Outlet1.y = LeftCorner.y + UI.COND_HI;
+
+	Outlet2.x = Inlet.x;
+	Outlet2.y = LeftCorner.y + UI.COND_HI;//Edit Co-ordinates
+
 }

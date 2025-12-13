@@ -38,11 +38,18 @@ public:
 	virtual void Draw(Output* pOut) const;
 	Point GetLeftCorner();
 	Point GetInLet() const;
+	Point GetOutLet1() const;
+	void SetOutConn1(Connector* C);
+
+	Connector* GetOutConn1();
 	Point GetOutLet() const;
 	void get_all(string &l,string &r)const;
 	void SetOutConn(Connector* C);
 	void Edit(ApplicationManager* pManager) override;
+	virtual void Save(ofstream& OutFile);
+	virtual void Load(ifstream& InFile);
 
+	VariableAssign() = default;
 };
 
 #endif

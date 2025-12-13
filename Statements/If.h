@@ -24,9 +24,11 @@ private:
 	//      then the connector's destination statement and so on (follow the connectors)
 
 	Point Inlet;	//A point where connections enters this statement 
-	//It's used as the (End) point of the (Input) connectors
-	Point Outlet1;	//A point a connection leaves this statement
+	Point Outlet1;
 	Point Outlet2;
+	//It's used as the (End) point of the (Input) connectors
+	//Point Outlet1;	//A point a connection leaves this statement
+	//Point Outlet2;
 	//It's used as the (Start) point of the (Output) connector
 
 	Point LeftCorner;	//left corenr of the statement block.
@@ -51,5 +53,24 @@ public:
 	virtual void Draw(Output* pOut) const;
 	Point GetLeftCorner();
 	void Edit(ApplicationManager* pManager) override;
+	Point GetInLet() const;
+	Point GetOutLet1() const;
+	//Point GetOutLet2() const;
+	Point GetOutLet2()const;
+	void SetOutConn1(Connector* C);
+	void SetOutConn2(Connector* C);
+
+	Connector* GetOutConn1();
+	Connector* GetOutConn2();
+
+	
+
+
+	virtual void Draw(Output* pOut) const;
+	Point GetLeftCorner();
+	virtual void Save(ofstream& OutFile);
+	virtual void Load(ifstream& InFile);
+
+	If() = default;
 };
 

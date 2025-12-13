@@ -24,8 +24,8 @@ Output::Output()
 	UI.ASSGN_HI = 50;
 	UI.OVAL_WDTH = 80; 
 	UI.OVAL_HI = 50;
-	UI.COND_WDTH = 120;
-	UI.COND_HI = 100;
+	UI.COND_WDTH = 150;
+	UI.COND_HI = 50;
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 	//Change the title
@@ -342,21 +342,20 @@ void Output::DrawConnector(Point first, Point second, bool Selected)
 		if (first.x > second.x)
 		{
 			pWind->DrawLine(first.x, first.y, first.x + 100, first.y);
-			pWind->DrawLine(first.x + 100, first.y, first.x + 100, second.y);
-			pWind->DrawLine(first.x + 100, second.y, second.x, second.y);
-			pWind->DrawTriangle(second.x, second.y,
-				second.x + TriHeight, second.y + TriHeight,
-				second.x + TriHeight, second.y - TriHeight);
+			pWind->DrawLine(first.x + 100, first.y, first.x + 100, second.y - 15);
+			pWind->DrawLine(first.x + 100, second.y-15, second.x, second.y-15);
+			pWind->DrawLine(second.x, second.y - 15, second.x, second.y);
 		}
 		else if (first.x <= second.x)
 		{
 			pWind->DrawLine(first.x, first.y, first.x - 100, first.y);
-			pWind->DrawLine(first.x - 100, first.y, first.x - 100, second.y);
-			pWind->DrawLine(first.x - 100, second.y, second.x, second.y);
-			pWind->DrawTriangle(second.x, second.y,
-				second.x - TriHeight, second.y + TriHeight,
-				second.x - TriHeight, second.y - TriHeight);
+			pWind->DrawLine(first.x - 100, first.y, first.x - 100, second.y-15);
+			pWind->DrawLine(first.x - 100, second.y-15, second.x, second.y-15);
+			pWind->DrawLine(second.x, second.y - 15, second.x, second.y);
 		}
+		pWind->DrawTriangle(second.x, second.y,
+			second.x + TriHeight, second.y - TriHeight,
+			second.x - TriHeight, second.y - TriHeight);
 	}
 }
 

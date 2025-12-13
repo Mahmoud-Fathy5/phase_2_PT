@@ -29,12 +29,17 @@ public:
 	virtual void Draw(Output* pOut) const;
 
 	Point GetLeftCorner() const;
-	Point GetOutLet() const;
-	void SetOutConn(Connector* C);
+	Point GetOutLet1() const;
+	void SetOutConn1(Connector* C);
 	virtual void Save(ofstream& OutFile);
 	void Edit(ApplicationManager* pManager) override;
 	~Start();
+	Connector* GetOutConn1();
+	virtual void Load(ifstream& InFile);
 
+	//Start() = default;
+
+	Start() = default;
 };
 
 #endif

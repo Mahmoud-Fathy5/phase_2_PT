@@ -47,7 +47,7 @@ Point Declare::GetInLet() const
 	return Inlet;
 }
 
-Point Declare::GetOutLet() const
+Point Declare::GetOutLet1() const
 {
 	return Outlet;
 }
@@ -58,6 +58,7 @@ string Declare::get_var() const
 }
 
 void Declare::SetOutConn(Connector* C)
+void Declare::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
 }
@@ -74,6 +75,15 @@ void Declare::Edit(ApplicationManager* pManager)
 }
 
 
+
+
+Connector* Declare::GetOutConn1()
+{
+	return pOutConn;
+}
+
+
+
 //This function should be called when LHS or RHS changes
 void Declare::UpdateStatementText()
 {
@@ -81,4 +91,24 @@ void Declare::UpdateStatementText()
 	ostringstream T;
 	T <<"Double "<< var;
 	Text = T.str();
+}
+
+
+void Declare::Save(ofstream& OutFile)
+{
+	OutFile << "DECLARE" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " << var << "\n";
+}
+
+void Declare::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> var;
+	UpdateStatementText();
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet.x = Inlet.x;
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
+
 }
