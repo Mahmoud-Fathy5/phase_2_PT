@@ -70,3 +70,12 @@ void End::Save(ofstream& OutFile)
 {
 	OutFile << "END" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << "\n";
 }
+
+void End::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y;
+	Inlet.x = LeftCorner.x + UI.OVAL_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+}
+

@@ -14,10 +14,11 @@ void Save::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 	string filename;
+	pOut->PrintMessage("Write File name");
 	filename = pIn->GetString(pOut);
 	system("mkdir SavedCharts");
 	OutFile.open("SavedCharts//" + filename + ".txt");
-
+	pOut->PrintMessage("Saved");
 
 }
 

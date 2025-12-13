@@ -342,21 +342,20 @@ void Output::DrawConnector(Point first, Point second, bool Selected)
 		if (first.x > second.x)
 		{
 			pWind->DrawLine(first.x, first.y, first.x + 100, first.y);
-			pWind->DrawLine(first.x + 100, first.y, first.x + 100, second.y);
-			pWind->DrawLine(first.x + 100, second.y, second.x, second.y);
-			pWind->DrawTriangle(second.x, second.y,
-				second.x + TriHeight, second.y + TriHeight,
-				second.x + TriHeight, second.y - TriHeight);
+			pWind->DrawLine(first.x + 100, first.y, first.x + 100, second.y - 15);
+			pWind->DrawLine(first.x + 100, second.y-15, second.x, second.y-15);
+			pWind->DrawLine(second.x, second.y - 15, second.x, second.y);
 		}
 		else if (first.x <= second.x)
 		{
 			pWind->DrawLine(first.x, first.y, first.x - 100, first.y);
-			pWind->DrawLine(first.x - 100, first.y, first.x - 100, second.y);
-			pWind->DrawLine(first.x - 100, second.y, second.x, second.y);
-			pWind->DrawTriangle(second.x, second.y,
-				second.x - TriHeight, second.y + TriHeight,
-				second.x - TriHeight, second.y - TriHeight);
+			pWind->DrawLine(first.x - 100, first.y, first.x - 100, second.y-15);
+			pWind->DrawLine(first.x - 100, second.y-15, second.x, second.y-15);
+			pWind->DrawLine(second.x, second.y - 15, second.x, second.y);
 		}
+		pWind->DrawTriangle(second.x, second.y,
+			second.x + TriHeight, second.y - TriHeight,
+			second.x - TriHeight, second.y - TriHeight);
 	}
 }
 

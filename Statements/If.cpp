@@ -123,3 +123,26 @@ void If::UpdateStatementText()
 	T <<"If " << LHS << " " << op << " " << RHS;
 	Text = T.str();
 }
+
+void If::Save(ofstream& OutFile)
+{
+	OutFile << "COND" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " 
+		<< LHS << " " << op << " " << RHS << "\n";
+}
+
+void If::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> LHS >> op >> RHS;
+	UpdateStatementText();
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.COND_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet1.x = Inlet.x;
+	Outlet1.y = LeftCorner.y + UI.COND_HI;
+
+	Outlet2.x = Inlet.x;
+	Outlet2.y = LeftCorner.y + UI.COND_HI;//Edit Co-ordinates
+
+}

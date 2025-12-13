@@ -31,6 +31,11 @@ public:
 	void SetOutConn1(Connector* C);
 	virtual void Save(ofstream& OutFile);
 	Connector* GetOutConn1();
+	virtual void Load(ifstream& InFile);
+
+	//Start() = default;
+
+	Start() = default;
 };
 
 #endif

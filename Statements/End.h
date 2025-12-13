@@ -30,6 +30,9 @@ public:
 	Connector* GetOutConn1();
 	Point GetOutLet1() const;
 	void SetOutConn1(Connector* C);
+	virtual void Load(ifstream& InFile);
+
+	End() = default;
 };
 
 #endif

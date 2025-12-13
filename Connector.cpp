@@ -110,5 +110,6 @@ void Connector::Draw(Output* pOut) const
 
 void Connector::Save(ofstream& OutFile)
 {
-	OutFile << SrcStat->GetID() << " " << DstStat->GetID() << " " << 0 << "\n";
+	OutFile << SrcStat->GetID() << " " << DstStat->GetID() << "\n";
 }
+
