@@ -68,6 +68,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case SAVE:
 			pAct = new Save(this);
 			break;
+		case LOAD:
+			pAct = new Load(this);
+			break;
 
 		case EXIT:
 			///create Exit Action here
@@ -98,7 +101,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_CONNECTOR:
 			pAct = new AddConn(this);
 			break;
-
+		case SWITCH_SIM_MODE:
+			pOut->CreateSimulationToolBar();
+			break;
+		case SWITCH_DSN_MODE:
+			pOut->CreateDesignToolBar();
+			break;
 		
 
 	}
@@ -222,10 +230,10 @@ Statement *ApplicationManager::GetStatement(Point P) const
 		else if (dynamic_cast<Declare*>(StatList[i]))
 		{
 			Declare* pStat = static_cast<Declare*>(StatList[i]);
-			if (P.x < pStat->GetLeftCorner().x + UI.ASSGN_WDTH / 2
-				&& P.x < pStat->GetLeftCorner().x - UI.ASSGN_WDTH / 2
-				&& P.y < pStat->GetLeftCorner().y
-				&& P.y < pStat->GetLeftCorner().y - UI.ASSGN_HI)
+			if (P.x < pStat->GetLeftCorner().x + UI.ASSGN_WDTH
+				&& P.x > pStat->GetLeftCorner().x
+				&& P.y > pStat->GetLeftCorner().y
+				&& P.y < pStat->GetLeftCorner().y + UI.ASSGN_HI)
 			{
 
 
@@ -356,6 +364,16 @@ void ApplicationManager::saveConn(ofstream& OutFile)
 	OutFile << ConnCount << "\n";
 	for (int i = 0; i < ConnCount; i++)
 		ConnList[i]->Save(OutFile);
+}
+
+Statement* ApplicationManager::FindStatement(int id)
+{
+	for (int i = 0; i < StatCount; i++)
+	{
+		if (StatList[i]->GetID() == id)
+			return StatList[i];
+	}
+	return nullptr;
 }
 
 

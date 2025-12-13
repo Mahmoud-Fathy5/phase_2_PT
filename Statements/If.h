@@ -47,5 +47,9 @@ public:
 
 	virtual void Draw(Output* pOut) const;
 	Point GetLeftCorner();
+	virtual void Save(ofstream& OutFile);
+	virtual void Load(ifstream& InFile);
+
+	If() = default;
 };
 

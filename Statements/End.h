@@ -27,7 +27,9 @@ public:
 	Point GetLeftCorner() const;
 	Point GetInLet() const;
 	virtual void Save(ofstream& OutFile);
+	virtual void Load(ifstream& InFile);
 
+	End() = default;
 };
 
 #endif

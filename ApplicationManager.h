@@ -50,7 +50,7 @@ public:
 
 	void saveStatements(ofstream& OutFile);
 	void saveConn(ofstream& OutFile);
-
+	Statement* FindStatement(int id);
 	// Note: you should use the following 4 functions 
 	//       in order not to break class responsibilities (especially in copy, cut and paste)
 	Statement *GetSelectedStatement() const;	 //Returns the selected Statement

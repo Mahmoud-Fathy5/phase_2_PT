@@ -134,6 +134,7 @@
     <ClCompile Include="Actions\AddStart.cpp" />
     <ClCompile Include="Actions\AddAssignVariable.cpp" />
     <ClCompile Include="Actions\Edit.cpp" />
+    <ClCompile Include="Actions\Load.cpp" />
     <ClCompile Include="Actions\Save.cpp" />
     <ClCompile Include="Actions\Select.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
@@ -310,6 +311,7 @@
     <ClInclude Include="Actions\AddAssignVariable.h" />
     <ClInclude Include="Actions\AddConn.h" />
     <ClInclude Include="Actions\Edit.h" />
+    <ClInclude Include="Actions\Load.h" />
     <ClInclude Include="Actions\Save.h" />
     <ClInclude Include="Actions\Select.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />

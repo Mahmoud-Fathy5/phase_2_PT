@@ -62,5 +62,18 @@ void Start::UpdateStatementText()
 
 void Start::Save(ofstream& OutFile)
 {
-	OutFile << "START" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << "\n";
+	OutFile << "STRT" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << "\n";
 }
+
+void Start::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y;
+	pOutConn = NULL;	//No connectors yet
+
+
+
+	Outlet.x = LeftCorner.x + UI.OVAL_WDTH / 2;
+	Outlet.y = LeftCorner.y + UI.OVAL_HI;
+
+}
+

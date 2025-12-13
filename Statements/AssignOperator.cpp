@@ -86,3 +86,23 @@ void AssignOperator::UpdateStatementText()
 	T << LHS << " = "<<RHS_1<<" " << op << " " << RHS_2;
 	Text = T.str();
 }
+
+void AssignOperator::Save(ofstream& OutFile)
+{
+	OutFile << "OP_ASSIGN" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " 
+		<< LHS << " " << RHS_1 << " " << op << " " << RHS_2 << "\n";
+}
+
+void AssignOperator::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> LHS >> RHS_1 >> op >> RHS_2;
+	UpdateStatementText();
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet.x = Inlet.x;
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
+
+}
