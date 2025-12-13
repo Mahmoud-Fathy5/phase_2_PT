@@ -45,7 +45,12 @@ void AddConn::Execute()
 {
 
 	ReadActionParameters();
+	if (SrcStat == DstStat)
+	{
+		(pManager->GetOutput())->PrintMessage("Cannot Add Connector");
+		return;
 
+	}
 
 	if (dynamic_cast<End*>(SrcStat))
 	{
