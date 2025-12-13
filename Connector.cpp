@@ -110,6 +110,17 @@ void Connector::Draw(Output* pOut) const
 
 void Connector::Save(ofstream& OutFile)
 {
-	OutFile << SrcStat->GetID() << " " << DstStat->GetID() << "\n";
+	OutFile << SrcStat->GetID() << " " << DstStat->GetID() << " ";
+	if (dynamic_cast<If*>(SrcStat))
+	{
+		if (this == SrcStat->GetOutConn1())
+			OutFile << "1" << "\n";
+		if (this == SrcStat->GetOutConn2())
+			OutFile << "2" << "\n";
+	}
+	else
+	{
+		OutFile << "0" << "\n";
+	}
 }
 

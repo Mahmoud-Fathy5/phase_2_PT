@@ -64,7 +64,6 @@ void VariableAssign::get_all(string& l, string& r) const
 	r = this->RHS;
 }
 
-void VariableAssign::SetOutConn(Connector* C)
 void VariableAssign::SetOutConn1(Connector* C)
 {
 	pOutConn = C;

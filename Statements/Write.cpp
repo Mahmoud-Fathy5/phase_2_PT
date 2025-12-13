@@ -46,7 +46,7 @@ Point Write::GetInLet() const
 	return Inlet;
 }
 
-Point Write::GetOutLet() const
+Point Write::GetOutLet1() const
 {
 	return Outlet;
 }
@@ -56,7 +56,7 @@ string Write::get_ValuOrVar() const
 	return this->VarorStr;
 }
 
-void Write::SetOutConn(Connector* C)
+void Write::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
 }
@@ -78,3 +78,27 @@ void Write::UpdateStatementText()
 	T << VarorStr;
 	Text = T.str();
 }
+
+Connector* Write::GetOutConn1()
+{
+	return pOutConn;
+}
+
+void Write::Save(ofstream& OutFile)
+{
+	OutFile << "WRITE" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << " " << VarorStr;
+}
+
+void Write::Load(ifstream& InFile)
+{
+	InFile >> ID >> LeftCorner.x >> LeftCorner.y >> VarorStr;
+	pOutConn = NULL;	//No connectors yet
+
+	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH / 2;
+	Inlet.y = LeftCorner.y;
+
+	Outlet.x = Inlet.x;
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need tobe condiderd
+
+}
+

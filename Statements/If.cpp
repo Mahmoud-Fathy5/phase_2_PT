@@ -88,7 +88,6 @@ void If::Edit(ApplicationManager* pManager)
 	pOut->ClearStatusBar();
 }
 
-Point If::GetInlet() const
 Point If::GetInLet() const
 {
 	return Inlet;
@@ -128,11 +127,6 @@ void If::get_all(string& l, string& h, string& o) const
 	
 }
 
-void If::SetOutConn2(Connector* C)
-{
-	pOutConn2 = C;
-
-}
 
 Connector* If::GetOutConn1()
 {
@@ -174,10 +168,10 @@ void If::Load(ifstream& InFile)
 	Inlet.x = LeftCorner.x + UI.COND_WDTH / 2;
 	Inlet.y = LeftCorner.y;
 
-	Outlet1.x = Inlet.x;
-	Outlet1.y = LeftCorner.y + UI.COND_HI;
+	Outlet1.x = LeftCorner.x + UI.COND_WDTH;
+	Outlet1.y = LeftCorner.y + UI.COND_HI / 2;
 
-	Outlet2.x = Inlet.x;
-	Outlet2.y = LeftCorner.y + UI.COND_HI;//Edit Co-ordinates
+	Outlet2.x = LeftCorner.x;
+	Outlet2.y = LeftCorner.y + UI.COND_HI / 2;
 
 }

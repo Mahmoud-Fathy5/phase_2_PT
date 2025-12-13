@@ -437,7 +437,7 @@ void ApplicationManager::DeleteConn(Connector* pConn)
 		}
 		ConnList[ConnCount - 1] = NULL;
 		ConnCount--;
-		//(pConn->getSrcStat())->SetOutConn1(NULL);
+		(pConn->getSrcStat())->SetOutConn1(NULL);
 		delete pConn;
 	}
 	
@@ -447,10 +447,10 @@ void ApplicationManager::DeleteStat(Statement* pStat)
 {
 
 	if (pStat != NULL) {
+		DeleteConn(pStat->GetOutConn1());
 		if (dynamic_cast<If*>(pStat)) {
-			//DeleteConn(pStat->GetOutConn2());
+			DeleteConn(pStat->GetOutConn2());
 		}
-		//DeleteConn(pStat->GetOutConn1());
 
 		for (int i = 0; i < ConnCount;i++) {
 			if ((ConnList[i]->getDstStat()) == pStat ) {

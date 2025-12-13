@@ -36,9 +36,14 @@ public:
 
 	Point GetLeftCorner();
 	Point GetInLet() const;
-	Point GetOutLet() const;
+	Point GetOutLet1() const;
 	string get_ValuOrVar()const;
 
-	void SetOutConn(Connector* C);
+	void SetOutConn1(Connector* C);
+	virtual Connector* GetOutConn1();
 	void Edit(ApplicationManager* pManager) override;
+	virtual void Save(ofstream& OutFile);
+	virtual void Load(ifstream& InFile);
+
+	Write() = default;
 };

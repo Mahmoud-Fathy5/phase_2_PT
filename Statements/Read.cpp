@@ -57,7 +57,6 @@ string Read::get_var() const
 	return this->var;
 }
 
-void Read::SetOutConn(Connector* C)
 void Read::SetOutConn1(Connector* C)
 {
 	pOutConn = C;

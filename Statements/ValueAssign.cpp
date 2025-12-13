@@ -64,7 +64,6 @@ void ValueAssign::get_all(string& l, double& r) const
 	r = this->RHS;
 }
 
-void ValueAssign::SetOutConn(Connector* C)
 void ValueAssign::SetOutConn1(Connector* C)
 {
 	pOutConn = C;

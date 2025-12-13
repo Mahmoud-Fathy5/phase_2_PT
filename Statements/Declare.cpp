@@ -57,7 +57,6 @@ string Declare::get_var() const
 	return this->var;
 }
 
-void Declare::SetOutConn(Connector* C)
 void Declare::SetOutConn1(Connector* C)
 {
 	pOutConn = C;

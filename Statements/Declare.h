@@ -41,9 +41,7 @@ public:
 	void SetOutConn1(Connector* C);
 
 	Connector* GetOutConn1();
-	Point GetOutLet() const;
 	string get_var()const;
-	void SetOutConn(Connector* C);
 	void Edit(ApplicationManager* pManager) override;
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& InFile);

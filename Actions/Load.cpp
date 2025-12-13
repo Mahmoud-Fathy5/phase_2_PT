@@ -15,6 +15,7 @@
 #include "AddIf.h"
 #include "AddConn.h"
 #include "Save.h"
+#include "AddWrite.h"
 
 Load::Load(ApplicationManager* pAppManager):Action(pAppManager)
 {
@@ -46,7 +47,7 @@ void Load::Execute()
 		Statement* pStatement;
 		string StatType;
 		InFile >> StatType;
-		if (StatType == "STRT")
+		if (StatType == "START")
 		{
 			pStatement = new Start;
 			pStatement->Load(InFile);
@@ -94,6 +95,12 @@ void Load::Execute()
 			pStatement->Load(InFile);
 			pManager->AddStatement(pStatement);
 		}
+		else if (StatType == "WRITE")
+		{
+			pStatement = new Write;
+			pStatement->Load(InFile);
+			pManager->AddStatement(pStatement);
+		}
 
 	}
 	int ConnCount = 0;
@@ -102,7 +109,23 @@ void Load::Execute()
 	{
 		int srcID, dstID;
 		InFile >> srcID >> dstID;
+		Statement* Src = pManager->FindStatement(srcID);
 		Connector* Conn = new Connector(pManager->FindStatement(srcID), pManager->FindStatement(dstID));
+		if (dynamic_cast<If*>(Src))
+		{
+			int temp;
+			InFile >> temp;
+			if (temp == 1)
+				Src->SetOutConn1(Conn);
+			else if (temp == 2)
+				Src->SetOutConn2(Conn);
+		}
+		else
+		{
+			int temp;
+			InFile >> temp;
+			Src->SetOutConn1(Conn);
+		}
 		pManager->AddConnector(Conn);
 	}
 }

@@ -40,10 +40,12 @@ void Paste::Execute()
 	if (pStat_copy != NULL ) {
 
 		if (dynamic_cast<Start*>(pStat_copy)) {
+			if (Start::exsit && (pManager->get_Copy0_Cut1() == 0)) return;
 			Start* ptr = new Start(Position);
 			pManager->AddStatement(ptr);
 		}
 		else if (dynamic_cast<End*>(pStat_copy)) {
+			if (End::exist) return;
 			End* ptr = new End(Position);
 			pManager->AddStatement(ptr);
 			

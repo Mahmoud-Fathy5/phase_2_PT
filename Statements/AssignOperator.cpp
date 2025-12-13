@@ -97,10 +97,6 @@ void AssignOperator::Edit(ApplicationManager* pManager)
 	pOut->ClearStatusBar();
 }
 
-void AssignOperator::SetOutConn(Connector* C)
-{
-	pOutConn = C;
-}
 
 Point AssignOperator::GetInLet() const
 {

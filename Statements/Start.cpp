@@ -84,8 +84,6 @@ Start::~Start()
 {
 	exsit = false;
 }
-	OutFile << "STRT" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << "\n";
-}
 
 void Start::Load(ifstream& InFile)
 {
