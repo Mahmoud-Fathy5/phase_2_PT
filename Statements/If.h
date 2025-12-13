@@ -42,6 +42,17 @@ public:
 	void setRHS(string R);
 	void setOp(string O);
 
+	Point GetInlet() const;
+	Point GetOutlet1() const;
+	Point GetOutlet2()const;
+	void SetOutConn1(Connector* C);
+	void SetOutConn2(Connector* C);
+
+	void get_all(string &l,string &h,string &o)const;
+
+	virtual void Draw(Output* pOut) const;
+	Point GetLeftCorner();
+	void Edit(ApplicationManager* pManager) override;
 	Point GetInLet() const;
 	Point GetOutLet1() const;
 	//Point GetOutLet2() const;

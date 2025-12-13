@@ -19,6 +19,7 @@ private:
 
 
 public:
+	static bool exist;
 	End(Point Lcorner);
 
 
@@ -27,6 +28,8 @@ public:
 	Point GetLeftCorner() const;
 	Point GetInLet() const;
 	virtual void Save(ofstream& OutFile);
+	void Edit(ApplicationManager* pManager) override;
+	~End();
 	Connector* GetOutConn1();
 	Point GetOutLet1() const;
 	void SetOutConn1(Connector* C);

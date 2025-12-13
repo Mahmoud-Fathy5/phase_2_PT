@@ -1,6 +1,6 @@
 #include "VariableAssign.h"
 #include <sstream>
-
+#include"../ApplicationManager.h"
 using namespace std;
 
 VariableAssign::VariableAssign(Point Lcorner, string LeftHS, string RightHS)
@@ -58,9 +58,31 @@ Point VariableAssign::GetOutLet1() const
 	return Outlet;
 }
 
+void VariableAssign::get_all(string& l, string& r) const
+{
+	l = this->LHS;
+	r = this->RHS;
+}
+
+void VariableAssign::SetOutConn(Connector* C)
 void VariableAssign::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
+}
+
+void VariableAssign::Edit(ApplicationManager* pManager)
+{
+	string l, r;
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
+	pOut->PrintMessage("Please Enter Left Hand Side");
+	l = pIn->GetVariabel(pOut);
+
+	pOut->PrintMessage("Please Enter Right Hand Side");
+	r = pIn->GetVariabel(pOut);
+	this->setRHS(r);
+	this->setLHS(l);
+	pOut->ClearStatusBar();
 }
 
 

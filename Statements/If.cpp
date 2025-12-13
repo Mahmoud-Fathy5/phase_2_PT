@@ -1,6 +1,6 @@
 #include "If.h"
 #include <sstream>
-
+#include"../ApplicationManager.h"
 using namespace std;
 
 If::If(Point Lcorner, string LeftHS, string RightHS, string oper)
@@ -15,6 +15,8 @@ If::If(Point Lcorner, string LeftHS, string RightHS, string oper)
 
 	LeftCorner = Lcorner;
 
+	pOutConn2 = NULL;
+	pOutConn1 = NULL;	//No connectors yet
 	pOutConn1 = NULL;	//No connectors yet
 	pOutConn2 = NULL;
 
@@ -65,6 +67,28 @@ Point If::GetLeftCorner()
 	return LeftCorner;
 }
 
+void If::Edit(ApplicationManager* pManager)
+{
+	string l, o, r;
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
+	pOut->PrintMessage("Please Enter Left Hand Side");
+	l = pIn->GetVariabelOrValue(pOut);
+
+	pOut->PrintMessage("Please Enter Comparator ");
+	o = pIn->GetCompOperator(pOut);
+
+
+	//ValueOrVariable()
+	pOut->PrintMessage("Please Enter Right Hand Side ");
+	r = pIn->GetVariabelOrValue(pOut);
+	this->setLHS(l);
+	this->setOp(o);
+	this->setRHS(r);
+	pOut->ClearStatusBar();
+}
+
+Point If::GetInlet() const
 Point If::GetInLet() const
 {
 	return Inlet;
@@ -90,6 +114,17 @@ Point If::GetOutLet2() const
 void If::SetOutConn1(Connector* C)
 {
 	pOutConn1 = C;
+}
+void If::SetOutConn2(Connector* C)
+{
+	pOutConn2 = C;
+}
+
+void If::get_all(string& l, string& h, string& o) const
+{
+	l = this->LHS;
+	h = this->RHS;
+	o = this->op;
 	
 }
 

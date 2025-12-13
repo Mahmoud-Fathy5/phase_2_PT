@@ -1,12 +1,14 @@
 #include "End.h"
 #include <sstream>
-
+#include"../ApplicationManager.h"
 using namespace std;
+
+bool End::exist = false;
 
 End::End(Point Lcorner)
 {
 
-
+	exist = true;
 	UpdateStatementText();
 	
 	LeftCorner = Lcorner;
@@ -71,6 +73,13 @@ void End::Save(ofstream& OutFile)
 	OutFile << "END" << " " << ID << " " << LeftCorner.x << " " << LeftCorner.y << "\n";
 }
 
+void End::Edit(ApplicationManager* pManager)
+{
+}
+
+End ::~End() {
+	exist = false;
+}
 void End::Load(ifstream& InFile)
 {
 	InFile >> ID >> LeftCorner.x >> LeftCorner.y;

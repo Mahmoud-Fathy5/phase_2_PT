@@ -46,7 +46,7 @@ public:
 	virtual void Save(ofstream& OutFile) = 0; //Save the Statement parameters to a file
 	virtual void Load(ifstream &InFile) = 0;	//Load the Statement parameters from a file
 
-	//virtual void Edit() = 0;		//Edit the Statement parameter
+	virtual void Edit(ApplicationManager* pManager) = 0;		//Edit the Statement parameter
 
 	//virtual void Simulate();	//Execute the statement in the simulation mode
 
@@ -54,6 +54,7 @@ public:
 
 
 	///TODO: Add more functions if needed
+	virtual ~Statement();
 
 };
 

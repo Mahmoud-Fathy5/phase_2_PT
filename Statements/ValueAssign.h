@@ -45,7 +45,9 @@ public:
 
 	Connector* GetOutConn1();
 	Point GetOutLet() const;
+	void get_all(string &l,double &r)const;
 	void SetOutConn(Connector* C);
+	void Edit(ApplicationManager* pManager) override;
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& InFile);
 

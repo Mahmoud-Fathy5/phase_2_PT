@@ -22,6 +22,7 @@ private:
 	Statement *pSelectedStat; //a pointer to the last selected statement
 	                          //you can set and get this pointer
 	Statement *pClipboard;    //a pointer to the last copied/cut statement
+	bool Copy0_or_Cut1 = 0;
 	                          //you can set and get this pointer
 	Connector* pSelectedConn;
 
@@ -57,11 +58,15 @@ public:
 	void SetSelectedStatement(Statement *pStat); //Set the Statement selected by the user
 	Statement *GetClipboard() const;	         //Returns the Clipboard
 	void SetClipboard(Statement *pStat);         //Set the Clipboard
+	bool get_Copy0_Cut1()const;
+	void set_Copy0_Cut1(bool b);
 
 
 	Connector* GetSelectedConn()const;
 	void SetSelectedConn(Connector* pConn);
 
+	void DeleteConn(Connector* pConn);
+	void DeleteStat(Statement* pStat);
 
 	// == Interface Management Functions ==
 	Input *GetInput() const;        //Return pointer to the input

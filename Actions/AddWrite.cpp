@@ -1,4 +1,4 @@
-#include "AddIf.h"
+#include "AddWrite.h"
 
 
 
@@ -7,21 +7,21 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-#include <sstream>
-using namespace std;
+
+
 
 //constructor: set the ApplicationManager pointer inside this action
-AddIf::AddIf(ApplicationManager* pAppManager) :Action(pAppManager)
+AddWrite::AddWrite(ApplicationManager* pAppManager) :Action(pAppManager)
 {
 }
 
-void AddIf::ReadActionParameters()
+void AddWrite::ReadActionParameters()
 {
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 
-	//Read the (Position) parameter
-	pOut->PrintMessage("Conditional Statement: Click to add the statement");
+	//Write the (Position) parameter
+	pOut->PrintMessage("Write Statement: Click to Write a Variabel");
 
 	pIn->GetPointClicked(Position);
 	while (!(Position.x <UI.DrawingAreaWidth && Position.y >UI.ToolBarHeight && Position.y < (UI.height - UI.StatusBarHeight))) {
@@ -35,19 +35,8 @@ void AddIf::ReadActionParameters()
 	pOut->ClearStatusBar();
 
 	//TODO: Ask the user in the status bapr to enter the LHS and set the data member
-	pOut->PrintMessage("Please Enter Left Hand Side");
-	LHS = pIn->GetVariabelOrValue(pOut);
-
-	pOut->PrintMessage("Please Enter Comparator ");
-	op = pIn->GetCompOperator(pOut);
-
-
-	//ValueOrVariable()
-	pOut->PrintMessage("Please Enter Right Hand Side ");
-	RHS = pIn->GetVariabelOrValue(pOut);
-
-	
-
+	pOut->PrintMessage("Please Enter Variable name or Value");
+	VarOrValu = pIn->GetVariabelOrValue(pOut);
 
 	//TODO: Ask the user in the status bar to enter the RHS and set the data member
 
@@ -55,19 +44,18 @@ void AddIf::ReadActionParameters()
 	//      Call the appropriate functions for this.
 }
 
-void AddIf::Execute()
+void AddWrite::Execute()
 {
 	ReadActionParameters();
-
 	//Calculating left corner of assignement statement block
 	Point Corner;
-	Corner.x = Position.x - UI.COND_WDTH / 2;
+	Corner.x = Position.x - UI.ASSGN_WDTH / 2;   // need to be considerdddd
 	Corner.y = Position.y;
 
-	If* pIf = new If(Corner, LHS, RHS, op);
+	Write* pWrite = new Write(Corner, VarOrValu);
 	//TODO: should set the LHS and RHS of pAssign statement
-	//      with the data members set and validated before in ReadActionParameters()
+	//      with the data members set and validated before in WriteActionParameters()
 
-	pManager->AddStatement(pIf); // Adds the created statement to application manger's statement list
+	pManager->AddStatement(pWrite); // Adds the created statement to application manger's statement list
 }
 

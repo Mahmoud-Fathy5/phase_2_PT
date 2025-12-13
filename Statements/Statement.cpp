@@ -1,4 +1,5 @@
 #include "Statement.h"
+#include "Start.h"
 int Statement::temp = 0;
 Statement::Statement()	
 { 
@@ -63,4 +64,8 @@ Connector *Statement::GetOutConn2()
 void Statement::Save(ofstream& OutFile)
 {
 
+}
+
+Statement::~Statement()
+{
 }

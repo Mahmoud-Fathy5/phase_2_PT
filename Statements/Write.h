@@ -1,17 +1,14 @@
-#ifndef ASSIGN_OPERATOR_H
-#define ASSIGN_OPERATOR_H
-
+#pragma once
 #include "Statement.h"
 
 //Value Assignment statement class
 //The value assignment statement assigns a value to a variable
-class AssignOperator : public Statement
+class	Write : public Statement
 {
 private:
-	string LHS;
-	string op;
-	string RHS_1;
-	string RHS_2;
+	string VarorStr;	//Left Handside of the assignment (name of a variable)
+	//Right Handside (Value)
+
 	Connector* pOutConn;	//Value Assignment Stat. has one Connector to next statement
 	//Each statement type in flowchart has a predefined number of (output) connectors
 	//For example, conditional statement always has 2 output connectors
@@ -31,28 +28,17 @@ private:
 	virtual void UpdateStatementText();
 
 public:
-	AssignOperator(Point Lcorner, string LeftHS,string RightHS_1="", string oper="", string RightHS_2="");
+	Write(Point Lcorner, string var = "");
 
-	void setLHS(const string& L);
-	void setRHS_1(string R1);
-	void setRHS_2(string R2); //const by refrence
-	void setOp(string O);
-	void get_all(string& LeftHS, string& RightHS_1, string& oper, string& RightHS_2) const;
-
-	Point GetInLet() const;
-	Point GetOutLet1() const;
-	void SetOutConn1(Connector* C);
+	void set_ValuOrVar(const string& L);
 
 	virtual void Draw(Output* pOut) const;
+
 	Point GetLeftCorner();
+	Point GetInLet() const;
+	Point GetOutLet() const;
+	string get_ValuOrVar()const;
+
+	void SetOutConn(Connector* C);
 	void Edit(ApplicationManager* pManager) override;
-	virtual void Save(ofstream& OutFile);
-	virtual void Load(ifstream& InFile);
-
-	Connector *GetOutConn1();
-
-
-	AssignOperator() = default;
 };
-
-#endif

@@ -1,23 +1,17 @@
 #pragma once
-
 #include "Action.h"
-#include "..\Statements\ValueAssign.h"
-#include "..\Connector.h"
+#include "..\ApplicationManager.h"
 
 
-class Edit : public Action
+class Cut : public Action
 {
 private:
 
-
 	Statement* pStat;
-	//Statement* pSelected;
-
-
 
 public:
 
-	Edit(ApplicationManager* pAppManager);
+	Cut(ApplicationManager* pAppManager);
 
 	//Read Assignemt statements position
 	virtual void ReadActionParameters();
@@ -26,10 +20,3 @@ public:
 	virtual void Execute();
 
 };
-
-
-
-
-
-
-

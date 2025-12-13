@@ -1,23 +1,20 @@
 #pragma once
-
+#include "../Connector.h"
 #include "Action.h"
-#include "..\Statements\ValueAssign.h"
-#include "..\Connector.h"
+#include "..\ApplicationManager.h"
 
 
-class Edit : public Action
+class Delete : public Action
 {
 private:
 
-
 	Statement* pStat;
 	//Statement* pSelected;
-
-
+	Connector* pCon;
 
 public:
 
-	Edit(ApplicationManager* pAppManager);
+	Delete(ApplicationManager* pAppManager);
 
 	//Read Assignemt statements position
 	virtual void ReadActionParameters();

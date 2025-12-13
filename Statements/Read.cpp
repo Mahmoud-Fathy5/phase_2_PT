@@ -1,6 +1,6 @@
 #include "Read.h"
 #include <sstream>
-
+#include"../ApplicationManager.h"
 using namespace std;
 
 Read::Read(Point Lcorner, string v)
@@ -24,6 +24,7 @@ Read::Read(Point Lcorner, string v)
 
 void Read::setVar(const string& L)
 {
+
 	var = L;
 	UpdateStatementText();
 }
@@ -51,10 +52,28 @@ Point Read::GetOutLet1() const
 	return Outlet;
 }
 
+string Read::get_var() const
+{
+	return this->var;
+}
+
+void Read::SetOutConn(Connector* C)
 void Read::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
 }
+
+void Read::Edit(ApplicationManager* pManager)
+{
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
+	string s;
+	pOut->PrintMessage("Please Enter var");
+	s = pIn->GetVariabel(pOut);
+	this->setVar(s);
+	pOut->ClearStatusBar();
+}
+
 
 Connector* Read::GetOutConn1()
 {

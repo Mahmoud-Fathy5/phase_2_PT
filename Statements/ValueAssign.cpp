@@ -1,6 +1,6 @@
 #include "ValueAssign.h"
 #include <sstream>
-
+#include"../ApplicationManager.h"
 using namespace std;
 
 ValueAssign::ValueAssign(Point Lcorner, string LeftHS, double RightHS)
@@ -58,9 +58,32 @@ Point ValueAssign::GetOutLet1() const
 	return Outlet;
 }
 
+void ValueAssign::get_all(string& l, double& r) const
+{
+	l = this->LHS;
+	r = this->RHS;
+}
+
+void ValueAssign::SetOutConn(Connector* C)
 void ValueAssign::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
+}
+
+void ValueAssign::Edit(ApplicationManager* pManager)
+{
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
+	string l;
+	double r;
+	pOut->PrintMessage("Please Enter Left Hand Side");
+	l = pIn->GetVariabel(pOut);
+
+	pOut->PrintMessage("Please Enter Right Hand Side");
+	r = pIn->GetValue(pOut);
+	this->setLHS(l);
+	this->setRHS(r);
+	pOut->ClearStatusBar();
 }
 
 

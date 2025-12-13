@@ -1,5 +1,6 @@
 #include "Declare.h"
 #include <sstream>
+#include"../ApplicationManager.h"
 
 using namespace std;
 
@@ -51,9 +52,26 @@ Point Declare::GetOutLet1() const
 	return Outlet;
 }
 
+string Declare::get_var() const
+{
+	return this->var;
+}
+
+void Declare::SetOutConn(Connector* C)
 void Declare::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
+}
+
+void Declare::Edit(ApplicationManager* pManager)
+{
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
+	pOut->PrintMessage("Please Enter varaiable");
+	var = pIn->GetVariabel(pOut);
+	string s;
+	this->setVar(s);
+	pOut->ClearStatusBar();
 }
 
 
@@ -71,7 +89,7 @@ void Declare::UpdateStatementText()
 {
 	//Build the statement text: Left handside then equals then right handside
 	ostringstream T;
-	T << var;
+	T <<"Double "<< var;
 	Text = T.str();
 }
 
