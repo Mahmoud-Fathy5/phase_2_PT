@@ -24,8 +24,8 @@ Output::Output()
 	UI.ASSGN_HI = 50;
 	UI.OVAL_WDTH = 80; 
 	UI.OVAL_HI = 50;
-	UI.COND_WDTH = 120;
-	UI.COND_HI = 100;
+	UI.COND_WDTH = 150;
+	UI.COND_HI = 50;
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 	//Change the title

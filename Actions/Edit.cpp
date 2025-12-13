@@ -23,7 +23,6 @@ void Edit::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 
-
 	
 
 	pIn->GetPointClicked(Position);

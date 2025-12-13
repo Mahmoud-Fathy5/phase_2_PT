@@ -41,10 +41,29 @@ Point End::GetInLet() const
 }
 
 
+Point End::GetOutLet1()const
+{
+	return NULL;
+}
+
+
+void End::SetOutConn1(Connector* C)
+{
+	pOutConn = C;
+}
+
+Connector* End::GetOutConn1()
+{
+	return pOutConn;
+}
+
+
 
 void End::UpdateStatementText()
 {
-
+	ostringstream T;
+	T << "End";
+	Text = T.str();
 }
 
 void End::Save(ofstream& OutFile)

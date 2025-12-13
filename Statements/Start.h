@@ -27,10 +27,10 @@ public:
 	virtual void Draw(Output* pOut) const;
 
 	Point GetLeftCorner() const;
-	Point GetOutLet() const;
-	void SetOutConn(Connector* C);
+	Point GetOutLet1() const;
+	void SetOutConn1(Connector* C);
 	virtual void Save(ofstream& OutFile);
-
+	Connector* GetOutConn1();
 };
 
 #endif

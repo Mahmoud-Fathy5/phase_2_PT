@@ -7,6 +7,8 @@
 #include"..\Statements/Start.h"
 #include"..\Statements/End.h"
 
+#include"..\Statements/If.h"
+
 #include <sstream>
 using namespace std;
 
@@ -44,19 +46,70 @@ void AddConn::Execute()
 
 	ReadActionParameters();
 
-	Connector* pConnector = new Connector(SrcStat, DstStat);
-	pConnector->setStartPoint(SrcStat->GetOutLet());
 	if (dynamic_cast<End*>(SrcStat))
 	{
-		(pManager->GetOutput())->PrintMessage("Cannot Set End as a Start Point");
+		(pManager->GetOutput())->PrintMessage("Cannot Add Connector");
 		return;
 	}
-	pConnector->setEndPoint(DstStat->GetInLet());
+
+
+
 	if (dynamic_cast<Start*>(DstStat))
 	{
-		(pManager->GetOutput())->PrintMessage("Cannot Set Start as an End Point");
+		(pManager->GetOutput())->PrintMessage("Cannot Add Connector");
 		return;
 	}
+
+
+
+
+
+	if (dynamic_cast<If*>(SrcStat) && SrcStat->GetOutConn1() != NULL && SrcStat->GetOutConn2() != NULL)
+	{
+		(pManager->GetOutput())->PrintMessage("Cannot Add Conector");
+		return;
+	}
+
+
+
+	if (dynamic_cast<If*>(SrcStat)==NULL   &&    SrcStat->GetOutConn1() != NULL)
+	{
+		(pManager->GetOutput())->PrintMessage("Cannot Add Connector");
+		return;
+	}
+
+
+	Connector* pConnector = new Connector(SrcStat, DstStat);
+	if (dynamic_cast<If*>(SrcStat) && SrcStat->GetOutConn1() == NULL && SrcStat->GetOutConn2() == NULL)
+	{
+		
+		pConnector->setStartPoint(SrcStat->GetOutLet1());
+		pConnector->setEndPoint(DstStat->GetInLet());
+		SrcStat->SetOutConn1(pConnector);
+		pManager->AddConnector(pConnector);
+		return;
+	}
+
+	if (dynamic_cast<If*>(SrcStat) && SrcStat->GetOutConn1() != NULL && SrcStat->GetOutConn2() == NULL)
+	{
+		
+		pConnector->setStartPoint(SrcStat->GetOutLet2());
+		pConnector->setEndPoint(DstStat->GetInLet());
+		SrcStat->SetOutConn2(pConnector);
+		pManager->AddConnector(pConnector);
+		return;
+	}
+
+	if (dynamic_cast<If*>(SrcStat)==NULL)
+	{
+		SrcStat->SetOutConn1(pConnector);
+		pConnector->setStartPoint(SrcStat->GetOutLet1());
+	}
+	
+
+	
+
 	pManager->AddConnector(pConnector);
+
 
 }

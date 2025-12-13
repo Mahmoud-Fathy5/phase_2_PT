@@ -46,17 +46,20 @@ Point Read::GetInLet() const
 	return Inlet;
 }
 
-Point Read::GetOutLet() const
+Point Read::GetOutLet1() const
 {
 	return Outlet;
 }
 
-void Read::SetOutConn(Connector* C)
+void Read::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
 }
 
-
+Connector* Read::GetOutConn1()
+{
+	return pOutConn;
+}
 
 
 //This function should be called when LHS or RHS changes

@@ -54,7 +54,7 @@ void AddIf::Execute()
 
 	//Calculating left corner of assignement statement block
 	Point Corner;
-	Corner.x = Position.x - UI.ASSGN_WDTH / 2;
+	Corner.x = Position.x - UI.COND_WDTH / 2;
 	Corner.y = Position.y;
 
 	If* pIf = new If(Corner, LHS, RHS, op);

@@ -46,15 +46,24 @@ Point Declare::GetInLet() const
 	return Inlet;
 }
 
-Point Declare::GetOutLet() const
+Point Declare::GetOutLet1() const
 {
 	return Outlet;
 }
 
-void Declare::SetOutConn(Connector* C)
+void Declare::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
 }
+
+
+
+
+Connector* Declare::GetOutConn1()
+{
+	return pOutConn;
+}
+
 
 
 //This function should be called when LHS or RHS changes

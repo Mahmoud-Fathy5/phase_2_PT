@@ -34,7 +34,7 @@ void Start::Draw(Output* pOut) const
 //	return Outlet;
 //}
 
-void Start::SetOutConn(Connector* C)
+void Start::SetOutConn1(Connector* C)
 {
 	pOutConn = C;
 }
@@ -45,9 +45,15 @@ Point Start::GetLeftCorner() const
 	return LeftCorner;
 }
 
-Point Start::GetOutLet()const
+Point Start::GetOutLet1()const
 { 
 	return Outlet;
+}
+
+
+Connector* Start::GetOutConn1()
+{
+	return pOutConn;
 }
 
 
@@ -55,9 +61,9 @@ Point Start::GetOutLet()const
 void Start::UpdateStatementText()
 {
 	//Build the statement text: Left handside then equals then right handside
-	//ostringstream T;
-	//T <<"Start";
-	//Text = T.str();
+	ostringstream T;
+	T <<"Start";
+	Text = T.str();
 }
 
 void Start::Save(ofstream& OutFile)

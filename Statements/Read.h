@@ -36,7 +36,9 @@ public:
 
 	Point GetLeftCorner();
 	Point GetInLet() const;
-	Point GetOutLet() const;
-	void SetOutConn(Connector* C);
+	Point GetOutLet1() const;
+	void SetOutConn1(Connector* C);
+
+	Connector* GetOutConn1();
 
 };
