@@ -50,7 +50,8 @@ public:
 	void Edit(ApplicationManager* pManager) override;
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& InFile);
-
+	virtual Statement* Simulate(ApplicationManager* pManager);
+	virtual Statement* GenerateCode(ofstream& OutFile);
 	ValueAssign() = default;
 };
 

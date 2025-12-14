@@ -51,7 +51,8 @@ public:
 
 	Connector *GetOutConn1();
 
-
+	virtual Statement* Simulate(ApplicationManager* pManager);
+	virtual Statement* GenerateCode(ofstream& OutFile);
 	AssignOperator() = default;
 };
 

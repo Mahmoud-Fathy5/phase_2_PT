@@ -19,6 +19,9 @@
 #include "GUI\Output.h"
 #include "./Actions/AddConn.h"
 #include "Actions/Save.h"
+#include "Actions/Run.h"
+#include "Actions/Debug.h"
+#include "Actions/GenerateCode.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -27,6 +30,7 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 	StatCount = 0;
 	ConnCount = 0;
+	VarCount = 0;
 	pSelectedStat = NULL;	//no Statement is selected yet
 	pClipboard = NULL;
 	pSelectedConn = NULL;
@@ -134,8 +138,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case SWITCH_DSN_MODE:
 			pOut->CreateDesignToolBar();
 			break;
-		
-
+		case RUN:
+			pAct = new Run(this);
+			break;
+		case DEBUG:
+			pAct = new Debug(this);
+			break;
+		case GENERATE_CODE:
+			pAct = new GenerateCode(this);
+			break;
 	}
 	
 	//Execute the created action
@@ -564,6 +575,37 @@ void ApplicationManager::UpdateInterface() const
 		ConnList[i]->Draw(pOut);
 
 }
+Statement* ApplicationManager::GetStart()
+{
+	for (int i = 0; i < StatCount; i++)
+	{
+		if (dynamic_cast<Start*>(StatList[i]))
+			return StatList[i];
+	}
+	return NULL;
+}
+void ApplicationManager::AddVar(variable* v)
+{
+	if (VarCount < MaxCount)
+		Vars[VarCount++] = v;
+
+}
+variable* ApplicationManager::FindVar(string name)
+{
+	for (int i = 0; i < VarCount; i++)
+	{
+		if (Vars[i]->name == name)
+			return Vars[i];
+	}
+	return NULL;
+}
+void ApplicationManager::printVars() const
+{
+	for (int i = 0; i < VarCount; i++)
+	{
+		pOut->OutputMessages(Vars[i]->name + " = " + to_string(Vars[i]->value));
+	}
+}
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input *ApplicationManager::GetInput() const
@@ -581,6 +623,9 @@ ApplicationManager::~ApplicationManager()
 		delete StatList[i];
 	for(int i=0; i<ConnCount; i++) //ConnCount
 		delete ConnList[i];
+	for (int i = 0; i < VarCount; i++)
+		delete Vars[i];
+
 	delete pIn;
 	delete pOut;
 	

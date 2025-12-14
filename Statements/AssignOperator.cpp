@@ -1,6 +1,7 @@
 #include "AssignOperator.h"
 #include"../ApplicationManager.h"
 #include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -149,4 +150,48 @@ void AssignOperator::Load(ifstream& InFile)
 	Outlet.x = Inlet.x;
 	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
 
+}
+
+Statement* AssignOperator::Simulate(ApplicationManager* pAppManager)
+{
+	variable* pVar1 = pAppManager->FindVar(LHS);
+	variable* pVar2;
+	variable* pVar3;
+	if (IsVariable(RHS_1))
+	{
+		pVar2 = pAppManager->FindVar(RHS_1);
+		if (IsVariable(RHS_2))
+		{
+			pVar3 = pAppManager->FindVar(RHS_2);
+			if(op == "+") pVar1->value = pVar2->value + pVar3->value;
+			if (op == "*") pVar1->value = pVar2->value * pVar3->value;
+			if (op == "-") pVar1->value = pVar2->value - pVar3->value;
+			if (op == "/") pVar1->value = pVar2->value / pVar3->value;
+
+		}
+		else
+		{
+			if(op == "+") pVar1->value = pVar2->value + stod(RHS_2);
+			if (op == "*") pVar1->value = pVar2->value * stod(RHS_2);
+			if (op == "-") pVar1->value = pVar2->value - stod(RHS_2);
+			if (op == "/") pVar1->value = pVar2->value / stod(RHS_2);
+
+		}
+	}
+	else if (IsVariable(RHS_2))
+	{
+		pVar2 = pAppManager->FindVar(RHS_2);
+		if(op == "+") pVar1->value = stod(RHS_1) + pVar2->value;
+		if (op == "*") pVar1->value = stod(RHS_1) * pVar2->value;
+		if (op == "-") pVar1->value = stod(RHS_1) - pVar2->value;
+		if (op == "/") pVar1->value = stod(RHS_1) / pVar2->value;
+
+	}
+	return pOutConn->getDstStat();
+}
+
+Statement* AssignOperator::GenerateCode(ofstream& OutFile)
+{
+	OutFile << LHS << " = " << RHS_1 << " " << op << " " << RHS_2 << ";\n";
+	return pOutConn->getDstStat();
 }

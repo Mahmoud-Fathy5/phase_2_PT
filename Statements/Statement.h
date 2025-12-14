@@ -7,6 +7,7 @@
 #include "..\GUI\Output.h"
 #include "../Actions/Save.h"
 #include "../Actions/Load.h"
+#include <sstream>
 //Base class for all Statements
 class Statement
 {
@@ -48,9 +49,9 @@ public:
 
 	virtual void Edit(ApplicationManager* pManager) = 0;		//Edit the Statement parameter
 
-	//virtual void Simulate();	//Execute the statement in the simulation mode
+	virtual Statement* Simulate(ApplicationManager* pManager) = 0;	//Execute the statement in the simulation mode
 
-	//[BONUS] virtual void GenerateCode(ofstream &OutFile) = 0;	//write the statement code to a file
+	virtual Statement* GenerateCode(ofstream &OutFile) = 0;	//write the statement code to a file
 
 
 	///TODO: Add more functions if needed

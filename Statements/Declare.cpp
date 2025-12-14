@@ -1,6 +1,7 @@
 #include "Declare.h"
 #include <sstream>
 #include"../ApplicationManager.h"
+#include "../Actions/Run.h"
 
 using namespace std;
 
@@ -110,4 +111,19 @@ void Declare::Load(ifstream& InFile)
 	Outlet.x = Inlet.x;
 	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
 
+}
+
+Statement* Declare::Simulate(ApplicationManager* pManager)
+{
+	variable* pVar = new variable;
+	pVar->name = var;
+	pManager->AddVar(pVar);
+	return pOutConn->getDstStat();
+}
+
+
+Statement* Declare::GenerateCode(ofstream& OutFile)
+{
+	OutFile << "double " << var << ";\n";
+	return pOutConn->getDstStat();
 }

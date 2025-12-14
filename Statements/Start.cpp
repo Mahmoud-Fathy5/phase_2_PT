@@ -97,3 +97,12 @@ void Start::Load(ifstream& InFile)
 
 }
 
+Statement* Start::Simulate(ApplicationManager* pAppManager)
+{
+	return pOutConn->getDstStat();
+}
+
+Statement* Start::GenerateCode(ofstream& OutFile)
+{
+	return pOutConn->getDstStat();
+}
