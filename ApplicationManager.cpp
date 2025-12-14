@@ -14,6 +14,8 @@
 #include"./Actions\Paste.h"
 #include"./Actions\Edit.h"
 #include"./Actions\Cut.h"
+#include"./Actions\Validate.h"
+
 
 #include "GUI\Input.h"
 #include "GUI\Output.h"
@@ -135,6 +137,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pOut->CreateDesignToolBar();
 			break;
 		
+		case VALIDATE:
+			pAct = new Validate(this);
+			break;
 
 	}
 	
@@ -168,164 +173,171 @@ Statement *ApplicationManager::GetStatement(Point P) const
 	//otherwise, return NULL
 	for (int i = 0; i < StatCount; i++)
 	{
-		if (dynamic_cast<ValueAssign*>(StatList[i]))
+		if (StatList[i]->isInside(P))
 		{
-			ValueAssign* pStat = static_cast<ValueAssign*>(StatList[i]);
-			if (P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-				&& P.x >= pStat->GetLeftCorner().x - UI.ASSGN_WDTH
-				&& P.y >= pStat->GetLeftCorner().y
-				&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
-			{
-
-				return pStat;
-			}
-			
+			return StatList[i];
 		}
-		else if (dynamic_cast<VariableAssign*>(StatList[i]))
-		{
-
-			VariableAssign* pStat = static_cast<VariableAssign*>(StatList[i]);
-			if (P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-				&& P.x >= pStat->GetLeftCorner().x - UI.ASSGN_WDTH
-				&& P.y >= pStat->GetLeftCorner().y
-				&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
-			{
-				return pStat;
-			}
-			
-		}
-
-		else if (dynamic_cast<AssignOperator*>(StatList[i]))
-		{
-			AssignOperator* pStat = static_cast<AssignOperator*>(StatList[i]);
-			if (P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-				&& P.x >= pStat->GetLeftCorner().x - UI.ASSGN_WDTH
-				&& P.y >= pStat->GetLeftCorner().y
-				&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
-			{
-
-
-				return pStat;
-			}
-			
-		}
-		else if (dynamic_cast<End*>(StatList[i]))
-		{
-			End* pStat = static_cast<End*>(StatList[i]);
-			if (P.x >= pStat->GetLeftCorner().x
-				&& P.x <= pStat->GetLeftCorner().x + UI.OVAL_WDTH
-				&& P.y >= pStat->GetLeftCorner().y
-				&& P.y <= pStat->GetLeftCorner().y + UI.OVAL_HI)
-			{
-
-				return pStat;
-			}
-
-		}
-
-		else if (dynamic_cast<Start*>(StatList[i]))
-		{
-			Start* pStat = static_cast<Start*>(StatList[i]);
-			if (
-				P.x >= pStat->GetLeftCorner().x
-				&& P.x <= pStat->GetLeftCorner().x + UI.OVAL_WDTH
-				&& P.y >= pStat->GetLeftCorner().y
-				&& P.y <= pStat->GetLeftCorner().y + UI.OVAL_HI)
-			{
-
-
-				return pStat;
-			}
-			
-		}
-
-
-		else if (dynamic_cast<Read*>(StatList[i]))
-		{
-			Read* pStat = static_cast<Read*>(StatList[i]);
-			if (P.x >= pStat->GetLeftCorner().x
-				&& P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-				&& P.y >= pStat->GetLeftCorner().y
-				&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
-			{
-
-				return pStat;
-			}
-			
-		}
-
-		else if (dynamic_cast<Declare*>(StatList[i]))
-		{
-			Declare* pStat = static_cast<Declare*>(StatList[i]);
-			if (P.x < pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-				&& P.x > pStat->GetLeftCorner().x
-				&& P.y > pStat->GetLeftCorner().y
-				&& P.y < pStat->GetLeftCorner().y + UI.ASSGN_HI)
-			{
-
-
-				return pStat;
-			}
-			
-		}
-		else if (dynamic_cast<If*>(StatList[i]))
-		{
-			If* pStat = static_cast<If*>(StatList[i]);
-
-			/*double slope1 = ((pStat->GetLeftCorner().y - (pStat->GetLeftCorner().y + UI.COND_HI/2))
-				/ ((pStat->GetLeftCorner().x + UI.COND_WDTH / 2) - pStat->GetLeftCorner().x));
-
-
-
-			double slope2 = ((pStat->GetLeftCorner().y - (pStat->GetLeftCorner().y + UI.COND_HI / 2))
-				/ ((pStat->GetLeftCorner().x + UI.COND_WDTH / 2) - (pStat->GetLeftCorner().x+ UI.COND_WDTH)));
-
-
-
-			double slope3 = (((pStat->GetLeftCorner().y+UI.COND_HI/2) - (pStat->GetLeftCorner().y + UI.COND_HI ))
-				/ ((pStat->GetLeftCorner().x + UI.COND_WDTH)  - (pStat->GetLeftCorner().x + UI.COND_WDTH/2)));
-
-
-
-			double slope4= (((pStat->GetLeftCorner().y + UI.COND_HI / 2) - (pStat->GetLeftCorner().y + UI.COND_HI))
-				/ (pStat->GetLeftCorner().x  - (pStat->GetLeftCorner().x + UI.COND_WDTH / 2)));
-
-
-			
-
-			
-			if ((P.y- pStat->GetLeftCorner().y)/(P.x- pStat->GetLeftCorner().x + UI.COND_WDTH / 2)>=slope1&&
-				(P.y - pStat->GetLeftCorner().y) / (P.x - pStat->GetLeftCorner().x + UI.COND_WDTH ) >= slope2&&
-				(P.y - pStat->GetLeftCorner().y + UI.COND_HI / 2) / (P.x - pStat->GetLeftCorner().x + UI.COND_WDTH / 2) <= slope3&&
-				(P.y - pStat->GetLeftCorner().y + UI.COND_HI ) / (P.x - pStat->GetLeftCorner().x) <= slope4)*/
-			if (P.x >= pStat->GetLeftCorner().x
-				&& P.x <= pStat->GetLeftCorner().x + UI.COND_WDTH
-				&& P.y >= pStat->GetLeftCorner().y
-				&& P.y <= pStat->GetLeftCorner().y + UI.COND_HI)
-			{
-				return pStat;
-			}
-
-		}
-			else if (dynamic_cast<Write*>(StatList[i]))
-			{
-				Write* pStat = static_cast<Write*>(StatList[i]);
-				if (P.x >= pStat->GetLeftCorner().x
-					&& P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-					&& P.y >= pStat->GetLeftCorner().y
-					&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
-				{
-
-					return pStat;
-				}
-
-			}
-
-		
-		
 	}
-	Statement* pStat = NULL;
-	return pStat;
+	return NULL;
+	
+	//	if (dynamic_cast<ValueAssign*>(StatList[i]))
+	//	{
+	//		ValueAssign* pStat = static_cast<ValueAssign*>(StatList[i]);
+	//		if (P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
+	//			&& P.x >= pStat->GetLeftCorner().x - UI.ASSGN_WDTH
+	//			&& P.y >= pStat->GetLeftCorner().y
+	//			&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
+	//		{
+
+	//			return pStat;
+	//		}
+	//		
+	//	}
+	//	else if (dynamic_cast<VariableAssign*>(StatList[i]))
+	//	{
+
+	//		VariableAssign* pStat = static_cast<VariableAssign*>(StatList[i]);
+	//		if (P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
+	//			&& P.x >= pStat->GetLeftCorner().x - UI.ASSGN_WDTH
+	//			&& P.y >= pStat->GetLeftCorner().y
+	//			&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
+	//		{
+	//			return pStat;
+	//		}
+	//		
+	//	}
+
+	//	else if (dynamic_cast<AssignOperator*>(StatList[i]))
+	//	{
+	//		AssignOperator* pStat = static_cast<AssignOperator*>(StatList[i]);
+	//		if (P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
+	//			&& P.x >= pStat->GetLeftCorner().x - UI.ASSGN_WDTH
+	//			&& P.y >= pStat->GetLeftCorner().y
+	//			&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
+	//		{
+
+
+	//			return pStat;
+	//		}
+	//		
+	//	}
+	//	else if (dynamic_cast<End*>(StatList[i]))
+	//	{
+	//		End* pStat = static_cast<End*>(StatList[i]);
+	//		if (P.x >= pStat->GetLeftCorner().x
+	//			&& P.x <= pStat->GetLeftCorner().x + UI.OVAL_WDTH
+	//			&& P.y >= pStat->GetLeftCorner().y
+	//			&& P.y <= pStat->GetLeftCorner().y + UI.OVAL_HI)
+	//		{
+
+	//			return pStat;
+	//		}
+
+	//	}
+
+	//	else if (dynamic_cast<Start*>(StatList[i]))
+	//	{
+	//		Start* pStat = static_cast<Start*>(StatList[i]);
+	//		if (
+	//			P.x >= pStat->GetLeftCorner().x
+	//			&& P.x <= pStat->GetLeftCorner().x + UI.OVAL_WDTH
+	//			&& P.y >= pStat->GetLeftCorner().y
+	//			&& P.y <= pStat->GetLeftCorner().y + UI.OVAL_HI)
+	//		{
+
+
+	//			return pStat;
+	//		}
+	//		
+	//	}
+
+
+	//	else if (dynamic_cast<Read*>(StatList[i]))
+	//	{
+	//		Read* pStat = static_cast<Read*>(StatList[i]);
+	//		if (P.x >= pStat->GetLeftCorner().x
+	//			&& P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
+	//			&& P.y >= pStat->GetLeftCorner().y
+	//			&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
+	//		{
+
+	//			return pStat;
+	//		}
+	//		
+	//	}
+
+	//	else if (dynamic_cast<Declare*>(StatList[i]))
+	//	{
+	//		Declare* pStat = static_cast<Declare*>(StatList[i]);
+	//		if (P.x < pStat->GetLeftCorner().x + UI.ASSGN_WDTH
+	//			&& P.x > pStat->GetLeftCorner().x
+	//			&& P.y > pStat->GetLeftCorner().y
+	//			&& P.y < pStat->GetLeftCorner().y + UI.ASSGN_HI)
+	//		{
+
+
+	//			return pStat;
+	//		}
+	//		
+	//	}
+	//	else if (dynamic_cast<If*>(StatList[i]))
+	//	{
+	//		If* pStat = static_cast<If*>(StatList[i]);
+
+	//		/*double slope1 = ((pStat->GetLeftCorner().y - (pStat->GetLeftCorner().y + UI.COND_HI/2))
+	//			/ ((pStat->GetLeftCorner().x + UI.COND_WDTH / 2) - pStat->GetLeftCorner().x));
+
+
+
+	//		double slope2 = ((pStat->GetLeftCorner().y - (pStat->GetLeftCorner().y + UI.COND_HI / 2))
+	//			/ ((pStat->GetLeftCorner().x + UI.COND_WDTH / 2) - (pStat->GetLeftCorner().x+ UI.COND_WDTH)));
+
+
+
+	//		double slope3 = (((pStat->GetLeftCorner().y+UI.COND_HI/2) - (pStat->GetLeftCorner().y + UI.COND_HI ))
+	//			/ ((pStat->GetLeftCorner().x + UI.COND_WDTH)  - (pStat->GetLeftCorner().x + UI.COND_WDTH/2)));
+
+
+
+	//		double slope4= (((pStat->GetLeftCorner().y + UI.COND_HI / 2) - (pStat->GetLeftCorner().y + UI.COND_HI))
+	//			/ (pStat->GetLeftCorner().x  - (pStat->GetLeftCorner().x + UI.COND_WDTH / 2)));
+
+
+	//		
+
+	//		
+	//		if ((P.y- pStat->GetLeftCorner().y)/(P.x- pStat->GetLeftCorner().x + UI.COND_WDTH / 2)>=slope1&&
+	//			(P.y - pStat->GetLeftCorner().y) / (P.x - pStat->GetLeftCorner().x + UI.COND_WDTH ) >= slope2&&
+	//			(P.y - pStat->GetLeftCorner().y + UI.COND_HI / 2) / (P.x - pStat->GetLeftCorner().x + UI.COND_WDTH / 2) <= slope3&&
+	//			(P.y - pStat->GetLeftCorner().y + UI.COND_HI ) / (P.x - pStat->GetLeftCorner().x) <= slope4)*/
+	//		if (P.x >= pStat->GetLeftCorner().x
+	//			&& P.x <= pStat->GetLeftCorner().x + UI.COND_WDTH
+	//			&& P.y >= pStat->GetLeftCorner().y
+	//			&& P.y <= pStat->GetLeftCorner().y + UI.COND_HI)
+	//		{
+	//			return pStat;
+	//		}
+
+	//	}
+	//		else if (dynamic_cast<Write*>(StatList[i]))
+	//		{
+	//			Write* pStat = static_cast<Write*>(StatList[i]);
+	//			if (P.x >= pStat->GetLeftCorner().x
+	//				&& P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
+	//				&& P.y >= pStat->GetLeftCorner().y
+	//				&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
+	//			{
+
+	//				return pStat;
+	//			}
+
+	//		
+
+	//	
+	//	
+	//}
+	//Statement* pStat = NULL;
+	//return pStat;
 
 	///Add your code here to search for a statement given a point P(x,y)	
 	///WITHOUT breaking class responsibilities
@@ -515,6 +527,10 @@ Statement* ApplicationManager::FindStatement(int id)
 
 
 
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Returns the selected statement
 Statement *ApplicationManager::GetSelectedStatement() const
@@ -564,6 +580,7 @@ void ApplicationManager::UpdateInterface() const
 		ConnList[i]->Draw(pOut);
 
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input *ApplicationManager::GetInput() const
@@ -584,4 +601,18 @@ ApplicationManager::~ApplicationManager()
 	delete pIn;
 	delete pOut;
 	
+}
+
+Statement*ApplicationManager:: GetStart()
+{
+	Start* pStart;
+	for (int i = 0; i < StatCount; i++)
+	{
+		if (dynamic_cast<Start*>(StatList[i]))
+		{
+			pStart = (Start*)StatList[i];
+			return pStart;
+		}
+	}
+	return NULL;
 }

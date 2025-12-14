@@ -39,6 +39,8 @@ public:
 
 	//Start() = default;
 
+	bool isInside(Point);
+
 	Start() = default;
 };
 

@@ -102,3 +102,15 @@ void Write::Load(ifstream& InFile)
 
 }
 
+
+bool Write::isInside(Point P)
+{
+	if (P.x >= GetLeftCorner().x
+		&& P.x <= GetLeftCorner().x + UI.ASSGN_WDTH
+		&& P.y >= GetLeftCorner().y
+		&& P.y <= GetLeftCorner().y + UI.ASSGN_HI)
+		{
+			return true;
+		}
+	return false;
+}

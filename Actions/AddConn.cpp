@@ -54,7 +54,7 @@ void AddConn::Execute()
 
 	if (dynamic_cast<End*>(SrcStat))
 	{
-		(pManager->GetOutput())->PrintMessage("Cannot Add Connector");
+		(pManager->GetOutput())->PrintMessage("Cannot Add Connector1");
 		return;
 	}
 
@@ -62,7 +62,7 @@ void AddConn::Execute()
 
 	if (dynamic_cast<Start*>(DstStat))
 	{
-		(pManager->GetOutput())->PrintMessage("Cannot Add Connector");
+		(pManager->GetOutput())->PrintMessage("Cannot Add Connector2");
 		return;
 	}
 
@@ -72,7 +72,7 @@ void AddConn::Execute()
 
 	if (dynamic_cast<If*>(SrcStat) && SrcStat->GetOutConn1() != NULL && SrcStat->GetOutConn2() != NULL)
 	{
-		(pManager->GetOutput())->PrintMessage("Cannot Add Conector");
+		(pManager->GetOutput())->PrintMessage("Cannot Add Conector3");
 		return;
 	}
 
@@ -80,7 +80,7 @@ void AddConn::Execute()
 
 	if (dynamic_cast<If*>(SrcStat)==NULL   &&    SrcStat->GetOutConn1() != NULL)
 	{
-		(pManager->GetOutput())->PrintMessage("Cannot Add Connector");
+		(pManager->GetOutput())->PrintMessage("Cannot Add Connector4");
 		return;
 	}
 

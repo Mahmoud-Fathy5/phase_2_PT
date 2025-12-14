@@ -107,3 +107,15 @@ void Read::Load(ifstream& InFile)
 	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need tobe condiderd
 
 }
+
+bool Read::isInside(Point P)
+{
+	if (P.x >= GetLeftCorner().x
+		&& P.x <= GetLeftCorner().x + UI.ASSGN_WDTH
+		&& P.y >= GetLeftCorner().y
+		&& P.y <= GetLeftCorner().y + UI.ASSGN_HI)
+	{
+		return true;
+	}
+	return false;
+}

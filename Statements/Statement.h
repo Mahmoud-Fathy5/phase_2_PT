@@ -37,6 +37,7 @@ public:
 	virtual Connector *GetOutConn1()=0;
 	virtual Connector *GetOutConn2();
 
+	virtual bool isInside(Point) = 0;
 	
 
 	///TODO:The following functions should be supported by the Statement class

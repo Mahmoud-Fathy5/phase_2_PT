@@ -119,3 +119,17 @@ void VariableAssign::Load(ifstream& InFile)
 	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
 
 }
+
+
+
+bool VariableAssign::isInside(Point P)
+{
+	if (P.x <= LeftCorner.x + UI.ASSGN_WDTH
+		&& P.x >= LeftCorner.x
+		&& P.y >= LeftCorner.y
+		&& P.y <= LeftCorner.y + UI.ASSGN_HI)
+	{
+		return true;
+	}
+	return false;
+}

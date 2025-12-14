@@ -175,3 +175,16 @@ void If::Load(ifstream& InFile)
 	Outlet2.y = LeftCorner.y + UI.COND_HI / 2;
 
 }
+
+
+bool If::isInside(Point P)
+{
+	if(P.x >= GetLeftCorner().x
+		&& P.x <= GetLeftCorner().x + UI.COND_WDTH
+		&& P.y >= GetLeftCorner().y
+		&& P.y <= GetLeftCorner().y + UI.COND_HI)
+	{
+		return true;
+	}
+	return false;
+}

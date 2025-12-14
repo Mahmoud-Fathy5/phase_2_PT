@@ -35,6 +35,9 @@ public:
 	void SetOutConn1(Connector* C);
 	virtual void Load(ifstream& InFile);
 
+
+	bool isInside(Point);
+
 	End() = default;
 };
 

@@ -150,3 +150,18 @@ void AssignOperator::Load(ifstream& InFile)
 	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
 
 }
+
+
+bool AssignOperator::isInside(Point P)
+{
+	if (P.x <= GetLeftCorner().x + UI.ASSGN_WDTH
+		&& P.x >= GetLeftCorner().x - UI.ASSGN_WDTH
+		&& P.y >= GetLeftCorner().y
+		&& P.y <= GetLeftCorner().y + UI.ASSGN_HI)
+	{
+
+
+		return true;
+	}
+	return false;
+}

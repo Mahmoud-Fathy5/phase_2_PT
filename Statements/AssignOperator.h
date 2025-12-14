@@ -51,6 +51,7 @@ public:
 
 	Connector *GetOutConn1();
 
+	bool isInside(Point);
 
 	AssignOperator() = default;
 };

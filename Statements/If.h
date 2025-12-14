@@ -57,7 +57,7 @@ public:
 	Connector* GetOutConn1();
 	Connector* GetOutConn2();
 
-	
+	bool isInside(Point);
 
 
 	Point GetLeftCorner();
