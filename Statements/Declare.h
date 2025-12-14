@@ -47,5 +47,8 @@ public:
 	virtual void Load(ifstream& InFile);
 	bool isInside(Point);
 
+
+	virtual Statement* Simulate(ApplicationManager* pManager);
+	virtual Statement* GenerateCode(ofstream& OutFile);
 	Declare() = default;
 };

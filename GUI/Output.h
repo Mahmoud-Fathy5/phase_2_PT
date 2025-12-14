@@ -7,6 +7,7 @@ class Output	//The application manager should have a pointer to this class
 {
 private:
 	window* pWind;	//Pointer to the Graphics Window
+	static int outputmsgcount;
 public:
 	Output();
 
@@ -25,7 +26,7 @@ public:
 
 	void PrintMessage(string msg);	//Prints a message on Status bar
 	void DrawString(const int, const int, const string);  //Writes a string in the specified location
-
+	void OutputMessages(string msg);
 	void ClearToolBar();
 
 	// -- Statements Drawing Functions

@@ -7,6 +7,13 @@
 class Input;
 class Output;
 
+struct variable
+{
+	string name;
+	double value;
+
+};
+
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -29,6 +36,8 @@ private:
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
+	variable* Vars[MaxCount];
+	int VarCount;
 
 public:	
 	ApplicationManager(); 
@@ -76,6 +85,11 @@ public:
 
 	Statement* GetStart();
 	
+	Statement* GetStart();
+	void AddVar(variable*);
+	variable* FindVar(string name);
+	void printVars() const;
 };
+
 
 #endif

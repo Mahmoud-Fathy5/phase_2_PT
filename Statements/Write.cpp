@@ -99,7 +99,25 @@ void Write::Load(ifstream& InFile)
 
 	Outlet.x = Inlet.x;
 	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need tobe condiderd
+	UpdateStatementText();
+}
 
+Statement* Write::Simulate(ApplicationManager* pAppManager)
+{
+	ostringstream T;
+	Input* pIn = pAppManager->GetInput();
+	Output* pOut = pAppManager->GetOutput();
+	if (IsVariable(VarorStr))
+	{
+		variable* pVar = pAppManager->FindVar(VarorStr);
+		T << VarorStr << " = " << pVar->value;
+	}
+	else
+	{
+		T << VarorStr;
+	}
+	pOut->OutputMessages(T.str());
+	return pOutConn->getDstStat();
 }
 
 
@@ -113,4 +131,8 @@ bool Write::isInside(Point P)
 			return true;
 		}
 	return false;
+Statement* Write::GenerateCode(ofstream& OutFile)
+{
+	OutFile << "cout << " << VarorStr << ";\n";
+	return pOutConn->getDstStat();
 }

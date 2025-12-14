@@ -49,5 +49,7 @@ public:
 
 	bool isInside(Point);
 
+	virtual Statement* Simulate(ApplicationManager* pManager);
+	virtual Statement* GenerateCode(ofstream& OutFile);
 	Read() = default;
 };

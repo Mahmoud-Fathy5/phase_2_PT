@@ -132,4 +132,15 @@ bool ValueAssign:: isInside(Point P)
 		return true;
 	}
 	return false;
+Statement* ValueAssign::Simulate(ApplicationManager* pAppManager)
+{
+	variable* pVar = pAppManager->FindVar(LHS);
+	pVar->value = RHS;
+	return pOutConn->getDstStat();
+}
+
+Statement* ValueAssign::GenerateCode(ofstream& OutFile)
+{
+	OutFile << LHS << " = " << RHS << ";\n";
+	return pOutConn->getDstStat();
 }

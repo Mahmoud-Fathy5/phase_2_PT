@@ -1,6 +1,7 @@
 #include "Declare.h"
 #include <sstream>
 #include"../ApplicationManager.h"
+#include "../Actions/Run.h"
 
 using namespace std;
 
@@ -126,4 +127,17 @@ bool Declare:: isInside(Point P)
 	}
 	return false;
 
+Statement* Declare::Simulate(ApplicationManager* pManager)
+{
+	variable* pVar = new variable;
+	pVar->name = var;
+	pManager->AddVar(pVar);
+	return pOutConn->getDstStat();
+}
+
+
+Statement* Declare::GenerateCode(ofstream& OutFile)
+{
+	OutFile << "double " << var << ";\n";
+	return pOutConn->getDstStat();
 }

@@ -108,4 +108,12 @@ bool Start::isInside(Point P)
 		return true;
 		}
 	return false;
+Statement* Start::Simulate(ApplicationManager* pAppManager)
+{
+	return pOutConn->getDstStat();
+}
+
+Statement* Start::GenerateCode(ofstream& OutFile)
+{
+	return pOutConn->getDstStat();
 }

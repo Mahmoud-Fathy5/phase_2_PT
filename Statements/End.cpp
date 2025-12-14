@@ -13,8 +13,7 @@ End::End(Point Lcorner)
 	
 	LeftCorner = Lcorner;
 
-	//pInConn = NULL;	//No connectors yet
-
+	pOutConn = NULL;
 
 
 	Inlet.x = LeftCorner.x + UI.OVAL_WDTH / 2;
@@ -104,3 +103,14 @@ bool End:: isInside(Point P)
 	return false;
 }
 
+Statement* End::Simulate(ApplicationManager* AppManager)
+{
+	return NULL;
+}
+
+
+Statement* End::GenerateCode(ofstream& OutFile)
+{
+	OutFile << "return 0;\n";
+	return NULL;
+}
