@@ -32,7 +32,7 @@ private:
 	//It's used as the (Start) point of the (Output) connector
 
 	Point LeftCorner;	//left corenr of the statement block.
-
+	bool visted;
 	virtual void UpdateStatementText();
 
 public:
@@ -57,13 +57,14 @@ public:
 	Connector* GetOutConn1();
 	Connector* GetOutConn2();
 
-	
+	bool GetVisted() const;
 
 
 	Point GetLeftCorner();
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& InFile);
-
+	virtual Statement* Simulate(ApplicationManager* pManager);
+	virtual Statement* GenerateCode(ofstream& OutFile);
 	If() = default;
 };
 

@@ -107,3 +107,20 @@ void Read::Load(ifstream& InFile)
 	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need tobe condiderd
 
 }
+
+Statement* Read::Simulate(ApplicationManager* pAppManager)
+{
+	Input* pIn = pAppManager->GetInput();
+	Output* pOut = pAppManager->GetOutput();
+	pOut->PrintMessage("Enter the value of " + var);
+	double d = pIn->GetValue(pOut);
+	variable* pVar = pAppManager->FindVar(var);
+	pVar->value = d;
+	return pOutConn->getDstStat();
+}
+
+Statement* Read::GenerateCode(ofstream& OutFile)
+{
+	OutFile << "cin >> " << var << ";\n";
+	return pOutConn->getDstStat();
+}

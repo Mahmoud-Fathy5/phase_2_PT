@@ -34,6 +34,8 @@ public:
 	Point GetOutLet1() const;
 	void SetOutConn1(Connector* C);
 	virtual void Load(ifstream& InFile);
+	virtual Statement* Simulate(ApplicationManager* pAppManager);
+	virtual Statement* GenerateCode(ofstream& OutFile);
 
 	End() = default;
 };

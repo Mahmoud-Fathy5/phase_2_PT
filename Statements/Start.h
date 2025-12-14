@@ -2,6 +2,7 @@
 #define START_H
 
 #include "Statement.h"
+#include <sstream>
 
 //Value Assignment statement class
 //The value assignment statement assigns a value to a variable
@@ -36,9 +37,8 @@ public:
 	~Start();
 	Connector* GetOutConn1();
 	virtual void Load(ifstream& InFile);
-
-	//Start() = default;
-
+	virtual Statement* Simulate(ApplicationManager* pAppManager);
+	virtual Statement* GenerateCode(ofstream& OutFile);
 	Start() = default;
 };
 

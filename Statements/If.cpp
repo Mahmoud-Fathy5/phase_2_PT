@@ -1,6 +1,7 @@
 #include "If.h"
 #include <sstream>
 #include"../ApplicationManager.h"
+#include <string>
 using namespace std;
 
 If::If(Point Lcorner, string LeftHS, string RightHS, string oper)
@@ -10,13 +11,11 @@ If::If(Point Lcorner, string LeftHS, string RightHS, string oper)
 	LHS = LeftHS;
 	RHS = RightHS;
 	op = oper;
-
+	visted = false;
 	UpdateStatementText();
 
 	LeftCorner = Lcorner;
 
-	pOutConn2 = NULL;
-	pOutConn1 = NULL;	//No connectors yet
 	pOutConn1 = NULL;	//No connectors yet
 	pOutConn2 = NULL;
 
@@ -139,6 +138,11 @@ Connector* If::GetOutConn2()
 	return pOutConn2;
 }
 
+bool If::GetVisted() const
+{
+	return visted;
+}
+
 
 
 
@@ -173,5 +177,83 @@ void If::Load(ifstream& InFile)
 
 	Outlet2.x = LeftCorner.x;
 	Outlet2.y = LeftCorner.y + UI.COND_HI / 2;
+	visted = false;
 
+}
+
+
+Statement* If::Simulate(ApplicationManager* pAppManager)
+{
+	variable* pVar1;
+	variable* pVar2;
+	bool status = false;
+	if (IsVariable(LHS))
+	{
+		pVar1 = pAppManager->FindVar(LHS);
+		if (IsVariable(RHS))
+		{
+			pVar2 = pAppManager->FindVar(RHS);
+			if (op == "==") status = pVar1->value == pVar2->value;
+			if (op == ">") status = pVar1->value > pVar2->value;
+			if (op == "<") status = pVar1->value < pVar2->value;
+			if (op == ">=") status = pVar1->value >= pVar2->value;
+			if (op == "<=") status = pVar1->value <= pVar2->value;
+			if (op == "!=") status = pVar1->value != pVar2->value;
+		}
+		else if (IsValue(RHS))
+		{
+			double d = stod(RHS);
+			if (op == "==") status = pVar1->value == d;
+			if (op == ">") status = pVar1->value > d;
+			if (op == "<") status = pVar1->value < d;
+			if (op == ">=") status = pVar1->value >= d;
+			if (op == "<=") status = pVar1->value <= d;
+			if (op == "!=") status = pVar1->value != d;
+		}
+	}
+	else if (IsValue(LHS))
+	{
+		double d = stod(LHS);
+		if (IsVariable(RHS))
+		{
+			pVar2 = pAppManager->FindVar(RHS);
+			if (op == "==") status = d == pVar2->value;
+			if (op == ">") status = d > pVar2->value;
+			if (op == "<") status = d < pVar2->value;
+			if (op == ">=") status = d >= pVar2->value;
+			if (op == "<=") status = d <= pVar2->value;
+			if (op == "!=") status = d != pVar2->value;
+		}
+		else if (IsValue(RHS))
+		{
+			double d1 = stod(RHS);
+			if (op == "==") status = d == d1;
+			if (op == ">") status = d > d1;
+			if (op == "<") status = d < d1;
+			if (op == ">=") status = d >= d1;
+			if (op == "<=") status = d <= d1;
+			if (op == "!=") status = d != d1;
+		}
+	}
+	if (status)
+		return pOutConn1->getDstStat();
+	else
+		return pOutConn2->getDstStat();
+}
+
+Statement* If::GenerateCode(ofstream& OutFile)
+{
+	if (visted == false)
+	{
+		OutFile << "while(" << RHS << op << LHS << "){\n";
+
+		visted = true;
+		return pOutConn1->getDstStat();
+	}
+	else
+	{
+		OutFile << "}\n";
+		visted = false;
+		return pOutConn2->getDstStat();
+	}
 }

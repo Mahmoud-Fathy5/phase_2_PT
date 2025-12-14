@@ -119,3 +119,17 @@ void VariableAssign::Load(ifstream& InFile)
 	Outlet.y = LeftCorner.y + UI.ASSGN_HI;
 
 }
+
+Statement* VariableAssign::Simulate(ApplicationManager* pAppManager)
+{
+	variable* pVar1 = pAppManager->FindVar(LHS);
+	variable* pVar2 = pAppManager->FindVar(RHS);
+	pVar1->value = pVar2->value;
+	return pOutConn->getDstStat();
+}
+
+Statement* VariableAssign::GenerateCode(ofstream& OutFile)
+{
+	OutFile << LHS << " = " << RHS << ";\n";
+	return pOutConn->getDstStat();
+}

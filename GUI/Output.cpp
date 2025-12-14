@@ -1,5 +1,6 @@
 #include "Output.h"
 
+int Output::outputmsgcount = 0;
 
 Output::Output()
 {
@@ -176,6 +177,13 @@ void Output::DrawString(const int iX, const int iY, const string Text)
 {
 	pWind->SetPen(BLACK, 2);
 	pWind->DrawString(iX, iY, Text);
+}
+void Output::OutputMessages(string msg)
+{
+	pWind->SetPen(BLACK, 3);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawString(0.75 * UI.width + 15, UI.ToolBarHeight + 15*(outputmsgcount+1), msg);
+	outputmsgcount++;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearToolBar()
