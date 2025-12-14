@@ -113,6 +113,20 @@ void Declare::Load(ifstream& InFile)
 
 }
 
+
+bool Declare:: isInside(Point P)
+{
+	if (P.x < GetLeftCorner().x + UI.ASSGN_WDTH
+		&& P.x > GetLeftCorner().x
+		&& P.y > GetLeftCorner().y
+		&& P.y < GetLeftCorner().y + UI.ASSGN_HI)
+	{
+
+
+		return true;
+	}
+	return false;
+
 Statement* Declare::Simulate(ApplicationManager* pManager)
 {
 	variable* pVar = new variable;

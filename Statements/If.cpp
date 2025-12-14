@@ -182,6 +182,17 @@ void If::Load(ifstream& InFile)
 }
 
 
+bool If::isInside(Point P)
+{
+	if(P.x >= GetLeftCorner().x
+		&& P.x <= GetLeftCorner().x + UI.COND_WDTH
+		&& P.y >= GetLeftCorner().y
+		&& P.y <= GetLeftCorner().y + UI.COND_HI)
+	{
+		return true;
+	}
+	return false;
+}
 Statement* If::Simulate(ApplicationManager* pAppManager)
 {
 	variable* pVar1;

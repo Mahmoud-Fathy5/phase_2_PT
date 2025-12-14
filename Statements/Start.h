@@ -37,6 +37,11 @@ public:
 	~Start();
 	Connector* GetOutConn1();
 	virtual void Load(ifstream& InFile);
+
+	//Start() = default;
+
+	bool isInside(Point);
+
 	virtual Statement* Simulate(ApplicationManager* pAppManager);
 	virtual Statement* GenerateCode(ofstream& OutFile);
 	Start() = default;

@@ -121,6 +121,17 @@ void ValueAssign::Load(ifstream& InFile)
 
 }
 
+
+bool ValueAssign:: isInside(Point P)
+{
+	if (P.x <= GetLeftCorner().x + UI.ASSGN_WDTH
+		&& P.x >= GetLeftCorner().x - UI.ASSGN_WDTH
+		&& P.y >= GetLeftCorner().y
+		&& P.y <= GetLeftCorner().y + UI.ASSGN_HI)
+	{
+		return true;
+	}
+	return false;
 Statement* ValueAssign::Simulate(ApplicationManager* pAppManager)
 {
 	variable* pVar = pAppManager->FindVar(LHS);

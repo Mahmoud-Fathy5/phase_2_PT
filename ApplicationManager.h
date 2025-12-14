@@ -82,6 +82,9 @@ public:
 	Output *GetOutput() const;      //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window
 
+
+	Statement* GetStart();
+	
 	Statement* GetStart();
 	void AddVar(variable*);
 	variable* FindVar(string name);

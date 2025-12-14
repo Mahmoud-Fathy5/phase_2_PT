@@ -120,6 +120,18 @@ void VariableAssign::Load(ifstream& InFile)
 
 }
 
+
+
+bool VariableAssign::isInside(Point P)
+{
+	if (P.x <= LeftCorner.x + UI.ASSGN_WDTH
+		&& P.x >= LeftCorner.x
+		&& P.y >= LeftCorner.y
+		&& P.y <= LeftCorner.y + UI.ASSGN_HI)
+	{
+		return true;
+	}
+	return false;
 Statement* VariableAssign::Simulate(ApplicationManager* pAppManager)
 {
 	variable* pVar1 = pAppManager->FindVar(LHS);

@@ -46,6 +46,9 @@ public:
 	void Edit(ApplicationManager* pManager) override;
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& InFile);
+
+	bool isInside(Point);
+
 	virtual Statement* Simulate(ApplicationManager* pManager);
 	virtual Statement* GenerateCode(ofstream& OutFile);
 	Read() = default;

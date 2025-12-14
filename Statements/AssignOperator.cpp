@@ -152,6 +152,19 @@ void AssignOperator::Load(ifstream& InFile)
 
 }
 
+
+bool AssignOperator::isInside(Point P)
+{
+	if (P.x <= GetLeftCorner().x + UI.ASSGN_WDTH
+		&& P.x >= GetLeftCorner().x - UI.ASSGN_WDTH
+		&& P.y >= GetLeftCorner().y
+		&& P.y <= GetLeftCorner().y + UI.ASSGN_HI)
+	{
+
+
+		return true;
+	}
+	return false;
 Statement* AssignOperator::Simulate(ApplicationManager* pAppManager)
 {
 	variable* pVar1 = pAppManager->FindVar(LHS);

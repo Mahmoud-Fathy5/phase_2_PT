@@ -28,10 +28,10 @@ void AddWrite::ReadActionParameters()
 		(pManager->GetOutput())->PrintMessage("You Should Draw in the Drawing Area Only, Click anywhere in the Drawing Area");
 		pIn->GetPointClicked(Position);
 	}
-	while ((pManager->GetStatement(Position))) {
-		(pManager->GetOutput())->PrintMessage("You cannot Put Statement Above The other , click anywhere else");
-		pIn->GetPointClicked(Position);
-	}
+	//while ((pManager->GetStatement(Position))) {
+		//(pManager->GetOutput())->PrintMessage("You cannot Put Statement Above The other , click anywhere else");
+		//pIn->GetPointClicked(Position);
+	//}
 	pOut->ClearStatusBar();
 
 	//TODO: Ask the user in the status bapr to enter the LHS and set the data member

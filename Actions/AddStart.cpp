@@ -32,7 +32,7 @@ void AddStart::ReadActionParameters()
 		(pManager->GetOutput())->PrintMessage("You cannot Put Statement Above The other , click anywhere else");
 		pIn->GetPointClicked(Position);
 	}
-	pOut->ClearStatusBar();
+	//pOut->ClearStatusBar();
 
 	
 	//TODO: Ask the user in the status bar to enter the RHS and set the data member

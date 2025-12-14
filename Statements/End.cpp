@@ -18,6 +18,8 @@ End::End(Point Lcorner)
 
 	Inlet.x = LeftCorner.x + UI.OVAL_WDTH / 2;
 	Inlet.y = LeftCorner.y ;
+
+	pOutConn = NULL;
 }
 
 
@@ -85,6 +87,20 @@ void End::Load(ifstream& InFile)
 	Inlet.x = LeftCorner.x + UI.OVAL_WDTH / 2;
 	Inlet.y = LeftCorner.y;
 
+}
+
+
+bool End:: isInside(Point P)
+{
+	if (P.x >= GetLeftCorner().x
+		&& P.x <= GetLeftCorner().x + UI.OVAL_WDTH
+		&& P.y >= GetLeftCorner().y
+		&& P.y <= GetLeftCorner().y + UI.OVAL_HI)
+	{
+
+		return true;
+	}
+	return false;
 }
 
 Statement* End::Simulate(ApplicationManager* AppManager)
