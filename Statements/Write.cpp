@@ -63,7 +63,11 @@ void Write::SetOutConn1(Connector* C)
 
 void Write::Edit(ApplicationManager* pManager)
 {
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
 	string s;
+	pOut->PrintMessage("Please Enter Variable name or String");
+	s = pIn->GetStringlOrVariable(pOut);
 	this->set_ValuOrVar(s);
 }
 

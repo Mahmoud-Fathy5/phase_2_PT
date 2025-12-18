@@ -36,7 +36,7 @@ void AddWrite::ReadActionParameters()
 
 	//TODO: Ask the user in the status bapr to enter the LHS and set the data member
 	pOut->PrintMessage("Please Enter Variable name or Value");
-	VarOrValu = pIn->GetVariabelOrValue(pOut);
+	VarOrValu = pIn->GetStringlOrVariable(pOut);
 
 	//TODO: Ask the user in the status bar to enter the RHS and set the data member
 
