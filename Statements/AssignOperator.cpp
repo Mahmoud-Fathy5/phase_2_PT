@@ -165,6 +165,7 @@ bool AssignOperator::isInside(Point P)
 		return true;
 	}
 	return false;
+}
 Statement* AssignOperator::Simulate(ApplicationManager* pAppManager)
 {
 	variable* pVar1 = pAppManager->FindVar(LHS);

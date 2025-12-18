@@ -36,6 +36,8 @@ public:
 	//Reads parameters required for action to execute
 	virtual void ReadActionParameters();
 
+	bool ValidateRec(Statement* sp, string declared[], int& declCount, string initialized[], int& initCount, Statement* visited[], int& visitedCount);
+
 	//Execute action (code depends on action type)
 	virtual void Execute() ;
 

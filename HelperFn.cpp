@@ -67,3 +67,4 @@ OpType ValueOrVariable(string input)
 
 	return INVALID_OP;
 }
+

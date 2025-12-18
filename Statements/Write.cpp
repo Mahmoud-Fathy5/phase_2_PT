@@ -127,10 +127,11 @@ bool Write::isInside(Point P)
 		&& P.x <= GetLeftCorner().x + UI.ASSGN_WDTH
 		&& P.y >= GetLeftCorner().y
 		&& P.y <= GetLeftCorner().y + UI.ASSGN_HI)
-		{
-			return true;
-		}
+	{
+		return true;
+	}
 	return false;
+}
 Statement* Write::GenerateCode(ofstream& OutFile)
 {
 	OutFile << "cout << " << VarorStr << ";\n";

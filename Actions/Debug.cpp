@@ -38,5 +38,6 @@ void Debug::Execute()
 
 	pStat->SetSelected(false);
 	pManager->SetSelectedStatement(NULL);
+	pManager->killVars();
 
 }

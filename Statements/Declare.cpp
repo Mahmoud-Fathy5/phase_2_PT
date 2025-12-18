@@ -114,7 +114,7 @@ void Declare::Load(ifstream& InFile)
 }
 
 
-bool Declare:: isInside(Point P)
+bool Declare::isInside(Point P)
 {
 	if (P.x < GetLeftCorner().x + UI.ASSGN_WDTH
 		&& P.x > GetLeftCorner().x
@@ -126,6 +126,7 @@ bool Declare:: isInside(Point P)
 		return true;
 	}
 	return false;
+}
 
 Statement* Declare::Simulate(ApplicationManager* pManager)
 {

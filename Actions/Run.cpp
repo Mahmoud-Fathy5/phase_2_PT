@@ -26,4 +26,5 @@ void Run::Execute()
 	}
 	pOut->OutputMessages("==========================");
 	pOut->PrintMessage("Simulation Ended");
+	pManager->killVars();
 }

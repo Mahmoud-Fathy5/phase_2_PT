@@ -100,14 +100,15 @@ void Start::Load(ifstream& InFile)
 
 bool Start::isInside(Point P)
 {
-	if(P.x >= GetLeftCorner().x
+	if (P.x >= GetLeftCorner().x
 		&& P.x <= GetLeftCorner().x + UI.OVAL_WDTH
 		&& P.y >= GetLeftCorner().y
 		&& P.y <= GetLeftCorner().y + UI.OVAL_HI)
-		{
+	{
 		return true;
-		}
+	}
 	return false;
+}
 Statement* Start::Simulate(ApplicationManager* pAppManager)
 {
 	return pOutConn->getDstStat();

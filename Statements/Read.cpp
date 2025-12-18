@@ -118,6 +118,7 @@ bool Read::isInside(Point P)
 		return true;
 	}
 	return false;
+}
 Statement* Read::Simulate(ApplicationManager* pAppManager)
 {
 	Input* pIn = pAppManager->GetInput();

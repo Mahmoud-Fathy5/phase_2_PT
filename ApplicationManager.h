@@ -85,10 +85,10 @@ public:
 
 	Statement* GetStart();
 	
-	Statement* GetStart();
 	void AddVar(variable*);
 	variable* FindVar(string name);
 	void printVars() const;
+	void killVars();
 };
 
 

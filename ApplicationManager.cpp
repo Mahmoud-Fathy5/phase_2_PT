@@ -620,10 +620,21 @@ variable* ApplicationManager::FindVar(string name)
 }
 void ApplicationManager::printVars() const
 {
-	for (int i = 0; i < VarCount; i++)
+	if (VarCount == 0)
+		pOut->OutputMessages("No Variables");
+	else
 	{
-		pOut->OutputMessages(Vars[i]->name + " = " + to_string(Vars[i]->value));
+		for (int i = 0; i < VarCount; i++)
+		{
+			pOut->OutputMessages(Vars[i]->name + " = " + to_string(Vars[i]->value));
+		}
 	}
+}
+void ApplicationManager::killVars()
+{
+	for (int i = 0; i < VarCount; i++)
+		delete Vars[i];
+	VarCount = 0;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -648,18 +659,4 @@ ApplicationManager::~ApplicationManager()
 	delete pIn;
 	delete pOut;
 	
-}
-
-Statement*ApplicationManager:: GetStart()
-{
-	Start* pStart;
-	for (int i = 0; i < StatCount; i++)
-	{
-		if (dynamic_cast<Start*>(StatList[i]))
-		{
-			pStart = (Start*)StatList[i];
-			return pStart;
-		}
-	}
-	return NULL;
 }

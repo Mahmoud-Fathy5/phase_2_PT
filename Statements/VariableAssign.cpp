@@ -132,6 +132,7 @@ bool VariableAssign::isInside(Point P)
 		return true;
 	}
 	return false;
+}
 Statement* VariableAssign::Simulate(ApplicationManager* pAppManager)
 {
 	variable* pVar1 = pAppManager->FindVar(LHS);
