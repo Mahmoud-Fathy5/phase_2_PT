@@ -209,3 +209,31 @@ Statement* AssignOperator::GenerateCode(ofstream& OutFile)
 	OutFile << LHS << " = " << RHS_1 << " " << op << " " << RHS_2 << ";\n";
 	return pOutConn->getDstStat();
 }
+
+Statement* AssignOperator::Valid(ApplicationManager* pManager)
+{
+	set_is_visited(true);
+	Output* pOut = pManager->GetOutput();
+	if (!(pManager->FindVar(LHS)) && IsVariable(LHS)) {
+		pOut->PrintMessage("Error: Variable" + LHS + "Not declared");
+		pManager->set_error(true);
+	}
+	if (!(pManager->FindVar(RHS_1)) && IsVariable(RHS_1)) {
+		pOut->PrintMessage("Error: Variable" + RHS_1 + "Not declared");
+		pManager->set_error(true);
+	}
+	if (!(pManager->FindVar(RHS_2)) && IsVariable(RHS_2)) {
+		pOut->PrintMessage("Error: Variable" + RHS_2 + "Not declared");
+		pManager->set_error(true);
+	}
+	if (pOutConn && !((pOutConn->getDstStat())->get_is_visited())) {
+		return pOutConn->getDstStat();
+	}
+	else if (!pOutConn) {
+
+		pOut->OutputMessages("Error: No Output Connector from the Assign Statement");
+		pManager->set_error(true);
+		return NULL;
+	}
+	return NULL;
+}

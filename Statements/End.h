@@ -37,6 +37,8 @@ public:
 	virtual Statement* Simulate(ApplicationManager* pAppManager);
 	virtual Statement* GenerateCode(ofstream& OutFile);
 
+	Statement* Valid(ApplicationManager* pManager);
+
 
 	bool isInside(Point);
 

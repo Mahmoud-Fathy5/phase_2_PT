@@ -10,24 +10,7 @@
 class Validate: public Action
 {
 private:
-
-	//Pointer to ApplicationManager because action needs this pointer for its functions
-	
-
-	Point Position;
-	
-	//int x=0;
-	//int y=0;
-	Point p;
-
-	Statement* pStat;
-	
-	Statement* pStat1;
-
-	Statement* pStat2;
-
-	Connector* pCon;
-
+	bool skip;
 public:
 
 	Validate(ApplicationManager* pAppManager);
@@ -35,17 +18,10 @@ public:
 
 	//Reads parameters required for action to execute
 	virtual void ReadActionParameters();
-
-	bool ValidateRec(Statement* sp, string declared[], int& declCount, string initialized[], int& initCount, Statement* visited[], int& visitedCount);
-
 	//Execute action (code depends on action type)
-	virtual void Execute() ;
+	virtual void Execute();
 
-	void FirstBranchConditionCheck();
-
-	void SecondBranchConditionCheck();
-
-	bool NormalStatementCheck(Statement*);
+	void Execute_if(Statement* ptr);
 	
 };
 

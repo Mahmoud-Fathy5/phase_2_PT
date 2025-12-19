@@ -68,8 +68,9 @@ void Declare::Edit(ApplicationManager* pManager)
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Please Enter varaiable");
-	var = pIn->GetVariabel(pOut);
 	string s;
+	s = pIn->GetVariabel(pOut);
+	
 	this->setVar(s);
 	pOut->ClearStatusBar();
 }
@@ -128,6 +129,8 @@ bool Declare::isInside(Point P)
 	return false;
 }
 
+
+
 Statement* Declare::Simulate(ApplicationManager* pManager)
 {
 	variable* pVar = new variable;
@@ -141,4 +144,30 @@ Statement* Declare::GenerateCode(ofstream& OutFile)
 {
 	OutFile << "double " << var << ";\n";
 	return pOutConn->getDstStat();
+}
+
+Statement* Declare::Valid(ApplicationManager* pManager)
+{
+	set_is_visited(true);
+	variable* pVar = new variable;
+	Output* pOut = pManager->GetOutput();
+	pVar->name = get_var();
+	if (pManager->FindVar(pVar->name)) {
+		pOut->OutputMessages("Error: Variable "+pVar->name +"already declared");
+		pManager->set_error(true);
+	}
+	else {
+		pManager->AddVar(pVar);
+	}
+	
+	if ( pOutConn && !((pOutConn->getDstStat())->get_is_visited()) ) {
+		return pOutConn->getDstStat();
+	}
+	else if (!pOutConn){
+		
+		pOut->OutputMessages("Error: No Output Connector from the Decalre Statement");
+		pManager->set_error(true);
+		return NULL;
+	}
+	return NULL;
 }

@@ -135,3 +135,23 @@ Statement* Read::GenerateCode(ofstream& OutFile)
 	OutFile << "cin >> " << var << ";\n";
 	return pOutConn->getDstStat();
 }
+
+Statement* Read::Valid(ApplicationManager* pManager)
+{
+	set_is_visited(true);
+	Output* pOut = pManager->GetOutput();
+	if (!(pManager->FindVar(var))) {
+		pOut->OutputMessages("Error: Variable " + var + "Not declared");
+		pManager->set_error(true);
+	}
+	if (pOutConn && !((pOutConn->getDstStat())->get_is_visited())) {
+		return pOutConn->getDstStat();
+	}
+	else if (!(pOutConn)){
+
+		pOut->OutputMessages("Error: No Output Connector from the Read Statement");
+		pManager->set_error(true);
+		return NULL;
+	}
+	return NULL;
+}

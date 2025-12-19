@@ -20,6 +20,7 @@ protected:
 	virtual void UpdateStatementText() = 0;	//is called when any part of the stat. is edited	
 
 	/// Add more parameters if needed.
+	bool is_visited;
 
 public:
 	Statement();
@@ -54,7 +55,10 @@ public:
 
 	virtual Statement* GenerateCode(ofstream &OutFile) = 0;	//write the statement code to a file
 
+	virtual Statement* Valid(ApplicationManager* pManager)=0; //will make pure Virtual
 
+	void set_is_visited(bool b);
+	bool get_is_visited() const;
 	///TODO: Add more functions if needed
 	virtual ~Statement();
 

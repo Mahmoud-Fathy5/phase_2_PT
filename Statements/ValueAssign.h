@@ -26,6 +26,7 @@ private:
 	                //It's used as the (Start) point of the (Output) connector
 
 	Point LeftCorner;	//left corenr of the statement block.
+	
 
 	virtual void UpdateStatementText();
 	
@@ -56,6 +57,7 @@ public:
 	virtual Statement* Simulate(ApplicationManager* pManager);
 	virtual Statement* GenerateCode(ofstream& OutFile);
 	ValueAssign() = default;
+	Statement* Valid(ApplicationManager* pManager) override;
 };
 
 #endif

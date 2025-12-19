@@ -86,6 +86,7 @@ void End::Load(ifstream& InFile)
 	InFile >> ID >> LeftCorner.x >> LeftCorner.y;
 	Inlet.x = LeftCorner.x + UI.OVAL_WDTH / 2;
 	Inlet.y = LeftCorner.y;
+	exist = true;
 
 }
 
@@ -112,5 +113,11 @@ Statement* End::Simulate(ApplicationManager* AppManager)
 Statement* End::GenerateCode(ofstream& OutFile)
 {
 	OutFile << "return 0;\n";
+	return NULL;
+}
+
+Statement* End::Valid(ApplicationManager* pManager)
+{
+	set_is_visited(true);
 	return NULL;
 }
