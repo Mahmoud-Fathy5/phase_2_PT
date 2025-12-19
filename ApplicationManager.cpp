@@ -509,6 +509,16 @@ void ApplicationManager::Validate_Statements_Connection_and_reset()
 		StatList[j]->set_is_visited(false);
 	}
 }
+void ApplicationManager::KillAll()
+{
+	for (int i = 0; i < StatCount; i++)
+		delete StatList[i];
+	for (int i = 0; i < ConnCount; i++)
+		delete ConnList[i];
+	StatCount = 0;
+	ConnCount = 0;
+	UpdateInterface();
+}
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input *ApplicationManager::GetInput() const

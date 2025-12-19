@@ -101,6 +101,8 @@ public:
 	bool GetIsValid();
 
 	void Validate_Statements_Connection_and_reset();
+	
+	void KillAll();
 };
 
 

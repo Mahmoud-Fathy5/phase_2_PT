@@ -23,6 +23,7 @@ Load::Load(ApplicationManager* pAppManager):Action(pAppManager)
 
 void Load::ReadActionParameters()
 {
+	pManager->KillAll();
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 	string filename;

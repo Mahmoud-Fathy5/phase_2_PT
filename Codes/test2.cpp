@@ -6,10 +6,10 @@ int main(){
 	cin >> x;
 	while(x>=5){
 	x = y;
-	cout << y;
+	cout << y << endl;
 return 0;
 	}
 	x = y + 10;
-	cout << y;
+	cout << y << endl;
 	return 0;
 }
