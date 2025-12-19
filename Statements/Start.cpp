@@ -124,7 +124,7 @@ Statement* Start::Valid(ApplicationManager* pManager)
 {
 	set_is_visited(true);
 	if (pOutConn) {
-		return pOutConn->getDstStat();;
+		return pOutConn->getDstStat();
 	}
 	else {
 		Output* pOut = pManager->GetOutput();

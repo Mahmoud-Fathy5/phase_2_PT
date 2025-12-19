@@ -278,8 +278,16 @@ Statement* If::Valid(ApplicationManager* pManager)
 		pOut->OutputMessages("Error: Variable "+ LHS + " Not declared");
 		pManager->set_error(true);
 	}
+	if ((pManager->FindVar(LHS)) && IsVariable(LHS) && (pManager->FindVar(LHS))->assigned == false) {
+		pOut->OutputMessages("Error: Variable " + LHS + " Not Intialized");
+		pManager->set_error(true);
+	}
 	if (!(pManager->FindVar(RHS)) && IsVariable(RHS)) {
 		pOut->OutputMessages("Error: Variable " + RHS + " Not declared");
+		pManager->set_error(true);
+	}
+	if ((pManager->FindVar(RHS)) && IsVariable(RHS) && (pManager->FindVar(LHS))->assigned == false) {
+		pOut->OutputMessages("Error: Variable " + RHS + " Not Intialized");
 		pManager->set_error(true);
 	}
 	if (pOutConn1 && !( (pOutConn1->getDstStat())->get_is_visited() ) ) {
