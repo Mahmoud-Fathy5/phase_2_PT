@@ -10,10 +10,10 @@
 #include <sstream>
 using namespace std;
 
-//constructor: set the ApplicationManager pointer inside this action
+
 Select::Select(ApplicationManager* pAppManager) :Action(pAppManager)
 {
-	//pSelected = NULL;
+	
 }
 
 void Select::ReadActionParameters()

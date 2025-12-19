@@ -34,14 +34,9 @@ void AddDeclare::ReadActionParameters()
 	}
 	pOut->ClearStatusBar();
 
-	//TODO: Ask the user in the status bapr to enter the LHS and set the data member
 	pOut->PrintMessage("Please Enter varaiable");
 	var = pIn->GetVariabel(pOut);
 
-	//TODO: Ask the user in the status bar to enter the RHS and set the data member
-
-	//Note: You should validate the LHS to be variable name and RHS to be a value
-	//      Call the appropriate functions for this.
 }
 
 void AddDeclare::Execute()
@@ -54,7 +49,6 @@ void AddDeclare::Execute()
 	Corner.y = Position.y;
 
 	Declare* pDeclare = new Declare(Corner, var);
-	//TODO: should set the LHS and RHS of pAssign statement
 	//      with the data members set and validated before in ReadActionParameters()
 
 	pManager->AddStatement(pDeclare); // Adds the created statement to application manger's statement list

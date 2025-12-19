@@ -82,7 +82,6 @@ void AssignOperator::Edit(ApplicationManager* pManager)
 	l = pIn->GetVariabel(pOut);
 
 
-	//ValueOrVariable()
 	pOut->PrintMessage("Please Enter First Operand Right Hand Side ");
 	r1 = pIn->GetVariabelOrValue(pOut);
 

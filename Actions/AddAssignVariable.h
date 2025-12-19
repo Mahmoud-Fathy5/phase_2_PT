@@ -13,6 +13,7 @@
 class AddAssignVariable : public Action
 {
 private:
+	//TODO: you should add LHS and RHS of the assignment statement as parameters
 	string LHS;
 	string RHS;
 	// in the data members of the actions
@@ -20,7 +21,7 @@ private:
 	// to be set in ReadActionParameters() then used in Execute()
 
 	Point Position;	//Position where the user clicks to add the stat.
-	//TODO: you should add LHS and RHS of the assignment statement as parameters
+	
 
 public:
 	AddAssignVariable(ApplicationManager* pAppManager);

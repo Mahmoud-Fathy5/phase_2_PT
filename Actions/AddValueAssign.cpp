@@ -33,16 +33,13 @@ void AddValueAssign::ReadActionParameters()
 	}
 	pOut->ClearStatusBar();		
 
-	//TODO: Ask the user in the status bapr to enter the LHS and set the data member
+	
 	pOut->PrintMessage("Please Enter Left Hand Side");
 	LHS = pIn->GetVariabel(pOut);
 
 	pOut->PrintMessage("Please Enter Right Hand Side");
 	RHS = pIn->GetValue(pOut);
-	//TODO: Ask the user in the status bar to enter the RHS and set the data member
-
-	//Note: You should validate the LHS to be variable name and RHS to be a value
-	//      Call the appropriate functions for this.
+	
 }
 
 void AddValueAssign::Execute()
@@ -55,8 +52,7 @@ void AddValueAssign::Execute()
 	Corner.y = Position.y ;
 	
 	ValueAssign *pAssign = new ValueAssign(Corner, LHS, RHS);
-	//TODO: should set the LHS and RHS of pAssign statement
-	//      with the data members set and validated before in ReadActionParameters()
+	
 
 	pManager->AddStatement(pAssign); // Adds the created statement to application manger's statement list
 }

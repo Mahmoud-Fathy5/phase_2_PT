@@ -21,7 +21,7 @@ void AddAssignOperator::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 
 	//Read the (Position) parameter
-	pOut->PrintMessage("Value Assignment Statement: Click to add the statement");
+	pOut->PrintMessage("Operator Assign Assignment Statement: Click to add the statement");
 
 	pIn->GetPointClicked(Position);
 	while (!(Position.x <UI.DrawingAreaWidth && Position.y >UI.ToolBarHeight && Position.y < (UI.height - UI.StatusBarHeight))) {

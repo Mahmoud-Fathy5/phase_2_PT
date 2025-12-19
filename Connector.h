@@ -12,8 +12,7 @@ private:
 	Statement *SrcStat;	//The source statement of the connector
 	Statement *DstStat;	//The destination statement of the connector
 	Point start;	//Start point of the connector
-	//Point Start1;
-	//Point Start2;
+	
 	Point end;		//End point of the connector
 
 	bool isSelected;
@@ -27,12 +26,6 @@ public:
 
 	void setStartPoint(Point P);
 
-	//void setStart1Point(Point P);
-	//void setStart2Point(Point P);
-
-
-	//Point getStart1Point(Point P);
-	//Point getStart2Point(Point P);
 
 
 

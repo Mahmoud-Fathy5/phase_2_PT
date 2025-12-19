@@ -26,8 +26,6 @@ End::End(Point Lcorner)
 
 void End::Draw(Output* pOut) const
 {
-	//Call Output::DrawAssign function to draw assignment statement 	
-	//pOut->DrawAssign(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected);
 	pOut->DrawEnd(LeftCorner, UI.OVAL_WDTH, UI.OVAL_HI, Selected);
 
 }

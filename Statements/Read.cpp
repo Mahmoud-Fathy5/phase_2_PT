@@ -5,7 +5,7 @@ using namespace std;
 
 Read::Read(Point Lcorner, string v)
 {
-	// Note: The LeftHS and RightHS should be validated inside (AddRead) action
+	// Note:  RightHS should be validated inside (AddRead) action
 	//       before passing it to the constructor of Read
 	 var= v;
 
@@ -32,7 +32,7 @@ void Read::setVar(const string& L)
 
 void Read::Draw(Output* pOut) const
 {
-	//Call Output::DrawAssign function to draw assignment statement 	
+	//Call Output::DrawAssign function to draw Read statement 	
 	pOut->DrawRead(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected); //need to be considerd
 
 }
@@ -83,7 +83,7 @@ Connector* Read::GetOutConn1()
 //This function should be called when LHS or RHS changes
 void Read::UpdateStatementText()
 {
-	//Build the statement text: Left handside then equals then right handside
+	//Build the statement text
 	ostringstream T;
 	T << var;
 	Text = T.str();
@@ -104,7 +104,7 @@ void Read::Load(ifstream& InFile)
 	Inlet.y = LeftCorner.y;
 
 	Outlet.x = Inlet.x;
-	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need tobe condiderd
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI; 
 
 }
 
