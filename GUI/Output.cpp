@@ -33,7 +33,7 @@ Output::Output()
 	pWind->ChangeTitle("Programming Techniques Project");
 
 	pWind->SetPen(RED, 3);
-
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
 	CreateDesignToolBar();
 	ClearStatusBar();
 	ClearDrawArea();
@@ -229,6 +229,7 @@ void Output::Drawstart(Point Left, int width, int height, bool Selected)
 	pWind->DrawEllipse(Left.x, Left.y, Left.x + width, Left.y + height);
 
 	pWind->SetPen(BLACK, 3);
+
 	pWind->DrawString(Left.x + width / 4, Left.y + height / 4, "Start");
 
 }
@@ -242,7 +243,7 @@ void Output::DrawEnd(Point Left, int width, int height, bool Selected)
 		pWind->SetPen(UI.DrawColor, 3);	//use normal color
 	pWind->DrawEllipse(Left.x, Left.y, Left.x + width, Left.y + height);
 
-	pWind->SetPen(BLACK, 2);
+	pWind->SetPen(BLACK, 3);
 	pWind->DrawString(Left.x + width / 4, Left.y + height / 4, "End");
 
 }
@@ -281,7 +282,7 @@ void Output::DrawRead(Point Left, int width, int height, string Var, bool Select
 	pWind->DrawPolygon(xCor, yCor, 4);
 
 	pWind->SetPen(BLACK, 2);
-	pWind->DrawString(Left.x + width / 4, Left.y + height / 4, Text);
+	pWind->DrawString(Left.x + width / 6, Left.y + height / 4, Text);
 
 }
 
@@ -301,7 +302,7 @@ void Output::DrawWrite(Point Left, int width, int height, string Var, bool Selec
 	pWind->DrawPolygon(xCor, yCor, 4);
 
 	pWind->SetPen(BLACK, 2);
-	pWind->DrawString(Left.x + width / 4, Left.y + height / 4, Text);
+	pWind->DrawString(Left.x + width / 6, Left.y + height / 4, Text);
 
 }
 

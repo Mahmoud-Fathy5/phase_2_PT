@@ -257,7 +257,7 @@ Statement* If::GenerateCode(ofstream& OutFile)
 {
 	if (visted == false)
 	{
-		OutFile << "while(" << RHS << op << LHS << "){\n";
+		OutFile << "while(" << LHS << op << RHS << "){\n";
 
 		visted = true;
 		return pOutConn1->getDstStat();

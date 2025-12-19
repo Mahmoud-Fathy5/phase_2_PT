@@ -13,6 +13,8 @@ struct variable
 	double value;
 	bool assigned=false;
 
+	bool isInitialize = false;
+
 };
 
 
@@ -40,6 +42,7 @@ private:
 	Output *pOut;
 	variable* Vars[MaxCount];
 	int VarCount;
+	bool isValid;
 
 public:	
 	ApplicationManager(); 
@@ -96,6 +99,8 @@ public:
 	void printVars() const;
 	void killVars();
 
+	void SetIsValid(bool);
+	bool GetIsValid();
 
 	void Validate_Statements_Connection_and_reset();
 };

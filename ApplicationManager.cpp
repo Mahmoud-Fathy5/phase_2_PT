@@ -36,12 +36,14 @@ ApplicationManager::ApplicationManager()
 	pSelectedStat = NULL;	//no Statement is selected yet
 	pClipboard = NULL;
 	pSelectedConn = NULL;
+	isValid = false;
 	 
 	//Create an array of Statement pointers and set them to NULL		
 	for(int i=0; i<MaxCount; i++)
 	{
 		StatList[i] = NULL;	
 		ConnList[i] = NULL;
+		Vars[i] = NULL;
 	}
 }
 
@@ -76,7 +78,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case SELECT:
 			///create Select Action here
 			pAct = new Select(this);
-			pOut->PrintMessage("LOL");
 			break;
 
 		case DEL:
@@ -191,170 +192,7 @@ Statement *ApplicationManager::GetStatement(Point P) const
 			return StatList[i];
 		}
 	}
-	return NULL;
-	
-	//	if (dynamic_cast<ValueAssign*>(StatList[i]))
-	//	{
-	//		ValueAssign* pStat = static_cast<ValueAssign*>(StatList[i]);
-	//		if (P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-	//			&& P.x >= pStat->GetLeftCorner().x - UI.ASSGN_WDTH
-	//			&& P.y >= pStat->GetLeftCorner().y
-	//			&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
-	//		{
-
-	//			return pStat;
-	//		}
-	//		
-	//	}
-	//	else if (dynamic_cast<VariableAssign*>(StatList[i]))
-	//	{
-
-	//		VariableAssign* pStat = static_cast<VariableAssign*>(StatList[i]);
-	//		if (P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-	//			&& P.x >= pStat->GetLeftCorner().x - UI.ASSGN_WDTH
-	//			&& P.y >= pStat->GetLeftCorner().y
-	//			&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
-	//		{
-	//			return pStat;
-	//		}
-	//		
-	//	}
-
-	//	else if (dynamic_cast<AssignOperator*>(StatList[i]))
-	//	{
-	//		AssignOperator* pStat = static_cast<AssignOperator*>(StatList[i]);
-	//		if (P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-	//			&& P.x >= pStat->GetLeftCorner().x - UI.ASSGN_WDTH
-	//			&& P.y >= pStat->GetLeftCorner().y
-	//			&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
-	//		{
-
-
-	//			return pStat;
-	//		}
-	//		
-	//	}
-	//	else if (dynamic_cast<End*>(StatList[i]))
-	//	{
-	//		End* pStat = static_cast<End*>(StatList[i]);
-	//		if (P.x >= pStat->GetLeftCorner().x
-	//			&& P.x <= pStat->GetLeftCorner().x + UI.OVAL_WDTH
-	//			&& P.y >= pStat->GetLeftCorner().y
-	//			&& P.y <= pStat->GetLeftCorner().y + UI.OVAL_HI)
-	//		{
-
-	//			return pStat;
-	//		}
-
-	//	}
-
-	//	else if (dynamic_cast<Start*>(StatList[i]))
-	//	{
-	//		Start* pStat = static_cast<Start*>(StatList[i]);
-	//		if (
-	//			P.x >= pStat->GetLeftCorner().x
-	//			&& P.x <= pStat->GetLeftCorner().x + UI.OVAL_WDTH
-	//			&& P.y >= pStat->GetLeftCorner().y
-	//			&& P.y <= pStat->GetLeftCorner().y + UI.OVAL_HI)
-	//		{
-
-
-	//			return pStat;
-	//		}
-	//		
-	//	}
-
-
-	//	else if (dynamic_cast<Read*>(StatList[i]))
-	//	{
-	//		Read* pStat = static_cast<Read*>(StatList[i]);
-	//		if (P.x >= pStat->GetLeftCorner().x
-	//			&& P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-	//			&& P.y >= pStat->GetLeftCorner().y
-	//			&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
-	//		{
-
-	//			return pStat;
-	//		}
-	//		
-	//	}
-
-	//	else if (dynamic_cast<Declare*>(StatList[i]))
-	//	{
-	//		Declare* pStat = static_cast<Declare*>(StatList[i]);
-	//		if (P.x < pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-	//			&& P.x > pStat->GetLeftCorner().x
-	//			&& P.y > pStat->GetLeftCorner().y
-	//			&& P.y < pStat->GetLeftCorner().y + UI.ASSGN_HI)
-	//		{
-
-
-	//			return pStat;
-	//		}
-	//		
-	//	}
-	//	else if (dynamic_cast<If*>(StatList[i]))
-	//	{
-	//		If* pStat = static_cast<If*>(StatList[i]);
-
-	//		/*double slope1 = ((pStat->GetLeftCorner().y - (pStat->GetLeftCorner().y + UI.COND_HI/2))
-	//			/ ((pStat->GetLeftCorner().x + UI.COND_WDTH / 2) - pStat->GetLeftCorner().x));
-
-
-
-	//		double slope2 = ((pStat->GetLeftCorner().y - (pStat->GetLeftCorner().y + UI.COND_HI / 2))
-	//			/ ((pStat->GetLeftCorner().x + UI.COND_WDTH / 2) - (pStat->GetLeftCorner().x+ UI.COND_WDTH)));
-
-
-
-	//		double slope3 = (((pStat->GetLeftCorner().y+UI.COND_HI/2) - (pStat->GetLeftCorner().y + UI.COND_HI ))
-	//			/ ((pStat->GetLeftCorner().x + UI.COND_WDTH)  - (pStat->GetLeftCorner().x + UI.COND_WDTH/2)));
-
-
-
-	//		double slope4= (((pStat->GetLeftCorner().y + UI.COND_HI / 2) - (pStat->GetLeftCorner().y + UI.COND_HI))
-	//			/ (pStat->GetLeftCorner().x  - (pStat->GetLeftCorner().x + UI.COND_WDTH / 2)));
-
-
-	//		
-
-	//		
-	//		if ((P.y- pStat->GetLeftCorner().y)/(P.x- pStat->GetLeftCorner().x + UI.COND_WDTH / 2)>=slope1&&
-	//			(P.y - pStat->GetLeftCorner().y) / (P.x - pStat->GetLeftCorner().x + UI.COND_WDTH ) >= slope2&&
-	//			(P.y - pStat->GetLeftCorner().y + UI.COND_HI / 2) / (P.x - pStat->GetLeftCorner().x + UI.COND_WDTH / 2) <= slope3&&
-	//			(P.y - pStat->GetLeftCorner().y + UI.COND_HI ) / (P.x - pStat->GetLeftCorner().x) <= slope4)*/
-	//		if (P.x >= pStat->GetLeftCorner().x
-	//			&& P.x <= pStat->GetLeftCorner().x + UI.COND_WDTH
-	//			&& P.y >= pStat->GetLeftCorner().y
-	//			&& P.y <= pStat->GetLeftCorner().y + UI.COND_HI)
-	//		{
-	//			return pStat;
-	//		}
-
-	//	}
-	//		else if (dynamic_cast<Write*>(StatList[i]))
-	//		{
-	//			Write* pStat = static_cast<Write*>(StatList[i]);
-	//			if (P.x >= pStat->GetLeftCorner().x
-	//				&& P.x <= pStat->GetLeftCorner().x + UI.ASSGN_WDTH
-	//				&& P.y >= pStat->GetLeftCorner().y
-	//				&& P.y <= pStat->GetLeftCorner().y + UI.ASSGN_HI)
-	//			{
-
-	//				return pStat;
-	//			}
-
-	//		
-
-	//	
-	//	
-	//}
-	//Statement* pStat = NULL;
-	//return pStat;
-
-	///Add your code here to search for a statement given a point P(x,y)	
-	///WITHOUT breaking class responsibilities
-	
+	return NULL;	
 }
 void ApplicationManager::AddConnector(Connector* pConn)
 {
@@ -646,6 +484,14 @@ void ApplicationManager::killVars()
 	for (int i = 0; i < VarCount; i++)
 		delete Vars[i];
 	VarCount = 0;
+}
+void ApplicationManager::SetIsValid(bool b)
+{
+	isValid = b;
+}
+bool ApplicationManager::GetIsValid()
+{
+	return isValid;
 }
 void ApplicationManager::Validate_Statements_Connection_and_reset()
 {

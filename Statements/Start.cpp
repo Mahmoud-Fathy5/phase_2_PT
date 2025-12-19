@@ -28,16 +28,10 @@ Start::Start(Point Lcorner)
 
 void Start::Draw(Output* pOut) const
 {
-	//Call Output::DrawAssign function to draw assignment statement 	
-	//pOut->DrawAssign(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected);
 	pOut->Drawstart(LeftCorner, UI.OVAL_WDTH, UI.OVAL_HI, Selected);
 
 }
 
-//Point Start::GetOutlet() const
-//{
-//	return Outlet;
-//}
 
 void Start::SetOutConn1(Connector* C)
 {
