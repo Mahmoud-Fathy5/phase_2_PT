@@ -44,6 +44,8 @@ void Select::Execute()
 	
 	if (pCon == NULL&&pStat==NULL)
 	{
+		pManager->GetOutput()->ClearStatusBar();
+
 		return;
 	}
 
@@ -53,6 +55,8 @@ void Select::Execute()
 		{
 			(pManager->GetSelectedConn())->SetSelected(false);
 			pManager->SetSelectedConn(NULL);
+			pManager->GetOutput()->ClearStatusBar();
+
 		}
 
 		if (pManager->GetSelectedStatement() != NULL &&pManager->GetSelectedStatement()!=pStat)
@@ -60,6 +64,8 @@ void Select::Execute()
 			(pManager->GetSelectedStatement())->SetSelected(false);
 			pStat->SetSelected(true);
 			pManager->SetSelectedStatement(pStat);
+			pManager->GetOutput()->ClearStatusBar();
+
 			return;
 		}
 
@@ -67,6 +73,8 @@ void Select::Execute()
 		{
 			(pManager->GetSelectedStatement())->SetSelected(false);
 			pManager->SetSelectedStatement(NULL);
+			pManager->GetOutput()->ClearStatusBar();
+
 			return;
 			
 		}
@@ -74,6 +82,8 @@ void Select::Execute()
 		{
 			pStat->SetSelected(true);
 			pManager->SetSelectedStatement(pStat);
+			pManager->GetOutput()->ClearStatusBar();
+
 		}
 		return;
 
@@ -85,6 +95,8 @@ void Select::Execute()
 		{
 			(pManager->GetSelectedStatement())->SetSelected(false);
 			pManager->SetSelectedStatement(NULL);
+			pManager->GetOutput()->ClearStatusBar();
+
 		}
 
 		if (pManager->GetSelectedConn() != NULL && pManager->GetSelectedConn() != pCon)
@@ -92,6 +104,8 @@ void Select::Execute()
 			(pManager->GetSelectedConn())->SetSelected(false);
 			pCon->SetSelected(true);
 			pManager->SetSelectedConn(pCon);
+			pManager->GetOutput()->ClearStatusBar();
+
 			return;
 		}
 
@@ -99,6 +113,8 @@ void Select::Execute()
 		{
 			(pManager->GetSelectedConn())->SetSelected(false);
 			pManager->SetSelectedConn(NULL);
+			pManager->GetOutput()->ClearStatusBar();
+
 			return;
 
 		}
@@ -112,7 +128,7 @@ void Select::Execute()
 
 	
 	
-
+	pManager->GetOutput()->ClearStatusBar();
 
 	
 }

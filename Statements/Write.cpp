@@ -138,7 +138,7 @@ bool Write::isInside(Point P)
 }
 Statement* Write::GenerateCode(ofstream& OutFile)
 {
-	OutFile << "cout << " << VarorStr << ";\n";
+	OutFile << "cout << " << VarorStr << " << " << "endl" << ";\n";
 	return pOutConn->getDstStat();
 }
 

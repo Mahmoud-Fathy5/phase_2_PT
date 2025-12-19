@@ -44,7 +44,6 @@ void Validate::Execute()
 	}
 		if ((pManager->get_error()) == false) {
 			pOut->PrintMessage("Valid");
-			pOut->OutputMessages("Valid");
 			pManager->SetIsValid(true);
 		}	
 		else {

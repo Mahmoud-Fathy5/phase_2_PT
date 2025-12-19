@@ -50,7 +50,7 @@ double Input::GetValue(Output* pO) const	// Reads a double value from the user
 	}
 	D = stod(value);
 	
-		
+	pO->ClearStatusBar();
 	//This function should make any needed validations on the entered text 
 	// to make sure it is a double value (e.g. 12.5, -12.5, -23, -23., -23.0 …etc.).
 
@@ -76,6 +76,7 @@ string Input::GetVariabel(Output *pO)const
 		variabel = GetString(pO);
 		
 	}
+	pO->ClearStatusBar();
 	return variabel;
 }
 
@@ -93,6 +94,7 @@ string Input::GetArithOperator(Output* pO)const
 		pO->PrintMessage("Please Enter a valid arithmetic operator");
 		arithmetic_operator = GetString(pO);
 	}
+	pO->ClearStatusBar();
 	return arithmetic_operator;
 }
 //TODO: Add the function Input::GetCompOperator
@@ -107,6 +109,7 @@ string Input::GetCompOperator(Output* pO)const
 		pO->PrintMessage("Please Enter a valid comparison operator");
 		comparison_operator = GetString(pO);
 	}
+	pO->ClearStatusBar();
 	return comparison_operator;
 }
 
@@ -117,6 +120,7 @@ string Input::GetVariabelOrValue(Output* pO) const
 		pO->PrintMessage("Please Enter a Valid Operand");
 		ValOrVar = GetString(pO);
 	}
+	pO->ClearStatusBar();
 	return ValOrVar;
 }
 

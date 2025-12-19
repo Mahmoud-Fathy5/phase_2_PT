@@ -13,8 +13,6 @@ struct variable
 	double value;
 	bool assigned=false;
 
-	bool isInitialize = false;
-
 };
 
 

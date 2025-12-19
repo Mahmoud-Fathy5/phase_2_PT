@@ -19,7 +19,6 @@ End::End(Point Lcorner)
 	Inlet.x = LeftCorner.x + UI.OVAL_WDTH / 2;
 	Inlet.y = LeftCorner.y ;
 
-	pOutConn = NULL;
 }
 
 
@@ -87,6 +86,7 @@ void End::Load(ifstream& InFile)
 	Inlet.x = LeftCorner.x + UI.OVAL_WDTH / 2;
 	Inlet.y = LeftCorner.y;
 	exist = true;
+	pOutConn = NULL;
 
 }
 

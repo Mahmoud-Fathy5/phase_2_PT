@@ -7,9 +7,6 @@
     <Filter Include="CMUgraphicsLib\JPEG">
       <UniqueIdentifier>{650df8b6-efa8-43be-a19f-c818ae4e4bca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Action Classes">
-      <UniqueIdentifier>{cfaf17f6-543d-447f-a095-0845317bb29d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GUI Classes">
       <UniqueIdentifier>{4a20f047-6a06-4665-8457-7ed8b3045c87}</UniqueIdentifier>
     </Filter>
@@ -21,6 +18,9 @@
     </Filter>
     <Filter Include="Connector">
       <UniqueIdentifier>{30d2a12b-8dad-444a-ba5d-2b5f4bd718a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Action Classes">
+      <UniqueIdentifier>{cfaf17f6-543d-447f-a095-0845317bb29d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -212,12 +212,6 @@
     <ClCompile Include="Actions\Load.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\AddWrite.cpp" />
-    <ClCompile Include="Actions\Copy.cpp" />
-    <ClCompile Include="Actions\Cut.cpp" />
-    <ClCompile Include="Actions\Delete.cpp" />
-    <ClCompile Include="Actions\Paste.cpp" />
-    <ClCompile Include="Statements\Write.cpp" />
     <ClCompile Include="Actions\Run.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -227,7 +221,27 @@
     <ClCompile Include="Actions\GenerateCode.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\Validate.cpp" />
+    <ClCompile Include="Actions\AddWrite.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Copy.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Cut.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Delete.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Paste.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Validate.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Statements\Write.cpp">
+      <Filter>Statements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -376,12 +390,6 @@
     <ClInclude Include="Actions\Load.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\AddWrite.h" />
-    <ClInclude Include="Actions\Copy.h" />
-    <ClInclude Include="Actions\Cut.h" />
-    <ClInclude Include="Actions\Delete.h" />
-    <ClInclude Include="Actions\Paste.h" />
-    <ClInclude Include="Statements\Write.h" />
     <ClInclude Include="Actions\Run.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
@@ -391,7 +399,27 @@
     <ClInclude Include="Actions\GenerateCode.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\Validate.h" />
+    <ClInclude Include="Actions\AddWrite.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Copy.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Cut.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Delete.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Paste.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Validate.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Statements\Write.h">
+      <Filter>Statements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

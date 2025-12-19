@@ -21,7 +21,7 @@ void AddWrite::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 
 	//Write the (Position) parameter
-	pOut->PrintMessage("Write Statement: Click to Write a Variabel");
+	pOut->PrintMessage("Write Statement: Click to Add a Write Statement");
 
 	pIn->GetPointClicked(Position);
 	while (!(Position.x <UI.DrawingAreaWidth && Position.y >UI.ToolBarHeight && Position.y < (UI.height - UI.StatusBarHeight))) {
@@ -35,7 +35,7 @@ void AddWrite::ReadActionParameters()
 	pOut->ClearStatusBar();
 
 	//TODO: Ask the user in the status bapr to enter the LHS and set the data member
-	pOut->PrintMessage("Please Enter Variable name or Value");
+	pOut->PrintMessage("Please Enter Variable name or String");
 	VarOrValu = pIn->GetStringlOrVariable(pOut);
 
 	//TODO: Ask the user in the status bar to enter the RHS and set the data member

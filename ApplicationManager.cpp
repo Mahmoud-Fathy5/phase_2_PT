@@ -296,7 +296,7 @@ void ApplicationManager::SetSelectedConn(Connector* pConn)
 void ApplicationManager::DeleteConn(Connector* pConn)
 {
 	if (pConn != NULL) {
-		int index;
+		int index = 0;
 		for (int i = 0; i < ConnCount; i++) {
 			if (pConn == ConnList[i]) {
 				index = i;
@@ -331,7 +331,7 @@ void ApplicationManager::DeleteStat(Statement* pStat)
 			}
 		}
 
-		int index;
+		int index = 0;
 		for (int i = 0; i < StatCount; i++) {
 			if (pStat == StatList[i]) {
 				index = i;
