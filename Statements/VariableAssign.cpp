@@ -150,14 +150,27 @@ Statement* VariableAssign::Valid(ApplicationManager* pManager)
 {
 	set_is_visited(true);
 	Output* pOut = pManager->GetOutput();
+
 	if (!(pManager->FindVar(LHS))) {
-		pOut->PrintMessage("Error: Variable" + LHS + "Not declared");
+		pOut->PrintMessage("Error: Variable " + LHS + " Not declared");
 		pManager->set_error(true);
 	}
+
 	if(!(pManager->FindVar(RHS))) {
-		pOut->PrintMessage("Error: Variable" + RHS + "Not declared");
+		pOut->PrintMessage("Error: Variable " + RHS + " Not declared");
 		pManager->set_error(true);
 	}
+	else if ((pManager->FindVar(RHS))->assigned == false) {
+		pOut->PrintMessage("Error: Variable " + RHS + " Not Intialized");
+		pManager->set_error(true);
+	}
+	else {
+		(pManager->FindVar(LHS))->assigned = true;
+	}
+
+	
+
+	
 	if (pOutConn && !((pOutConn->getDstStat())->get_is_visited())) {
 		return pOutConn->getDstStat();
 	}

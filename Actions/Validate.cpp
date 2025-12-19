@@ -43,10 +43,14 @@ void Validate::Execute()
 		pStat = pStat->Valid(pManager);
 	}
 		if ((pManager->get_error()) == false) {
+			pOut->PrintMessage("Valid");
 			pOut->OutputMessages("Valid");
 			pManager->SetIsValid(true);
 		}	
-		 pManager->killVars();
+		else {
+			pOut->PrintMessage("InValid , look at the Output Bar for details .");
+		}
+		pManager->killVars();
 		 pManager->set_error(false);
 		 pManager->Validate_Statements_Connection_and_reset();
 }

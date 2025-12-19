@@ -153,7 +153,7 @@ Statement* Declare::Valid(ApplicationManager* pManager)
 	Output* pOut = pManager->GetOutput();
 	pVar->name = get_var();
 	if (pManager->FindVar(pVar->name)) {
-		pOut->OutputMessages("Error: Variable "+pVar->name +"already declared");
+		pOut->OutputMessages("Error: Variable "+pVar->name +" already declared");
 		pManager->set_error(true);
 	}
 	else {

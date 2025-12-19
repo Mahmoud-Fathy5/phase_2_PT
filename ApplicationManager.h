@@ -9,8 +9,9 @@ class Output;
 
 struct variable
 {
-	string name;
+	string name ;
 	double value;
+	bool assigned=false;
 
 	bool isInitialize = false;
 

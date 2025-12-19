@@ -215,17 +215,32 @@ Statement* AssignOperator::Valid(ApplicationManager* pManager)
 	set_is_visited(true);
 	Output* pOut = pManager->GetOutput();
 	if (!(pManager->FindVar(LHS)) && IsVariable(LHS)) {
-		pOut->PrintMessage("Error: Variable" + LHS + "Not declared");
+		pOut->PrintMessage("Error: Variable " + LHS + " Not declared");
 		pManager->set_error(true);
 	}
+	
 	if (!(pManager->FindVar(RHS_1)) && IsVariable(RHS_1)) {
-		pOut->PrintMessage("Error: Variable" + RHS_1 + "Not declared");
+		pOut->PrintMessage("Error: Variable " + RHS_1 + " Not declared");
+		pManager->set_error(true);
+	}
+	if ((pManager->FindVar(RHS_1)) && IsVariable(RHS_1) && (pManager->FindVar(RHS_1))->assigned == false) {
+		pOut->PrintMessage("Error: Variable " + RHS_1 + " Not Intialized");
 		pManager->set_error(true);
 	}
 	if (!(pManager->FindVar(RHS_2)) && IsVariable(RHS_2)) {
-		pOut->PrintMessage("Error: Variable" + RHS_2 + "Not declared");
+		pOut->PrintMessage("Error: Variable " + RHS_2 + " Not declared");
 		pManager->set_error(true);
 	}
+	if ((pManager->FindVar(RHS_2)) && IsVariable(RHS_2) && (pManager->FindVar(RHS_2))->assigned == false) {
+		pOut->PrintMessage("Error: Variable " + RHS_2 + " Not Intialized");
+		pManager->set_error(true);
+	}
+
+
+	if ((pManager->FindVar(LHS))&&(pManager->FindVar(RHS_1)) && IsVariable(RHS_1) && (pManager->FindVar(RHS_1))->assigned == true && (pManager->FindVar(RHS_2)) && IsVariable(RHS_2) && (pManager->FindVar(RHS_2))->assigned == true) {
+		(pManager->FindVar(LHS))->assigned = true;
+	}
+
 	if (pOutConn && !((pOutConn->getDstStat())->get_is_visited())) {
 		return pOutConn->getDstStat();
 	}

@@ -141,8 +141,11 @@ Statement* Read::Valid(ApplicationManager* pManager)
 	set_is_visited(true);
 	Output* pOut = pManager->GetOutput();
 	if (!(pManager->FindVar(var))) {
-		pOut->OutputMessages("Error: Variable " + var + "Not declared");
+		pOut->OutputMessages("Error: Variable " + var + " Not declared");
 		pManager->set_error(true);
+	}
+	else {
+		(pManager->FindVar(var))->assigned = true;
 	}
 	if (pOutConn && !((pOutConn->getDstStat())->get_is_visited())) {
 		return pOutConn->getDstStat();
