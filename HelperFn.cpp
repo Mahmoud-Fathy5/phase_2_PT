@@ -50,6 +50,15 @@ bool IsVariable(string input)
 	return true;
 }
 
+bool IsStrring(string input)
+{
+	if ((input[0] == '"') && (input[input.length() - 1] == '"')) {
+		return true;
+	}
+	return false;
+}
+
+
 OpType ValueOrVariable(string input)
 {
 

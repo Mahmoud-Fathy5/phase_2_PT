@@ -489,6 +489,7 @@ void ApplicationManager::DeleteStat(Statement* pStat)
 		for (int i = 0; i < ConnCount;i++) {
 			if ((ConnList[i]->getDstStat()) == pStat ) {
 				DeleteConn(ConnList[i]);
+				i--;
 			}
 		}
 
@@ -573,6 +574,16 @@ void ApplicationManager::set_Copy0_Cut1(bool b)
 	this->Copy0_or_Cut1 = b;
 }
 
+bool ApplicationManager::get_error()
+{
+	return Error;
+}
+
+void ApplicationManager::set_error(bool b)
+{
+	Error = b;
+}
+
 
 //==================================================================================//
 //							Interface Management Functions							//
@@ -635,6 +646,19 @@ void ApplicationManager::killVars()
 	for (int i = 0; i < VarCount; i++)
 		delete Vars[i];
 	VarCount = 0;
+}
+void ApplicationManager::Validate_Statements_Connection_and_reset()
+{
+	Output* pOut = GetOutput();
+	for (int i = 0; i <StatCount ; i++) {
+		if((StatList[i]->get_is_visited())==false){
+			pOut->OutputMessages("There Is non Connected Statement");
+		}
+
+	}
+	for (int j = 0; j < StatCount; j++) {
+		StatList[j]->set_is_visited(false);
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input

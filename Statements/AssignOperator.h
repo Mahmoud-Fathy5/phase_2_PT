@@ -56,6 +56,9 @@ public:
 	virtual Statement* Simulate(ApplicationManager* pManager);
 	virtual Statement* GenerateCode(ofstream& OutFile);
 	AssignOperator() = default;
+
+	Statement* Valid(ApplicationManager* pManager) override;
 };
+
 
 #endif

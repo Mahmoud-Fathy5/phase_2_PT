@@ -63,7 +63,11 @@ void Write::SetOutConn1(Connector* C)
 
 void Write::Edit(ApplicationManager* pManager)
 {
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
 	string s;
+	pOut->PrintMessage("Please Enter Variable name or String");
+	s = pIn->GetStringlOrVariable(pOut);
 	this->set_ValuOrVar(s);
 }
 
@@ -136,4 +140,24 @@ Statement* Write::GenerateCode(ofstream& OutFile)
 {
 	OutFile << "cout << " << VarorStr << ";\n";
 	return pOutConn->getDstStat();
+}
+
+Statement* Write::Valid(ApplicationManager* pManager)
+{
+	set_is_visited(true);
+	Output* pOut = pManager->GetOutput();
+	if (!(pManager->FindVar(VarorStr)) && IsVariable(VarorStr)) {
+		pOut->OutputMessages("Error: Variable" + VarorStr + "Not declared");
+		pManager->set_error(true);
+	}
+	if (pOutConn && !((pOutConn->getDstStat())->get_is_visited())) {
+		return pOutConn->getDstStat();
+	}
+	else if (!(pOutConn)) {
+
+		pOut->OutputMessages("Error: No Output Connector from the Write Statement");
+		pManager->set_error(true);
+		return NULL;
+	}
+	return NULL;
 }

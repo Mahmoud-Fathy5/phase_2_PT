@@ -120,6 +120,19 @@ string Input::GetVariabelOrValue(Output* pO) const
 	return ValOrVar;
 }
 
+string Input::GetStringlOrVariable(Output* pO) const
+{
+	string S_or_V;
+	S_or_V = GetString(pO);
+	while (!(IsVariable(S_or_V)) && !(IsStrring(S_or_V))) {
+		pO->PrintMessage("Please Enter a valid variabel name or String");
+		S_or_V = GetString(pO);
+	}
+	pO->ClearStatusBar();
+	return S_or_V;
+	return string();
+}
+
 
 
 //TODO: Complete the implementation of the following function

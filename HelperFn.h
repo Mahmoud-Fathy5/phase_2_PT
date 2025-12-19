@@ -17,4 +17,5 @@ enum OpType
 
 bool IsValue(string input);
 bool IsVariable(string input);
+bool IsStrring(string input); //new
 OpType ValueOrVariable(string input);

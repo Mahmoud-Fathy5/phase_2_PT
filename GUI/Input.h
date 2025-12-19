@@ -29,7 +29,7 @@ public:
 	// It does not return before taking a valid arithmetic operator.
 
 	string GetVariabelOrValue(Output* pO) const;
-	
+	string GetStringlOrVariable(Output* pO) const;
 
 	string GetArithOperator(Output *pO) const;
 

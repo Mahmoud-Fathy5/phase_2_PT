@@ -2,6 +2,7 @@
 #include <sstream>
 #include"../ApplicationManager.h"
 #include <string>
+#include "../Actions/Validate.h"
 using namespace std;
 
 If::If(Point Lcorner, string LeftHS, string RightHS, string oper)
@@ -268,3 +269,40 @@ Statement* If::GenerateCode(ofstream& OutFile)
 		return pOutConn2->getDstStat();
 	}
 }
+
+Statement* If::Valid(ApplicationManager* pManager)
+{
+	set_is_visited(true);
+	Output* pOut = pManager->GetOutput();
+	if (!(pManager->FindVar(LHS)) && IsVariable(LHS)) {
+		pOut->OutputMessages("Error: Variable "+ LHS + " Not declared");
+		pManager->set_error(true);
+	}
+	if (!(pManager->FindVar(RHS)) && IsVariable(RHS)) {
+		pOut->OutputMessages("Error: Variable " + RHS + " Not declared");
+		pManager->set_error(true);
+	}
+	if (pOutConn1 && !( (pOutConn1->getDstStat())->get_is_visited() ) ) {
+
+		Validate True_Con(pManager);
+		True_Con.Execute_if(pOutConn1->getDstStat());
+	}
+	else if (!pOutConn1) {
+
+		pOut->OutputMessages("Error: No Output True Connector from the if Statement");
+		pManager->set_error(true);
+		return NULL;
+	}
+	if (pOutConn2 && !((pOutConn2->getDstStat())->get_is_visited())) {
+		return pOutConn2->getDstStat();
+	}
+	else if (!pOutConn2){
+
+		pOut->OutputMessages("Error: No Output False Connector from the if Statement");
+		pManager->set_error(true);
+		return NULL;
+	}
+	return NULL;
+}
+
+

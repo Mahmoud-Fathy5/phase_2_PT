@@ -6,6 +6,7 @@ Statement::Statement()
 { 
 	//TODO: set the ID with a unique value
 	Text = "";
+	is_visited = false;
 	Selected = false;	
 	ID = temp;
 	temp++;
@@ -67,6 +68,17 @@ void Statement::Save(ofstream& OutFile)
 
 }
 
+
+
+void Statement::set_is_visited(bool b)
+{
+	is_visited = b;
+}
+
+bool Statement::get_is_visited() const
+{
+	return is_visited;
+}
 
 Statement::~Statement()
 {

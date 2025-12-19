@@ -30,6 +30,7 @@ private:
 	                          //you can set and get this pointer
 	Statement *pClipboard;    //a pointer to the last copied/cut statement
 	bool Copy0_or_Cut1 = 0;
+	bool Error = 0;
 	                          //you can set and get this pointer
 	Connector* pSelectedConn;
 
@@ -71,6 +72,10 @@ public:
 	void set_Copy0_Cut1(bool b);
 
 
+	bool get_error();
+	void set_error(bool b);
+
+
 	Connector* GetSelectedConn()const;
 	void SetSelectedConn(Connector* pConn);
 
@@ -89,6 +94,9 @@ public:
 	variable* FindVar(string name);
 	void printVars() const;
 	void killVars();
+
+
+	void Validate_Statements_Connection_and_reset();
 };
 
 

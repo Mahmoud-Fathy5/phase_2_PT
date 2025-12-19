@@ -94,6 +94,7 @@ void Start::Load(ifstream& InFile)
 
 	Outlet.x = LeftCorner.x + UI.OVAL_WDTH / 2;
 	Outlet.y = LeftCorner.y + UI.OVAL_HI;
+	exsit =true;
 
 }
 
@@ -117,4 +118,17 @@ Statement* Start::Simulate(ApplicationManager* pAppManager)
 Statement* Start::GenerateCode(ofstream& OutFile)
 {
 	return pOutConn->getDstStat();
+}
+
+Statement* Start::Valid(ApplicationManager* pManager)
+{
+	set_is_visited(true);
+	if (pOutConn) {
+		return pOutConn->getDstStat();;
+	}
+	else {
+		Output* pOut = pManager->GetOutput();
+		pOut->PrintMessage("Error: No Output Connector from the Start Statement");
+		return NULL;
+	}
 }
