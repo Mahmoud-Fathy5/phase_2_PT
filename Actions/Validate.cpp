@@ -44,6 +44,7 @@ void Validate::Execute()
 	}
 		if ((pManager->get_error()) == false) {
 			pOut->OutputMessages("Valid");
+			pManager->SetIsValid(true);
 		}	
 		 pManager->killVars();
 		 pManager->set_error(false);

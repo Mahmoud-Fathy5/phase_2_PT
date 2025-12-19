@@ -22,9 +22,9 @@ void Select::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 
 
-	pIn->GetPointClicked(Position);
 	pOut->ClearStatusBar();
-
+	pOut->PrintMessage("Select a stetement or a connector");
+	pIn->GetPointClicked(Position);
 	
 
 
