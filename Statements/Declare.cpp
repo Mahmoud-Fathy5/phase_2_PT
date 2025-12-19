@@ -7,7 +7,7 @@ using namespace std;
 
 Declare::Declare(Point Lcorner, string v)
 {
-	// Note: The LeftHS and RightHS should be validated inside (AddDeclare) action
+	// Note: var should be validated inside (AddDeclare) action
 	//       before passing it to the constructor of Declare
 	var = v;
 
@@ -33,7 +33,7 @@ void Declare::setVar(const string& L)
 
 void Declare::Draw(Output* pOut) const
 {
-	//Call Output::DrawAssign function to draw assignment statement 	
+	
 	pOut->DrawAssign(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected);
 
 }
@@ -85,10 +85,10 @@ Connector* Declare::GetOutConn1()
 
 
 
-//This function should be called when LHS or RHS changes
+
 void Declare::UpdateStatementText()
 {
-	//Build the statement text: Left handside then equals then right handside
+	
 	ostringstream T;
 	T <<"Double "<< var;
 	Text = T.str();

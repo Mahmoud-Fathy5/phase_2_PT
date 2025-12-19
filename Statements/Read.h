@@ -1,17 +1,17 @@
 #pragma once
 #include "Statement.h"
 
-//Value Assignment statement class
-//The value assignment statement assigns a value to a variable
+//Value Read statement class
+//The value Read statement assigns a value to a variable
 class	Read : public Statement
 {
 private:
-	string var;	//Left Handside of the assignment (name of a variable)
-	//Right Handside (Value)
+	string var;	//var of the Read (name of a variable)
+	
 
-	Connector* pOutConn;	//Value Assignment Stat. has one Connector to next statement
+	Connector* pOutConn;	//Value Read Stat. has one Connector to next statement
 	//Each statement type in flowchart has a predefined number of (output) connectors
-	//For example, conditional statement always has 2 output connectors
+	
 
 	//Note: We don't need to keep track with input connectors
 	//      Whenever we want to iterate on all statements of the flowchart
@@ -40,9 +40,9 @@ public:
 	void SetOutConn1(Connector* C);
 
 	Connector* GetOutConn1();
-	Point GetOutLet() const;
+	
 	string get_var()const;
-	void SetOutConn(Connector* C);
+
 	void Edit(ApplicationManager* pManager) override;
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& InFile);

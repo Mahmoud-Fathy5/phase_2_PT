@@ -12,10 +12,8 @@
 #include <sstream>
 using namespace std;
 
-//constructor: set the ApplicationManager pointer inside this action
 Edit::Edit(ApplicationManager* pAppManager) :Action(pAppManager)
 {
-	//pSelected = NULL;
 }
 
 void Edit::ReadActionParameters()
@@ -25,13 +23,6 @@ void Edit::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 
 	pOut->ClearStatusBar();
-
-
-	//pIn->GetPointClicked(Position);
-
-
-
-
 
 }
 

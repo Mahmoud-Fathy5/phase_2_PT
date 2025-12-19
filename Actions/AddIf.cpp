@@ -46,27 +46,18 @@ void AddIf::ReadActionParameters()
 	pOut->PrintMessage("Please Enter Right Hand Side ");
 	RHS = pIn->GetVariabelOrValue(pOut);
 
-	
-
-
-	//TODO: Ask the user in the status bar to enter the RHS and set the data member
-
-	//Note: You should validate the LHS to be variable name and RHS to be a value
-	//      Call the appropriate functions for this.
 }
 
 void AddIf::Execute()
 {
 	ReadActionParameters();
 
-	//Calculating left corner of assignement statement block
+	//Calculating left corner of If statement block
 	Point Corner;
 	Corner.x = Position.x - UI.COND_WDTH / 2;
 	Corner.y = Position.y;
 
 	If* pIf = new If(Corner, LHS, RHS, op);
-	//TODO: should set the LHS and RHS of pAssign statement
-	//      with the data members set and validated before in ReadActionParameters()
 
 	pManager->AddStatement(pIf); // Adds the created statement to application manger's statement list
 }

@@ -40,8 +40,6 @@ void AddAssignVariable::ReadActionParameters()
 
 	pOut->PrintMessage("Please Enter Right Hand Side");
 	RHS = pIn->GetVariabel(pOut);
-	//TODO: Ask the user in the status bar to enter the RHS and set the data member
-
 	//Note: You should validate the LHS to be variable name and RHS to be a value
 	//      Call the appropriate functions for this.
 }

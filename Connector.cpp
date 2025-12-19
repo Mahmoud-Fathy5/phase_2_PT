@@ -47,26 +47,6 @@ Statement* Connector::getDstStat()
 {	return DstStat;	}
 
 
-//void Connector::setStart1Point(Point P)
-//{
-//	Start1 = P;
-//}
-
-
-//void Connector::setStart2Point(Point P)
-//{
-//	Start2 = P;
-//}
-
-//Point Connector::getStart1Point(Point P)
-//{
-//	return Start1;
-//}
-
-//Point Connector::getStart2Point(Point P)
-//{
-//	return Start2;
-//}
 
 
 void Connector::setStartPoint(Point P)

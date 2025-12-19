@@ -29,8 +29,7 @@ If::If(Point Lcorner, string LeftHS, string RightHS, string oper)
 	Outlet2.x = LeftCorner.x;
 	Outlet2.y = LeftCorner.y + UI.COND_HI / 2;
 
-	//Outlet2.x= Inlet.x;
-	//Outlet2.y= LeftCorner.y + UI.COND_HI;//Edit Co-ordinates
+	
 }
 
 
@@ -57,7 +56,7 @@ void If::setRHS(string R)
 
 void If::Draw(Output* pOut) const
 {
-	//Call Output::DrawAssign function to draw assignment statement 	
+	//Call Output::DrawAssign function to draw if statement 	
 	pOut->DrawCondtional(LeftCorner, UI.COND_WDTH, UI.COND_HI, Text, Selected); //need to be considerd
 
 }
@@ -152,7 +151,7 @@ bool If::GetVisted() const
 //This function should be called when LHS or RHS changes
 void If::UpdateStatementText()
 {
-	//Build the statement text: Left handside then equals then right handside
+	
 	ostringstream T;
 	T <<"If " << LHS << " " << op << " " << RHS;
 	Text = T.str();

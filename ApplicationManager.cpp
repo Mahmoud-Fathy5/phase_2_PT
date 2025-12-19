@@ -210,7 +210,7 @@ Connector* ApplicationManager::GetConnector(Point P) const
 		{
 			if (p1.x == p2.x)
 			{
-				if (P.x >= p1.x - 8 && P.x <= p1.x + 8 && P.y <= p2.y && P.y >= p1.y)
+				if (P.x >= p1.x - 8 && P.x <= p1.x + 8 && P.y <= p2.y && P.y >= p1.y) //Hit Box
 				{
 					Connector* pCon = ConnList[i];
 					return pCon;
@@ -268,7 +268,7 @@ Connector* ApplicationManager::GetConnector(Point P) const
 			{
 				if (P.y >= p1.y - 8 && P.y <= p1.y + 8 && P.x >= p1.x - 100 && P.x <= p1.x
 					|| P.x <= p1.x + 8 - 100 && P.x >= p1.x - 8 - 100 && P.y <= p1.y && P.y >= p2.y
-					|| P.y <= p2.y + 8 && P.y >= p2.y - 8 && P.x >= p1.x - 100 && P.x <= p2.x)
+					|| P.y <= p2.y-2  && P.y >= p2.y - 18 && P.x >= p1.x-100  && P.x <= p2.x) //Hit Box
 				{
 					Connector* pCon = ConnList[i];
 					return pCon;

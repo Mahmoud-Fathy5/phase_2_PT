@@ -20,8 +20,6 @@ void AddStart::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 
-	//Read the (Position) parameter
-	//pOut->PrintMessage("Value Assignment Statement: Click to add the statement");
 
 	pIn->GetPointClicked(Position);
 	while (!(Position.x <UI.DrawingAreaWidth && Position.y >UI.ToolBarHeight && Position.y < (UI.height - UI.StatusBarHeight))) {
@@ -32,13 +30,6 @@ void AddStart::ReadActionParameters()
 		(pManager->GetOutput())->PrintMessage("You cannot Put Statement Above The other , click anywhere else");
 		pIn->GetPointClicked(Position);
 	}
-	//pOut->ClearStatusBar();
-
-	
-	//TODO: Ask the user in the status bar to enter the RHS and set the data member
-
-	//Note: You should validate the LHS to be variable name and RHS to be a value
-	//      Call the appropriate functions for this.
 }
 
 void AddStart::Execute()

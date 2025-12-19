@@ -4,8 +4,7 @@
 #include "Statement.h"
 #include <sstream>
 
-//Value Assignment statement class
-//The value assignment statement assigns a value to a variable
+
 class Start : public Statement
 {
 private:
@@ -14,10 +13,9 @@ private:
 	Connector* pOutConn;	
 	
 
-	Point Outlet;	//A point a connection leaves this statement
-	//It's used as the (Start) point of the (Output) connector
+	Point Outlet;	
 
-	Point LeftCorner;	//left corenr of the statement block.
+	Point LeftCorner;	
 
 	virtual void UpdateStatementText();
 
@@ -37,8 +35,6 @@ public:
 	~Start();
 	Connector* GetOutConn1();
 	virtual void Load(ifstream& InFile);
-
-	//Start() = default;
 
 	bool isInside(Point);
 

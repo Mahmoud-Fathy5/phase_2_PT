@@ -5,8 +5,7 @@ using namespace std;
 
 Write::Write(Point Lcorner, string v)
 {
-	// Note: The LeftHS and RightHS should be validated inside (AddWrite) action
-	//       before passing it to the constructor of Write
+	
 	this->VarorStr = v;
 
 	UpdateStatementText();
@@ -19,7 +18,7 @@ Write::Write(Point Lcorner, string v)
 	Inlet.y = LeftCorner.y;
 
 	Outlet.x = Inlet.x;
-	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need tobe condiderd
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI; 
 }
 
 void Write::set_ValuOrVar(const string& L)
@@ -31,8 +30,8 @@ void Write::set_ValuOrVar(const string& L)
 
 void Write::Draw(Output* pOut) const
 {
-	//Call Output::DrawAssign function to draw assignment statement 	
-	pOut->DrawWrite(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected); //need to be considerd
+	//Call Output::DrawAssign function to draw Write statement 	
+	pOut->DrawWrite(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected); 
 
 }
 
@@ -74,10 +73,10 @@ void Write::Edit(ApplicationManager* pManager)
 
 
 
-//This function should be called when LHS or RHS changes
+
 void Write::UpdateStatementText()
 {
-	//Build the statement text: Left handside then equals then right handside
+	//Build the statement text
 	ostringstream T;
 	T << VarorStr;
 	Text = T.str();
@@ -102,7 +101,7 @@ void Write::Load(ifstream& InFile)
 	Inlet.y = LeftCorner.y;
 
 	Outlet.x = Inlet.x;
-	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need tobe condiderd
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI; 
 	UpdateStatementText();
 }
 
