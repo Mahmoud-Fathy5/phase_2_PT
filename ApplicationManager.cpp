@@ -258,7 +258,7 @@ Connector* ApplicationManager::GetConnector(Point P) const
 			{
 				if (P.y >= p1.y - 8 && P.y <= p1.y + 8 && P.x >= p1.x && P.x <= p1.x+100
 					|| P.x <= p1.x+100 + 8 && P.x >= p1.x+100 - 8 && P.y <= p1.y && P.y >= p2.y
-					|| P.y <= p2.y + 8 && P.y >= p2.y - 8 && P.x <= p1.x+100 && P.x >= p2.x)
+					|| P.y <= p2.y - 3 && P.y >= p2.y - 20 && P.x <= p1.x+100 && P.x >= p2.x)
 				{
 					Connector* pCon = ConnList[i];
 					return pCon;
@@ -268,7 +268,7 @@ Connector* ApplicationManager::GetConnector(Point P) const
 			{
 				if (P.y >= p1.y - 8 && P.y <= p1.y + 8 && P.x >= p1.x - 100 && P.x <= p1.x
 					|| P.x <= p1.x + 8 - 100 && P.x >= p1.x - 8 - 100 && P.y <= p1.y && P.y >= p2.y
-					|| P.y <= p2.y-2  && P.y >= p2.y - 18 && P.x >= p1.x-100  && P.x <= p2.x) //Hit Box
+					|| P.y <= p2.y - 3  && P.y >= p2.y - 20 && P.x >= p1.x-100  && P.x <= p2.x) //Hit Box
 				{
 					Connector* pCon = ConnList[i];
 					return pCon;
@@ -475,7 +475,10 @@ void ApplicationManager::printVars() const
 	{
 		for (int i = 0; i < VarCount; i++)
 		{
-			pOut->OutputMessages(Vars[i]->name + " = " + to_string(Vars[i]->value));
+			if (Vars[i]->assigned)
+				pOut->OutputMessages(Vars[i]->name + " = " + to_string(Vars[i]->value));
+			else
+				pOut->OutputMessages(Vars[i]->name + " is not initialized");
 		}
 	}
 }

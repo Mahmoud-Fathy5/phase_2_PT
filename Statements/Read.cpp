@@ -19,7 +19,7 @@ Read::Read(Point Lcorner, string v)
 	Inlet.y = LeftCorner.y;
 
 	Outlet.x = Inlet.x;
-	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need tobe condiderd
+	Outlet.y = LeftCorner.y + UI.ASSGN_HI; //need to be considred
 }
 
 void Read::setVar(const string& L)
@@ -33,7 +33,7 @@ void Read::setVar(const string& L)
 void Read::Draw(Output* pOut) const
 {
 	//Call Output::DrawAssign function to draw Read statement 	
-	pOut->DrawRead(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected); //need to be considerd
+	pOut->DrawRead(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected); //need to be considred
 
 }
 
@@ -127,6 +127,7 @@ Statement* Read::Simulate(ApplicationManager* pAppManager)
 	double d = pIn->GetValue(pOut);
 	variable* pVar = pAppManager->FindVar(var);
 	pVar->value = d;
+	pVar->assigned = true;
 	return pOutConn->getDstStat();
 }
 

@@ -200,6 +200,7 @@ Statement* AssignOperator::Simulate(ApplicationManager* pAppManager)
 		if (op == "/") pVar1->value = stod(RHS_1) / pVar2->value;
 
 	}
+	pAppManager->FindVar(LHS)->assigned = true;
 	return pOutConn->getDstStat();
 }
 

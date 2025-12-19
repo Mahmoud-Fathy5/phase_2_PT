@@ -137,6 +137,7 @@ Statement* ValueAssign::Simulate(ApplicationManager* pAppManager)
 {
 	variable* pVar = pAppManager->FindVar(LHS);
 	pVar->value = RHS;
+	pVar->assigned = true;
 	return pOutConn->getDstStat();
 }
 
