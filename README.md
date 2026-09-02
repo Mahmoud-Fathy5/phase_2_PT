@@ -297,8 +297,8 @@ int main(){
 Developed as part of the **Programming Techniques** course by:
 
 * **Mahmoud Fathy** ([@Mahmoud-Fathy5](https://github.com/Mahmoud-Fathy5))
-* **Mohamed Medhat** ([@mohamedmedhat](https://github.com/momedhat736))
-* **Mahmoud Taha** ([@Mahmouedtaha75](https://github.com/Mahmouedtaha75))
+* **Mohamed Medhat** ([@MoMedhat74](https://github.com/MoMedhat74))
+* **Mahmoud Taha** ([@Eng-Mahmoud-Taha](https://github.com/Eng-Mahmoud-Taha))
 
 ---
 
